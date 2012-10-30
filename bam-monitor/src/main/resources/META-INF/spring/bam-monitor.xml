@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:p="http://www.springframework.org/schema/p" 
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:oxm="http://www.springframework.org/schema/oxm"
+	xsi:schemaLocation="
+            http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+            http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+            http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+            http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.0.xsd
+            http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd
+            http://www.springframework.org/schema/oxm http://www.springframework.org/schema/oxm/spring-oxm-3.0.xsd">
+
+	<!-- ============================== Services ======================================= -->
+	
+	<bean id="monitorEngine" class="com.netflexity.bam.monitor.engine.BamMonitorEngine" autowire="byName"/>
+	
+	<bean id="monitorDispatcher" class="com.netflexity.bam.monitor.dispatcher.BamMonitorDispatcher" autowire="byName">
+		<property name="unmarshaller" ref="marshaller"/>
+	</bean>
+	
+	<bean id="esperMonitorExecutor" class="com.netflexity.bam.monitor.executor.EsperMonitorExecutor" autowire="byName"/>
+	
+	<bean id="manualMonitorExecutor" class="com.netflexity.bam.monitor.executor.ManualMonitorExecutor" autowire="byName"/>
+	
+	<bean id="bamStatementAwareUpdateListener" class="com.netflexity.bam.monitor.esper.listener.BamStatementAwareUpdateListener" autowire="byName"/>
+    
+    <!--bean id="statementLoader" class="com.netflexity.bam.monitor.esper.statement.DatabaseStatementLoader" autowire="byName">
+    	<property name="unmarshaller" ref="marshaller"/>
+    </bean-->
+    
+    <bean id="esperBean" class="com.netflexity.bam.monitor.esper.EsperBean" init-method="init" destroy-method="destroy">
+        <!--property name="statementLoader" ref="statementLoader" /-->
+        <property name="listeners">
+            <list>
+                <ref bean="bamStatementAwareUpdateListener" />
+            </list>
+        </property>
+    </bean>
+	
+	<oxm:jaxb2-marshaller id="marshaller">
+		<oxm:class-to-be-bound name="netflexity.schema.software.bam.monitors._1.*"/>
+	</oxm:jaxb2-marshaller>
+	
+	<bean id="eventProcessor" class="com.netflexity.bam.monitor.service.impl.CamelEventProcessor">
+		<property name="camelContext" ref="camelContext"/>
+		<property name="destination" value="direct:bam-queue"/>
+	</bean>
+	
+	<bean id="messageBuilder" class="com.netflexity.bam.monitor.service.impl.FreemarkerMessageBuilder" autowire="byName"/>
+	
+	<!-- ============================== Camel Context ======================================= -->
+	
+	<camel:camelContext id="camelContext">
+		<camel:route>
+			<camel:from uri="direct:bam-queue" />
+			<camel:to uri="activemq:queue:BAM" />
+		</camel:route>
+	</camel:camelContext>
+	
+</beans>
+
+
+
+
+
+
+
+
+
+
+
+
+

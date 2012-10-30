@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+		   xmlns="urn:netflexity:schema:software:bam:types:1.0" 
+		   targetNamespace="urn:netflexity:schema:software:bam:types:1.0" 
+		   elementFormDefault="qualified" 
+		   attributeFormDefault="unqualified">
+	<xs:complexType name="AuditType">
+		<xs:sequence>
+			<xs:element name="changeDate" type="xs:dateTime" minOccurs="0"/>
+			<xs:element name="changeBy" type="xs:string" minOccurs="0"/>
+			<xs:element name="status" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="QualifierType">
+		<xs:annotation>
+			<xs:documentation>A sequence of attributes that compose some kind of identifier</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="id" type="xs:string"/>
+			<xs:element name="partyId" type="xs:string"/>
+			<xs:element name="name" type="xs:string"/>
+			<!-- Static value is for comparison of identifier value against a string value. -->
+			<xs:element name="staticValue" type="xs:string" minOccurs="0"/>
+			<xs:element name="qualifierAttributes" type="AttributeArrayType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AttributeType">
+		<xs:annotation>
+			<xs:documentation>Defines XPath or string-based attribute within a message</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="AuditType">
+				<xs:sequence>
+					<xs:element name="id" type="xs:string"/>
+					<xs:element name="partyId" type="xs:string"/>
+					<xs:element name="name" type="xs:string"/>
+					<xs:element name="expression" type="xs:string" minOccurs="0"/>
+					<xs:element name="startPosition" type="xs:int" minOccurs="0"/>
+					<xs:element name="endPosition" type="xs:int" minOccurs="0"/>
+					<xs:element name="delimiter" type="xs:string" minOccurs="0"/>
+					<xs:element name="position" type="xs:int" minOccurs="0"/>
+					<xs:element name="required" type="xs:boolean"/>
+					<xs:element name="datatype" type="xs:int" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!--xs:complexType name="ConditionPredicateType">
+		<xs:complexContent>
+			<xs:extension base="AuditType">
+				<xs:sequence>
+					<xs:element name="id" type="xs:string"/>
+					<xs:element name="parentId" type="xs:string" minOccurs="0"/>
+					<xs:element name="lhsProcessConditionId" type="xs:string"/>
+					<xs:element name="rhsProcessConditionId" type="xs:string" minOccurs="0"/>
+					<xs:element name="operatorType" type="xs:int" minOccurs="0"/>
+					<xs:element name="parent" type="ConditionPredicateType" minOccurs="0"/>
+					<xs:element name="lhsProcessCondition" type="ConditionType" minOccurs="0"/>
+					<xs:element name="rhsProcessCondition" type="ConditionType" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ConditionType">
+		<xs:complexContent>
+			<xs:extension base="AuditType">
+				<xs:sequence>
+					<xs:element name="id" type="xs:string"/>
+					<xs:element name="name" type="xs:string"/>
+					<xs:element name="processAttributeId" type="xs:string"/>
+					<xs:element name="operatorType" type="xs:int"/>
+					<xs:element name="value" type="xs:string"/>
+					<xs:element name="attribute" type="AttributeType" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType-->
+	<xs:complexType name="FlowTransactionType">
+		<xs:annotation>
+			<xs:documentation>Defines a point (stage) of a transaction</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="id" type="xs:string"/>
+			<xs:element name="transactionId" type="xs:string"/>
+			<xs:element name="flowId" type="xs:string"/>
+			<xs:element name="transactionDate" type="xs:dateTime"/>
+			<xs:element name="transaction" type="TransactionType" minOccurs="0"/>
+			<xs:element name="flow" type="FlowType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="FlowType">
+		<xs:annotation>
+			<xs:documentation>Defines process flow (sequence of stages)</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="AuditType">
+				<xs:sequence>
+					<xs:element name="id" type="xs:string"/>
+					<xs:element name="uuid" type="xs:string" minOccurs="0"/>
+					<xs:element name="processId" type="xs:string"/>
+					<xs:element name="stageId" type="xs:string"/>
+					<xs:element name="stageTypeId" type="xs:string"/>
+					<xs:element name="transactionQualifierId" type="xs:string"/>
+					<xs:element name="storeMessagePayload" type="xs:boolean"/>
+					<xs:element name="process" type="ProcessType" minOccurs="0"/>
+					<xs:element name="stage" type="StageType" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="StageType">
+		<xs:annotation>
+			<xs:documentation>Defines a step (stage) within a process</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="AuditType">
+				<xs:sequence>
+					<xs:element name="id" type="xs:string"/>
+					<xs:element name="partyId" type="xs:string"/>
+					<xs:element name="name" type="xs:string"/>
+					<xs:element name="description" type="xs:string" minOccurs="0"/>
+					<xs:element name="qualifierId" type="xs:string"/>
+					<xs:element name="qualifier" type="QualifierType"/>
+					<xs:element name="stageAttributes" type="AttributeArrayType" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="TransactionType">
+		<xs:annotation>
+			<xs:documentation>Defines physical representation for the process</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="id" type="xs:string"/>
+			<xs:element name="uuid" type="xs:string" minOccurs="0"/>
+			<xs:element name="stateType" type="xs:int"/>
+			<xs:element name="startDate" type="xs:dateTime"/>
+			<xs:element name="endDate" type="xs:dateTime" minOccurs="0"/>
+			<xs:element name="flowTransactions" type="FlowTransactionArrayType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ProcessType">
+		<xs:annotation>
+			<xs:documentation>Defines business process</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="AuditType">
+				<xs:sequence>
+					<xs:element name="id" type="xs:string"/>
+					<xs:element name="partyId" type="xs:string"/>
+					<xs:element name="name" type="xs:string"/>
+					<xs:element name="description" type="xs:string" minOccurs="0"/>
+					<xs:element name="flows" type="FlowArrayType" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- Enumerations. -->
+	<xs:simpleType name="StageTypeEnum">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="START"></xs:enumeration>
+			<xs:enumeration value="ALLINONE"></xs:enumeration>
+			<xs:enumeration value="INTERMEDIATE"></xs:enumeration>
+			<xs:enumeration value="END"></xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TransactionStatusEnum">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="PROCESSING"></xs:enumeration>
+			<xs:enumeration value="COMPLETED"></xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- Collections of objects. -->
+	<xs:complexType name="ProcessArrayType">
+		<xs:sequence>
+			<xs:element name="process" type="ProcessType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="StageArrayType">
+		<xs:sequence>
+			<xs:element name="stage" type="StageType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AttributeArrayType">
+		<xs:sequence>
+			<xs:element name="attribute" type="AttributeType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="FlowArrayType">
+		<xs:sequence>
+			<xs:element name="flow" type="FlowType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="FlowTransactionArrayType">
+		<xs:sequence>
+			<xs:element name="transaction" type="FlowTransactionType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="MonitorType">
+		<xs:sequence>
+			<xs:element name="criticalityTypeCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="name" type="xs:string" minOccurs="0"/>
+			<xs:element name="message" type="xs:string" minOccurs="0"/>
+			<xs:element name="changeBy" type="xs:string" minOccurs="0"/>
+			<xs:element name="conditions" type="ConditionType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="schedules" type="ScheduleType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="events" type="EventType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:long" use="optional"/>
+		<xs:attribute name="resourceId" type="xs:long" use="optional"/>
+		<xs:attribute name="occurrenceInterval" type="xs:integer" use="optional"/>
+		<xs:attribute name="changeDate" type="xs:long" use="optional"/>
+		<xs:attribute name="status" type="xs:string" use="optional"/>
+	</xs:complexType>
+	
+	<xs:complexType name="ConditionType">
+		<xs:attribute name="id" type="xs:long" use="optional"/>
+		<xs:attribute name="partyId" type="xs:string" use="optional"/>
+		<xs:attribute name="name" type="xs:string" use="optional"/>
+		<xs:attribute name="expression" type="xs:string" use="optional"/>
+	</xs:complexType>
+	
+	<xs:complexType name="ScheduleType">
+		<xs:attribute name="id" type="xs:long" use="optional"/>
+		<xs:attribute name="changeDate" type="xs:long" use="optional"/>
+		<xs:attribute name="partyId" type="xs:string" use="optional"/>
+		<xs:attribute name="name" type="xs:string" use="optional"/>
+		<xs:attribute name="minutes" type="xs:string" use="optional"/>
+		<xs:attribute name="hours" type="xs:string" use="optional"/>
+		<xs:attribute name="daysOfWeek" type="xs:string" use="optional"/>
+		<xs:attribute name="daysOfMonth" type="xs:string" use="optional"/>
+		<xs:attribute name="months" type="xs:string" use="optional"/>
+		<xs:attribute name="seconds" type="xs:string" use="optional"/>
+		<xs:attribute name="changeBy" type="xs:string" use="optional"/>
+	</xs:complexType>
+	
+	<xs:complexType name="EventType">
+		<xs:sequence>
+			<xs:element name="message" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:long" use="optional"/>
+		<xs:attribute name="startTime" type="xs:long" use="optional"/>
+		<xs:attribute name="endTime" type="xs:long" use="optional"/>
+		<xs:attribute name="changeDate" type="xs:long" use="optional"/>
+		<xs:attribute name="eventStatusCode" type="xs:string" use="optional"/>
+		<xs:attribute name="changeBy" type="xs:string" use="optional"/>
+	</xs:complexType>
+	
+	<xs:complexType name="TransactionSummaryType">
+		<xs:attribute name="processId" type="xs:long" use="optional"/>
+		<xs:attribute name="name" type="xs:string" use="optional"/>
+		<xs:attribute name="total" type="xs:integer" use="optional"/>
+	</xs:complexType>
+	
+	<xs:complexType name="TransactionDetailsType">
+		<xs:sequence>
+			<xs:element name="bpmFlowTransactions" type="FlowTransactionDetailsType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="processId" type="xs:long" use="optional"/>
+		<xs:attribute name="processName" type="xs:string" use="optional"/>
+		<xs:attribute name="id" type="xs:long" use="optional"/>
+		<xs:attribute name="uuid" type="xs:string" use="optional"/>
+		<xs:attribute name="startDate" type="xs:long" use="optional"/>
+		<xs:attribute name="endDate" type="xs:long" use="optional"/>
+		<xs:attribute name="transactionStatusCode" type="xs:string" use="optional"/>
+	</xs:complexType>
+	
+	<xs:complexType name="FlowTransactionDetailsType">
+		<xs:sequence>
+			<xs:element name="bpmFlowTransactionPayloads" type="FlowTransactionPayloadDetailsType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:long" use="optional"/>
+		<xs:attribute name="transactionDate" type="xs:long" use="optional"/>
+		<xs:attribute name="stageName" type="xs:string" use="optional"/>
+	</xs:complexType>
+	
+	<xs:complexType name="FlowTransactionPayloadDetailsType">
+		<xs:sequence>
+			<xs:element name="payload" type="xs:byte" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:long" use="optional"/>
+	</xs:complexType>
+	
+</xs:schema>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

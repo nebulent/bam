@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="urn:netflexity:schema:software:common:types:1.0" 
+		   xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+		   attributeFormDefault="unqualified" 
+		   elementFormDefault="qualified" 
+		   targetNamespace="urn:netflexity:schema:software:common:types:1.0">
+	<xs:complexType name="ModifiableType">
+		<xs:sequence>
+			<xs:element name="changeDate" minOccurs="0" type="xs:dateTime"/>
+			<xs:element name="changeBy" minOccurs="0" type="xs:string"/>
+			<xs:element name="status" minOccurs="0" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PartyType">
+		<xs:complexContent>
+			<xs:extension base="ModifiableType">
+				<xs:sequence>
+					<xs:element name="id" type="xs:string"/>
+					<xs:element name="companyName" type="xs:string"/>
+					<xs:element name="addressLine1" minOccurs="0" type="xs:string"/>
+					<xs:element name="addressLine2" minOccurs="0" type="xs:string"/>
+					<xs:element name="city" minOccurs="0" type="xs:string"/>
+					<xs:element name="stateProvince" minOccurs="0" type="xs:string"/>
+					<xs:element name="postalCode" minOccurs="0" type="xs:string"/>
+					<xs:element name="countryCode" minOccurs="0" type="xs:string"/>
+					<xs:element name="billingContact" minOccurs="0" type="ContactType"/>
+					<xs:element name="accounts" minOccurs="0" type="AccountArrayType"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ContactType">
+		<xs:sequence>
+			<xs:element name="name" type="xs:string"/>
+			<xs:element name="email" minOccurs="0" type="xs:string"/>
+			<xs:element name="phone" minOccurs="0" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AccountType">
+		<xs:complexContent>
+			<xs:extension base="ModifiableType">
+				<xs:sequence>
+					<xs:element name="id" type="xs:string"/>
+					<xs:element name="partyId" type="xs:string"/>
+					<xs:element name="uuid" type="xs:string"/>
+					<xs:element name="licenseContent" type="xs:base64Binary"/>
+					<xs:element name="effectiveDate" type="xs:dateTime"/>
+					<xs:element name="expirationDate" type="xs:dateTime"/>
+					<xs:element name="creationDate" type="xs:dateTime"/>
+					<xs:element name="party" minOccurs="0" type="PartyType"/>
+					<xs:element name="users" minOccurs="0" type="UserArrayType"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="UserType">
+		<xs:complexContent>
+			<xs:extension base="ModifiableType">
+				<xs:sequence>
+					<xs:element name="id" type="xs:string"/>
+					<xs:element name="accountId" type="xs:string"/>
+					<xs:element name="username" type="xs:string"/>
+					<xs:element name="password" type="xs:string"/>
+					<xs:element name="account" minOccurs="0" type="AccountType"/>
+					<xs:element name="roles" minOccurs="0" type="RoleArrayType"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="AccountArrayType">
+		<xs:sequence>
+			<xs:element maxOccurs="unbounded" name="user" type="AccountType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="UserArrayType">
+		<xs:sequence>
+			<xs:element maxOccurs="unbounded" name="user" type="UserType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="RoleArrayType">
+		<xs:sequence>
+			<xs:element maxOccurs="unbounded" name="role" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

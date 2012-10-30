@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">  
+    <parent>
+        <artifactId>bam</artifactId>
+        <groupId>com.netflexitysolutions.software</groupId>
+        <version>1.1</version>
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.netflexitysolutions.software.bam</groupId>
+    <artifactId>bam-ws</artifactId>
+    <packaging>war</packaging>
+    <name>Netflexity Solutions :: BAM :: Web Service</name>
+    <url>http://www.netflexity.com</url>
+    <version>1.1</version>
+    <build>
+    	<finalName>bam-ws</finalName>
+    </build>
+
+    <dependencies>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>bam-api</artifactId>
+            <version>1.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>bam-biz</artifactId>
+            <version>1.1</version>
+        </dependency>
+
+		<!--CXF dependencies.-->
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-frontend-jaxws</artifactId>
+            <version>${cxf-version}</version>
+            <exclusions>
+            	<!-- We are not using Geronimo. -->
+                <exclusion>
+                    <groupId>org.apache.geronimo.specs</groupId>
+                    <artifactId>geronimo-activation_1.1_spec</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.geronimo.specs</groupId>
+                    <artifactId>geronimo-annotation_1.0_spec</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.geronimo.specs</groupId>
+                    <artifactId>geronimo-javamail_1.4_spec</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.geronimo.specs</groupId>
+                    <artifactId>geronimo-jaxws_2.1_spec</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.geronimo.specs</groupId>
+                    <artifactId>geronimo-stax-api_1.0_spec</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.geronimo.specs</groupId>
+                    <artifactId>geronimo-ws-metadata_2.0_spec</artifactId>
+                </exclusion>
+                <!-- Exclude Spring 2.5.6 dependencies since we have Spring 3.0.1 on the classpath already. -->
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-beans</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-context</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-core</artifactId>
+				</exclusion>
+                <!--exclusion>
+                    <groupId>javax.xml.bind</groupId>
+                    <artifactId>jaxb-api</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.sun.xml.bind</groupId>
+                    <artifactId>jaxb-impl</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>javax.xml.soap</groupId>
+                    <artifactId>saaj-api</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.sun.xml.messaging.saaj</groupId>
+                    <artifactId>saaj-impl</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>wsdl4j</groupId>
+                    <artifactId>wsdl4j</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.codehaus.woodstox</groupId>
+                    <artifactId>wstx-asl</artifactId>
+                </exclusion-->
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-transports-http</artifactId>
+            <version>${cxf-version}</version>
+            <exclusions>
+				<!-- Exclude Spring 2.5.6 dependencies since we have Spring 3.0.1 on the classpath already. -->
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-context</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-core</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-web</artifactId>
+				</exclusion>
+			</exclusions>
+        </dependency>
+        
+        <dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${spring-version}</version>
+		</dependency>
+        <!-- Test. -->
+        <!--dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.0.8</version>
+            <scope>test</scope>
+            <optional>true</optional>
+        </dependency-->
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.14</version>
+            <!--scope>test</scope-->
+            <!--optional>true</optional-->
+        </dependency>
+       <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>${spring-version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.8.1</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.flex</groupId>
+            <artifactId>spring-flex</artifactId>
+            <version>${spring-flex-version}</version>
+            
+            <exclusions>
+                <exclusion>
+                    <groupId>org.jgroups</groupId>
+                    <artifactId>com.springsource.org.jgroups</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>org.springframework.core</artifactId>
+                </exclusion>
+               <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>org.springframework.context</artifactId>
+                </exclusion>
+               <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>org.springframework.context.support</artifactId>
+                </exclusion>
+               <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>org.springframework.web.servlet</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>org.springframework.web</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>org.springframework.beans</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+        	<groupId>org.apache.camel</groupId>
+        	<artifactId>camel-core</artifactId>
+        	<version>2.3.0</version>
+        </dependency>
+        <dependency>
+        	<groupId>org.apache.camel</groupId>
+        	<artifactId>camel-cxf</artifactId>
+        	<version>2.3.0</version>
+        </dependency>
+        <dependency>
+        	<groupId>org.apache.camel</groupId>
+        	<artifactId>camel-jms</artifactId>
+        	<version>2.3.0</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-core</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-beans</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-tx</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-aop</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-context</artifactId>
+				</exclusion>
+			</exclusions>
+        </dependency>
+        <dependency>
+        	<groupId>org.springframework</groupId>
+        	<artifactId>spring-jms</artifactId>
+        	<version>${spring-version}</version>
+        </dependency>
+        <dependency>
+        	<groupId>org.springframework</groupId>
+        	<artifactId>spring-webmvc</artifactId>
+        	<version>${spring-version}</version>
+        </dependency>
+
+        <dependency>
+        	<groupId>org.apache.activemq</groupId>
+        	<artifactId>activemq-camel</artifactId>
+        	<version>5.3.2</version>
+        </dependency>
+        <dependency>
+        	<groupId>org.apache.xbean</groupId>
+        	<artifactId>xbean-spring</artifactId>
+        	<version>3.7</version>
+        </dependency>
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.6.6</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.6.6</version>
+			<scope>provided</scope>
+		</dependency>
+        
+		<!-- dependency>
+			<groupId>com.netflexity.cgp</groupId>
+			<artifactId>netflexity-cgp-core-api</artifactId>
+			<version>1.0</version>
+		</dependency -->
+
+		<!-- dependency>
+			<groupId>com.netflexitysolutions.camel.sqs</groupId>
+			<artifactId>netflexitysolutions-camel-sqs</artifactId>
+			<version>1.0</version>
+		</dependency -->
+
+		<dependency>
+			<groupId>com.netflexitysolutions.software</groupId>
+			<artifactId>bam-monitor</artifactId>
+			<version>1.1</version>
+		</dependency>
+
+		<!-- dependency>
+		    <groupId>com.netflexitysolutions.logger</groupId>
+		    <artifactId>netflexitysolutions-logger</artifactId>
+		    <version>1.0</version>
+		</dependency -->
+
+    </dependencies>
+</project>
+
+

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.0.xsd">
+
+    <!--import resource="classpath:bam-monitor-integration.xml"/-->
+
+
+    <bean id="updateListener" class="com.netflexity.bam.monitor.esper.listener.ConsoleListener"></bean>
+
+    <bean id="statementLoader" class="com.netflexity.bam.monitor.esper.statement.DummyStatementLoaderImpl">
+        <property name="statementBeans">
+            <list>
+                <bean class="com.netflexity.bam.monitor.esper.statement.StatementBean">
+                    <constructor-arg value="@Description('Unfinished transaction') select * from pattern [every a = com.netflexity.bam.monitor.esper.event.BamEvent(stageTypeCode = 'START') -> (timer:interval(10 sec) and not b = com.netflexity.bam.monitor.esper.event.BamEvent(stageTypeCode = 'END' and a.transactionUuid = b.transactionUuid))]"/>
+                </bean>
+                <bean class="com.netflexity.bam.monitor.esper.statement.StatementBean">
+                    <constructor-arg value="@Description('Too long stage execution') select a.transactionUuid, a.processName, a.stageTypeCode from pattern [every a = com.netflexity.bam.monitor.esper.event.BamEvent -> b = com.netflexity.bam.monitor.esper.event.BamEvent(b.transactionDate - a.transactionDate > 9000 and a.transactionUuid = b.transactionUuid)]"/>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="esperBean" class="com.netflexity.bam.monitor.esper.EsperBean" init-method="init" destroy-method="destroy">
+        <property name="statementLoader" ref="statementLoader" />
+        <property name="updateListeners">
+            <list>
+                <ref bean="updateListener" />
+            </list>
+        </property>
+    </bean>
+
+
+    <!--bean id="generatorCore" class="com.netflexity.bam.monitor.generator.GeneratorCore" init-method="init" destroy-method="destroy">
+        <property name="messageSender" ref="messageSender" />
+        <property name="marshaller" ref="jaxb2Marshaller" />
+    </bean-->
+
+    <!--amq:broker id="broker" useJmx="false" persistent="false">
+        <amq:transportConnectors>
+            <amq:transportConnector uri="vm://localhost" />
+        </amq:transportConnectors>
+    </amq:broker-->
+
+
+    <!--amq:connectionFactory id="connectionFactory" brokerURL="vm://localhost" /-->
+
+    <!--amq:queue id="testQueue" physicalName="bam.test" /-->
+
+    <!--bean id="testJmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+        <property name="connectionFactory" ref="connectionFactory" />
+        <property name="defaultDestination" ref="testQueue" />
+    </bean-->
+
+    <!--bean id="messageSender" class="com.netflexity.bam.monitor.generator.jms.MessageSender">
+        <property name="jmsTemplate" ref="testJmsTemplate" />
+        <property name="destination" ref="testQueue" />
+    </bean-->
+
+    <!--bean id="jaxb2Marshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
+        <property name="classesToBeBound">
+            <list>
+                <value>netflexity.schema.software.bam.messages._1.ProcessTransactionTracking</value>
+            </list>
+        </property>
+        <property name="schema" value="classpath:bam-messages-1.0.xsd"/>
+    </bean-->
+
+</beans>

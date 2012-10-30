@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+		   xmlns:types="urn:netflexity:schema:software:bam:types:1.0" 
+		   xmlns="urn:netflexity:schema:software:bam:monitors:1.0" 
+		   targetNamespace="urn:netflexity:schema:software:bam:monitors:1.0" 
+		   elementFormDefault="qualified" 
+		   attributeFormDefault="unqualified">
+	
+	<xs:import namespace="urn:netflexity:schema:software:bam:types:1.0" schemaLocation="bam-types-1.0.xsd"/>
+		
+	<!-- ====================== Monitors ========================== -->
+			
+	<xs:complexType name="FlowToFlowDurationMonitorType">
+		<xs:attribute name="flow1UUID" type="xs:string" use="required"/>
+		<xs:attribute name="flow2UUID" type="xs:string" use="required"/>
+		<xs:attribute name="delayInSeconds" type="xs:long" use="required"/>
+	</xs:complexType>
+	
+	<xs:complexType name="OverallTransactionDurationMonitorType">
+		<xs:attribute name="processId" type="xs:long" use="required"/>
+	</xs:complexType>
+	
+	<xs:complexType name="SQSMonitorType">
+		<xs:attribute name="partyId" type="xs:string" use="required"/>
+		<xs:attribute name="sqsQueueName" type="xs:string" use="required"/>
+		<xs:attribute name="serviceIdentifier" type="xs:string" use="required"/>
+	</xs:complexType>
+	
+	<xs:element name="SQSMonitor" type="SQSMonitorType"/>
+	
+	<!-- ====================== Monitors' Events ========================== -->
+	
+	<xs:complexType name="FlowDurationEventType">
+		<xs:attribute name="flowUUID" type="xs:string" use="required"/>
+	</xs:complexType>
+	
+	<xs:complexType name="OverallTransactionDurationEventType">
+		<xs:attribute name="processId" type="xs:long" use="required"/>
+		<xs:attribute name="flowState" type="xs:string" use="required"/>
+		<xs:attribute name="transactionUUID" type="xs:string" use="required"/>
+		<xs:attribute name="transactionDate" type="xs:long" use="required"/>
+	</xs:complexType>
+	
+</xs:schema>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,424 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="urn:netflexity:schema:software:bam:messages:1.0" 
+		   xmlns:types="urn:netflexity:schema:software:bam:types:1.0" 
+		   xmlns:nfx-types="urn:netflexity:schema:software:common:types:1.0" 
+		   xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+		   attributeFormDefault="unqualified" 
+		   elementFormDefault="qualified" 
+		   targetNamespace="urn:netflexity:schema:software:bam:messages:1.0">
+		   
+	<xs:import namespace="urn:netflexity:schema:software:bam:types:1.0" schemaLocation="bam-types-1.0.xsd"/>
+	<xs:import namespace="urn:netflexity:schema:software:common:types:1.0" schemaLocation="nfx-types-1.0.xsd"/>
+	
+	<xs:complexType name="userAwareMessage">
+		<xs:attribute name="userName" type="xs:string"/>
+	</xs:complexType>
+	
+	<!--Process Transaction.-->
+	<xs:element name="ProcessTransactionTracking">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="userAwareMessage">
+					<xs:sequence>
+						<xs:element name="flowUuid" type="xs:string"/>
+						<xs:element name="transactionUuid" minOccurs="0" type="xs:string"/>
+						<xs:element name="transactionDate" type="xs:integer"/>
+						<xs:element name="transactionContent" minOccurs="0" type="xs:base64Binary"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="AcknowledgeTransactionTracking">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="flowUuid" type="xs:string"/>
+				<xs:element name="transactionUuid" minOccurs="0" type="xs:string"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<!--Transaction Audit Event for Esper.-->
+	<xs:element name="TransactionAuditEvent">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="userAwareMessage">
+					<xs:sequence>
+						<xs:element name="correlationId" type="xs:string"/>
+						<xs:element name="activityId" type="xs:string"/>
+						<xs:element name="activityTime" type="xs:integer"/>
+						<xs:element name="activityStatus" type="xs:int"/>
+						<xs:element name="activityAttributes" minOccurs="0" type="TransactionActivityAttributeArrayType"/>
+						<xs:element name="activityPayload" minOccurs="0" type="TransactionPayloadType"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:complexType name="TransactionPayloadType">
+		<xs:sequence>
+			<xs:element name="request" minOccurs="0" type="xs:base64Binary"/>
+			<xs:element name="response" minOccurs="0" type="xs:base64Binary"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="TransactionActivityAttributeType">
+		<xs:attribute name="name" use="required"/>
+		<xs:attribute name="value" use="required"/>
+	</xs:complexType>
+	
+	<xs:simpleType name="TransactionActivityStatusEnum">
+		<xs:restriction base="xs:int">
+			<xs:enumeration value="0">
+				<xs:annotation>
+					<xs:documentation>DONE</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="1">
+				<xs:annotation>
+					<xs:documentation>ERROR</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="2">
+				<xs:annotation>
+					<xs:documentation>INPROGRESS</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:complexType name="TransactionActivityAttributeArrayType">
+		<xs:sequence>
+			<xs:element maxOccurs="unbounded" name="attribute" type="TransactionActivityAttributeType"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:element name="getTransactionSummary">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="userAwareMessage">
+					<xs:attribute name="partyId" type="xs:string" use="optional"/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="getTransactionSummaryResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="transactions" type="types:TransactionSummaryType" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="getTransactions">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="userAwareMessage">
+					<xs:attribute name="limit" type="xs:integer" use="optional"/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="getTransactionsResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="transactions" type="types:TransactionDetailsType" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="getProcesses">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="userAwareMessage">
+					<xs:attribute name="partyId" type="xs:string" use="optional"/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="getProcessesResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="processes" type="types:ProcessType" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="getStages">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="userAwareMessage">
+					<xs:attribute name="partyId" type="xs:string" use="optional"/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="getStagesResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="stages" type="types:StageType" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="getAttributes">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="userAwareMessage">
+					<xs:attribute name="partyId" type="xs:string" use="optional"/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="getAttributesResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="attrs" type="types:AttributeType" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="deleteProcesses">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="userAwareMessage">
+					<xs:sequence>
+						<xs:element name="ids" type="xs:long" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="deleteProcessesResponse">
+		<xs:complexType>
+			<xs:attribute name="response" type="xs:boolean" use="optional"/>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="deleteStages">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="userAwareMessage">
+					<xs:sequence>
+						<xs:element name="ids" type="xs:long" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="deleteStagesResponse">
+		<xs:complexType>
+			<xs:attribute name="response" type="xs:boolean" use="optional"/>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="deleteAttributes">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="userAwareMessage">
+					<xs:sequence>
+						<xs:element name="ids" type="xs:long" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="deleteAttributesResponse">
+		<xs:complexType>
+			<xs:attribute name="response" type="xs:boolean" use="optional"/>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="updateProcess">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="userAwareMessage">
+					<xs:sequence>
+						<xs:element name="process" type="types:ProcessType" minOccurs="0"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="updateProcessResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="process" type="types:ProcessType" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="updateStage">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="userAwareMessage">
+					<xs:sequence>
+						<xs:element name="stage" type="types:StageType" minOccurs="0"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="updateStageResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="stage" type="types:StageType" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="updateAttribute">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="userAwareMessage">
+					<xs:sequence>
+						<xs:element name="attr" type="types:AttributeType" minOccurs="0"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="updateAttributeResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="attr" type="types:AttributeType" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="createProcess">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="userAwareMessage">
+					<xs:sequence>
+						<xs:element name="process" type="types:ProcessType" minOccurs="0"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="createProcessResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="process" type="types:ProcessType" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="createStage">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="userAwareMessage">
+					<xs:sequence>
+						<xs:element name="stage" type="types:StageType" minOccurs="0"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="createStageResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="stage" type="types:StageType" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="createAttribute">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="userAwareMessage">
+					<xs:sequence>
+						<xs:element name="attr" type="types:AttributeType" minOccurs="0"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="createAttributeResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="attr" type="types:AttributeType" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="createMonitor">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="userAwareMessage">
+					<xs:sequence>
+						<xs:element name="monitor" type="types:MonitorType" minOccurs="0"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="createMonitorResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="monitor" type="types:MonitorType" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="startMonitor">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="userAwareMessage">
+					<xs:sequence>
+						<xs:element name="monitor" type="types:MonitorType" minOccurs="1"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="startMonitorResponse">
+		<xs:complexType>
+			<xs:attribute name="response" type="xs:boolean" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	
+	
+</xs:schema>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

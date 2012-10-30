@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:jaxws="http://cxf.apache.org/jaxws"
+       xmlns:camel="http://camel.apache.org/schema/spring"
+	   xmlns:cxf="http://camel.apache.org/schema/cxf"
+	   xmlns:broker="http://activemq.apache.org/schema/core"
+	   xmlns:oxm="http://www.springframework.org/schema/oxm"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd
+       http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
+       http://camel.apache.org/schema/cxf http://camel.apache.org/schema/cxf/camel-cxf.xsd
+       http://activemq.apache.org/schema/core http://activemq.apache.org/schema/core/activemq-core-5.3.0.xsd
+       http://www.springframework.org/schema/oxm http://www.springframework.org/schema/oxm/spring-oxm-3.0.xsd">
+
+	<!-- ========================= CXF Resources ========================= -->
+    <import resource="classpath:META-INF/cxf/cxf.xml" />
+    <import resource="classpath:META-INF/cxf/cxf-extension-soap.xml" />
+    <import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
+
+    <!-- ========================= Resources ========================= -->
+    <import resource="classpath:/META-INF/spring/bam-biz-repositories.xml"/>
+    
+    <!-- ========================= Services ========================= -->
+	<bean id="bamInternalService" class="com.netflexity.bam.business.service.BamInternalServiceImpl" autowire="byName"/>
+	<bean id="bamMonitorService" class="com.netflexity.bam.monitor.service.impl.BamMonitorServiceImpl" autowire="byName"/>
+	<bean id="securityManagementService" class="com.netflexity.bam.business.service.FakeSecurityManagementService" autowire="byName"/>
+	
+	<bean id="bamService" class="com.netflexity.bam.business.service.BamServiceImpl">
+        <property name="camelContext" ref="camelContext"/>
+        <property name="qosDestination" value="direct:qos-ws"/>
+    </bean>
+	
+	<!-- ========================= WS Services ========================= -->
+	<jaxws:endpoint id="bamServiceWS" implementor="#bamService" address="/BamQoSService"/>
+	<jaxws:endpoint id="bamInternalServiceWS" implementor="#bamInternalService" address="/BAMInternal"/>
+	
+	<!-- ========================= Ws Clients ========================= -->
+	<!-- jaxws:client id="cgpClient" serviceClass="com.netflexity.software.cgp.webservice._1_0.Cgp" address="${cgp.service.url}"/>
+	<jaxws:client id="cgpManagementClient" serviceClass="com.netflexity.software.cgp.webservice._1_0.CgpManagement" address="${cgp.management.service.url}"/>
+	<jaxws:client id="slaServiceClient" serviceClass="com.netflexity.software.cgp.sla.webservice._1_0.SlaService" address="${sla.service.url}"/ -->
+	
+    <bean id="logInbound" class="org.apache.cxf.interceptor.LoggingInInterceptor"/>
+    <bean id="logOutbound" class="org.apache.cxf.interceptor.LoggingOutInterceptor"/>
+
+    <bean id="cxf" class="org.apache.cxf.bus.CXFBusImpl">
+        <property name="inInterceptors">
+            <list>
+                <ref bean="logInbound"/>
+            </list>
+        </property>
+        <property name="outInterceptors">
+            <list>
+                <ref bean="logOutbound"/>
+            </list>
+        </property>
+        <property name="outFaultInterceptors">
+            <list>
+                <ref bean="logOutbound"/>
+            </list>
+        </property>
+    </bean>
+    
+    <!-- ========================= QoS ========================= -->
+    
+	<broker:broker id="broker" useJmx="false" persistent="false" dataDirectory="target/activemq">
+		<broker:transportConnectors>
+			<broker:transportConnector uri="tcp://localhost:0" />
+		</broker:transportConnectors>
+	</broker:broker>
+
+	<bean id="activemq" class="org.apache.activemq.camel.component.ActiveMQComponent">
+		<property name="brokerURL" value="vm://localhost" />
+	</bean>
+
+	<!-- ========================= Monitor Services ========================= -->
+	
+	<bean id="monitorEngine" class="com.netflexity.bam.monitor.engine.BamMonitorEngine" init-method="init" autowire="byName"/>
+	
+	<bean id="monitorDispatcher" class="com.netflexity.bam.monitor.dispatcher.BamMonitorDispatcher" autowire="byName">
+		<property name="unmarshaller" ref="marshaller"/>
+	</bean>
+	
+	<bean id="esperMonitorExecutor" class="com.netflexity.bam.monitor.executor.EsperMonitorExecutor" autowire="byName"/>
+	
+	<bean id="manualMonitorExecutor" class="com.netflexity.bam.monitor.executor.ManualMonitorExecutor" autowire="byName">
+		<property name="xStreamUnmarshaller" ref="xStreamMarshaller"/>
+		<property name="sqsMonitorLevel" value="${sqs.monitor.level}"/>
+	</bean>
+	
+	<bean id="bamStatementAwareUpdateListener" class="com.netflexity.bam.monitor.esper.listener.BamStatementAwareUpdateListener" autowire="byName"/>
+    
+    <bean id="esperBean" class="com.netflexity.bam.monitor.esper.EsperBean" init-method="init" destroy-method="destroy">
+        <property name="listeners">
+            <list>
+                <ref bean="bamStatementAwareUpdateListener" />
+            </list>
+        </property>
+    </bean>
+	
+	<oxm:jaxb2-marshaller id="marshaller">
+		<oxm:class-to-be-bound name="netflexity.schema.software.bam.monitors._1.FlowToFlowDurationMonitorType"/>
+		<oxm:class-to-be-bound name="netflexity.schema.software.bam.monitors._1.OverallTransactionDurationMonitorType"/>
+		<oxm:class-to-be-bound name="netflexity.schema.software.bam.monitors._1.SQSMonitor"/>
+		<oxm:class-to-be-bound name="com.netflexity.software.logger._1.LogEvent"/>
+	</oxm:jaxb2-marshaller>
+	
+	<bean id="xStreamMarshaller" class="org.springframework.oxm.xstream.XStreamMarshaller"/>
+	
+	<bean id="eventProcessor" class="com.netflexity.bam.monitor.service.impl.CamelEventProcessor">
+		<property name="camelContext" ref="camelContext"/>
+		<property name="destination" value="direct:bam-queue"/>
+	</bean>
+	
+	<bean id="messageBuilder" class="com.netflexity.bam.monitor.service.impl.FreemarkerMessageBuilder" autowire="byName"/>
+	
+	<!-- ========================= Camel Context ========================= -->
+	
+	<!--  
+	<bean id="sqs" class="com.netflexitysolutions.camel.sqs.SQSComponent"/>
+	<bean id="sqsMessageProcessor" class="com.netflexitysolutions.camel.sqs.SQSMessageProcessor"/>
+	-->
+	
+	<camel:camelContext id="camelContext">
+		<!--
+		<camel:endpoint id="sqsConsumer" uri="sqs:sqsConsumer?accessId=${aws.accessId}&amp;secretKey=${aws.secretKey}&amp;queueName=${queue.name}&amp;consumer.initialDelay=${consumer.initialDelay}&amp;consumer.delay=${consumer.delay}"/>
+		<camel:route id="SQS-To-File" >
+            <camel:from ref="sqsConsumer"/>
+            <camel:process ref="sqsMessageProcessor"/>
+        </camel:route>
+        -->
+	
+		<camel:route>
+			<camel:from uri="direct:qos-ws" />
+			<camel:to uri="activemq:queue:Transactions" />
+		</camel:route>
+		
+		<camel:route>
+			<camel:from uri="activemq:Transactions" />
+			<camel:throttle maximumRequestsPerPeriod="10" timePeriodMillis="1000">
+				<camel:to uri="activemq:Throttler" />
+			</camel:throttle>
+		</camel:route>
+		
+		<camel:route>
+			<camel:from uri="activemq:Throttler" />
+			<camel:to uri="log:root"/>
+			<camel:to uri="bean:bamInternalService?method=processTransactionTracking"/>
+		</camel:route>
+		
+		<camel:route>
+			<camel:from uri="direct:bam-queue" />
+			<camel:to uri="activemq:queue:BAM" />
+		</camel:route>
+		
+	</camel:camelContext>
+	
+	
+	
+</beans>

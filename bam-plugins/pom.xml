@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<parent>
+		<artifactId>bam</artifactId>
+		<groupId>com.netflexitysolutions.software</groupId>
+		<version>1.1</version>
+	</parent>
+
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.netflexitysolutions.software.bam</groupId>
+	<artifactId>bam-plugins</artifactId>
+	<packaging>pom</packaging>
+	<name>Netflexity Solutions :: BAM :: Plugins</name>
+	<url>http://www.netflexity.com</url>
+	<version>1.1</version>
+	<build>
+		<finalName>bam-plugins</finalName>
+	</build>
+
+	<modules>
+		<module>sqs-flow</module>
+	</modules>
+
+
+</project>
+
+

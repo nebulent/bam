@@ -1,0 +1,1951 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project name="bam-ws-qos" resourceRoot="" soapui-version="3.0.1" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="BamAcknowledgeServiceServiceSoapBinding" type="wsdl" bindingName="{http://ws.bam.netflexity.com/}BamAcknowledgeServiceServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:8480/bam-ws-1.0/BamQoSService?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:8480/bam-ws-1.0/BamQoSService?wsdl"><con:part><con:url>http://localhost:8480/bam-ws-1.0/BamQoSService?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="BamAcknowledgeServiceService" targetNamespace="http://ws.bam.netflexity.com/" xmlns:ns1="urn:netflexity:ws:software:bam:services:1.0" xmlns:ns3="http://cxf.apache.org/bindings/xformat" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://ws.bam.netflexity.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:import location="http://localhost:8480/bam-ws-1.0/BamQoSService?wsdl=BAM.wsdl" namespace="urn:netflexity:ws:software:bam:services:1.0"></wsdl:import>
+  <wsdl:binding name="BamAcknowledgeServiceServiceSoapBinding" type="ns1:BAM">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="getAttributes">
+      <soap:operation soapAction="getAttributes" style="document"/>
+      <wsdl:input name="getAttributes">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getAttributesResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="processTransactionTracking">
+      <soap:operation soapAction="processTransactionTracking" style="document"/>
+      <wsdl:input name="processTransactionTracking">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="processTransactionTrackingResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="findAttributes">
+      <soap:operation soapAction="findAttributes" style="document"/>
+      <wsdl:input name="findAttributes">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="findAttributesResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="processRemoveProcesses">
+      <soap:operation soapAction="processRemoveProcesses" style="document"/>
+      <wsdl:input name="processRemoveProcesses">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="processRemoveProcessesResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getStages">
+      <soap:operation soapAction="getStages" style="document"/>
+      <wsdl:input name="getStages">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getStagesResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="processAddStage">
+      <soap:operation soapAction="processAddStage" style="document"/>
+      <wsdl:input name="processAddStage">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="processAddStageResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="findStages">
+      <soap:operation soapAction="findStages" style="document"/>
+      <wsdl:input name="findStages">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="findStagesResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="processAddQualifier">
+      <soap:operation soapAction="processAddQualifier" style="document"/>
+      <wsdl:input name="processAddQualifier">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="processAddQualifierResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getProcess">
+      <soap:operation soapAction="getProcess" style="document"/>
+      <wsdl:input name="getProcess">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getProcessResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="processAddProcess">
+      <soap:operation soapAction="processAddProcess" style="document"/>
+      <wsdl:input name="processAddProcess">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="processAddProcessResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getProcesses">
+      <soap:operation soapAction="getProcesses" style="document"/>
+      <wsdl:input name="getProcesses">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getProcessesResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getStage">
+      <soap:operation soapAction="getStage" style="document"/>
+      <wsdl:input name="getStage">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getStageResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="processChangeProcess">
+      <soap:operation soapAction="processChangeProcess" style="document"/>
+      <wsdl:input name="processChangeProcess">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="processChangeProcessResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="processChangeAttribute">
+      <soap:operation soapAction="processChangeAttribute" style="document"/>
+      <wsdl:input name="processChangeAttribute">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="processChangeAttributeResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAttribute">
+      <soap:operation soapAction="getAttribute" style="document"/>
+      <wsdl:input name="getAttribute">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getAttributeResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="processRemoveStages">
+      <soap:operation soapAction="processRemoveStages" style="document"/>
+      <wsdl:input name="processRemoveStages">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="processRemoveStagesResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="processAddAttribute">
+      <soap:operation soapAction="processAddAttribute" style="document"/>
+      <wsdl:input name="processAddAttribute">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="processAddAttributeResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="processRemoveAttributes">
+      <soap:operation soapAction="processRemoveAttributes" style="document"/>
+      <wsdl:input name="processRemoveAttributes">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="processRemoveAttributesResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="processChangeStage">
+      <soap:operation soapAction="processChangeStage" style="document"/>
+      <wsdl:input name="processChangeStage">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="processChangeStageResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="BamAcknowledgeServiceService">
+    <wsdl:port binding="tns:BamAcknowledgeServiceServiceSoapBinding" name="BamAcknowledgeServicePort">
+      <soap:address location="http://localhost:8480/bam-ws-1.0/BamQoSService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part><con:part><con:url>http://localhost:8480/bam-ws-1.0/BamQoSService?wsdl=BAM.wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="BAM" targetNamespace="urn:netflexity:ws:software:bam:services:1.0" xmlns:ns1="urn:netflexity:ws:software:bam:services:1.0" xmlns:ns2="urn:netflexity:schema:software:bam:messages:1.0" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:types>
+    <xs:schema elementFormDefault="qualified" targetNamespace="urn:netflexity:schema:software:common:types:1.0" version="1.0" xmlns:tns="urn:netflexity:schema:software:common:types:1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:complexType name="PartyType">
+        <xs:complexContent>
+          <xs:extension base="tns:ModifiableType">
+            <xs:sequence>
+              <xs:element name="id" type="xs:string"/>
+              <xs:element name="companyName" type="xs:string"/>
+              <xs:element minOccurs="0" name="addressLine1" type="xs:string"/>
+              <xs:element minOccurs="0" name="addressLine2" type="xs:string"/>
+              <xs:element minOccurs="0" name="city" type="xs:string"/>
+              <xs:element minOccurs="0" name="stateProvince" type="xs:string"/>
+              <xs:element minOccurs="0" name="postalCode" type="xs:string"/>
+              <xs:element minOccurs="0" name="countryCode" type="xs:string"/>
+              <xs:element minOccurs="0" name="billingContact" type="tns:ContactType"/>
+              <xs:element minOccurs="0" name="accounts" type="tns:AccountArrayType"/>
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="ModifiableType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="changeDate" type="xs:dateTime"/>
+          <xs:element minOccurs="0" name="changeBy" type="xs:string"/>
+          <xs:element minOccurs="0" name="status" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ContactType">
+        <xs:sequence>
+          <xs:element name="name" type="xs:string"/>
+          <xs:element minOccurs="0" name="email" type="xs:string"/>
+          <xs:element minOccurs="0" name="phone" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="AccountArrayType">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" name="user" type="tns:AccountType"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="AccountType">
+        <xs:complexContent>
+          <xs:extension base="tns:ModifiableType">
+            <xs:sequence>
+              <xs:element name="id" type="xs:string"/>
+              <xs:element name="partyId" type="xs:string"/>
+              <xs:element name="uuid" type="xs:string"/>
+              <xs:element name="licenseContent" type="xs:base64Binary"/>
+              <xs:element name="effectiveDate" type="xs:dateTime"/>
+              <xs:element name="expirationDate" type="xs:dateTime"/>
+              <xs:element name="creationDate" type="xs:dateTime"/>
+              <xs:element minOccurs="0" name="party" type="tns:PartyType"/>
+              <xs:element minOccurs="0" name="users" type="tns:UserArrayType"/>
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="UserArrayType">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" name="user" type="tns:UserType"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="UserType">
+        <xs:complexContent>
+          <xs:extension base="tns:ModifiableType">
+            <xs:sequence>
+              <xs:element name="id" type="xs:string"/>
+              <xs:element name="accountId" type="xs:string"/>
+              <xs:element name="username" type="xs:string"/>
+              <xs:element name="password" type="xs:string"/>
+              <xs:element minOccurs="0" name="account" type="tns:AccountType"/>
+              <xs:element minOccurs="0" name="roles" type="tns:RoleArrayType"/>
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="RoleArrayType">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" name="role" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema elementFormDefault="qualified" targetNamespace="urn:netflexity:schema:software:bam:types:1.0" version="1.0" xmlns:tns="urn:netflexity:schema:software:bam:types:1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:complexType name="AttributeArrayType">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" name="attribute" type="tns:AttributeType"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="AttributeType">
+        <xs:complexContent>
+          <xs:extension base="tns:AuditType">
+            <xs:sequence>
+              <xs:element name="id" type="xs:string"/>
+              <xs:element name="partyId" type="xs:string"/>
+              <xs:element name="name" type="xs:string"/>
+              <xs:element minOccurs="0" name="expression" type="xs:string"/>
+              <xs:element minOccurs="0" name="startPosition" type="xs:int"/>
+              <xs:element minOccurs="0" name="endPosition" type="xs:int"/>
+              <xs:element minOccurs="0" name="delimiter" type="xs:string"/>
+              <xs:element minOccurs="0" name="position" type="xs:int"/>
+              <xs:element name="required" type="xs:boolean"/>
+              <xs:element minOccurs="0" name="datatype" type="xs:int"/>
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="AuditType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="changeDate" type="xs:dateTime"/>
+          <xs:element minOccurs="0" name="changeBy" type="xs:string"/>
+          <xs:element minOccurs="0" name="status" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ProcessType">
+        <xs:complexContent>
+          <xs:extension base="tns:AuditType">
+            <xs:sequence>
+              <xs:element name="id" type="xs:string"/>
+              <xs:element name="partyId" type="xs:string"/>
+              <xs:element name="name" type="xs:string"/>
+              <xs:element minOccurs="0" name="description" type="xs:string"/>
+              <xs:element minOccurs="0" name="flows" type="tns:FlowArrayType"/>
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="FlowArrayType">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" name="flow" type="tns:FlowType"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="FlowType">
+        <xs:complexContent>
+          <xs:extension base="tns:AuditType">
+            <xs:sequence>
+              <xs:element name="id" type="xs:string"/>
+              <xs:element minOccurs="0" name="uuid" type="xs:string"/>
+              <xs:element name="processId" type="xs:string"/>
+              <xs:element name="stageId" type="xs:string"/>
+              <xs:element name="stageTypeId" type="xs:int"/>
+              <xs:element name="transactionQualifierId" type="xs:string"/>
+              <xs:element name="storeMessagePayload" type="xs:boolean"/>
+              <xs:element minOccurs="0" name="process" type="tns:ProcessType"/>
+              <xs:element minOccurs="0" name="stage" type="tns:StageType"/>
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="StageType">
+        <xs:complexContent>
+          <xs:extension base="tns:AuditType">
+            <xs:sequence>
+              <xs:element name="id" type="xs:string"/>
+              <xs:element name="partyId" type="xs:string"/>
+              <xs:element name="name" type="xs:string"/>
+              <xs:element minOccurs="0" name="description" type="xs:string"/>
+              <xs:element name="qualifierId" type="xs:string"/>
+              <xs:element name="qualifier" type="tns:QualifierType"/>
+              <xs:element minOccurs="0" name="stageAttributes" type="tns:AttributeArrayType"/>
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="QualifierType">
+        <xs:sequence>
+          <xs:element name="id" type="xs:string"/>
+          <xs:element name="partyId" type="xs:string"/>
+          <xs:element name="name" type="xs:string"/>
+          <xs:element minOccurs="0" name="staticValue" type="xs:string"/>
+          <xs:element minOccurs="0" name="qualifierAttributes" type="tns:AttributeArrayType"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ProcessArrayType">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" name="process" type="tns:ProcessType"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="StageArrayType">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" name="stage" type="tns:StageType"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="FlowTransactionArrayType">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" name="transaction" type="tns:FlowTransactionType"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="FlowTransactionType">
+        <xs:sequence>
+          <xs:element name="id" type="xs:string"/>
+          <xs:element name="transactionId" type="xs:string"/>
+          <xs:element name="flowId" type="xs:string"/>
+          <xs:element name="transactionDate" type="xs:dateTime"/>
+          <xs:element minOccurs="0" name="transaction" type="tns:TransactionType"/>
+          <xs:element minOccurs="0" name="flow" type="tns:FlowType"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="TransactionType">
+        <xs:sequence>
+          <xs:element name="id" type="xs:string"/>
+          <xs:element minOccurs="0" name="uuid" type="xs:string"/>
+          <xs:element name="stateType" type="xs:int"/>
+          <xs:element name="startDate" type="xs:dateTime"/>
+          <xs:element minOccurs="0" name="endDate" type="xs:dateTime"/>
+          <xs:element minOccurs="0" name="flowTransactions" type="tns:FlowTransactionArrayType"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema elementFormDefault="qualified" targetNamespace="urn:netflexity:schema:software:bam:messages:1.0" version="1.0" xmlns:ns1="urn:netflexity:schema:software:common:types:1.0" xmlns:ns2="urn:netflexity:schema:software:bam:types:1.0" xmlns:tns="urn:netflexity:schema:software:bam:messages:1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="urn:netflexity:schema:software:common:types:1.0"/>
+      <xs:import namespace="urn:netflexity:schema:software:bam:types:1.0"/>
+      <xs:element name="AcknowledgeAddAttribute">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="attribute" type="ns2:AttributeType"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="AcknowledgeAddProcess">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="process" type="ns2:ProcessType"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="AcknowledgeAddQualifier">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="qualifier" type="ns2:QualifierType"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="AcknowledgeAddStage">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="stage" type="ns2:StageType"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="AcknowledgeChangeAttribute">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="attribute" type="ns2:AttributeType"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="AcknowledgeChangeProcess">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="process" type="ns2:ProcessType"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="AcknowledgeChangeStage">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="stage" type="ns2:StageType"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="AcknowledgeRemoveAttributes">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="status" type="xs:int"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="AcknowledgeRemoveProcesses">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="status" type="xs:int"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="AcknowledgeRemoveStages">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="status" type="xs:int"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="AcknowledgeTransactionTracking">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="flowUuid" type="xs:string"/>
+            <xs:element minOccurs="0" name="transactionUuid" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="FindAttributes">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="attributeName" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="FindStages">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="stageName" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetAttribute">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="attributeId" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetAttributes">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="party" type="ns1:PartyType"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetProcess">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="processId" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetProcesses">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="party" type="ns1:PartyType"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetStage">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="stageId" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetStages">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="party" type="ns1:PartyType"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ProcessAddAttribute">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="attribute" type="ns2:AttributeType"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ProcessAddProcess">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="process" type="ns2:ProcessType"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ProcessAddQualifier">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="qualifier" type="ns2:QualifierType"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ProcessAddStage">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="stage" type="ns2:StageType"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ProcessChangeAttribute">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="attribute" type="ns2:AttributeType"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ProcessChangeProcess">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="process" type="ns2:ProcessType"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ProcessChangeStage">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="stage" type="ns2:StageType"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ProcessRemoveAttributes">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="attributes" type="ns2:AttributeArrayType"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ProcessRemoveProcesses">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="processes" type="ns2:ProcessArrayType"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ProcessRemoveStages">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="stages" type="ns2:StageArrayType"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ProcessTransactionTracking">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="flowUuid" type="xs:string"/>
+            <xs:element minOccurs="0" name="transactionUuid" type="xs:string"/>
+            <xs:element name="transactionDate" type="xs:integer"/>
+            <xs:element minOccurs="0" name="transactionContent" type="xs:base64Binary"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ShowAttribute">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="attribute" type="ns2:AttributeType"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ShowAttributes">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="attributes" type="ns2:AttributeArrayType"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ShowFoundAttributes">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="attributes" type="ns2:AttributeArrayType"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ShowFoundStages">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="stages" type="ns2:StageArrayType"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ShowProcess">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="process" type="ns2:ProcessType"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ShowProcesses">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="processes" type="ns2:ProcessArrayType"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ShowStage">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="stage" type="ns2:StageType"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ShowStages">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="stages" type="ns2:StageArrayType"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="TransactionAuditEvent">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="correlationId" type="xs:string"/>
+            <xs:element name="activityId" type="xs:string"/>
+            <xs:element name="activityTime" type="xs:integer"/>
+            <xs:element name="activityStatus" type="xs:int"/>
+            <xs:element minOccurs="0" name="activityAttributes" type="tns:TransactionActivityAttributeArrayType"/>
+            <xs:element minOccurs="0" name="activityPayload" type="tns:TransactionPayloadType"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:complexType name="TransactionPayloadType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="request" type="xs:base64Binary"/>
+          <xs:element minOccurs="0" name="response" type="xs:base64Binary"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="TransactionActivityAttributeArrayType">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" name="attribute" type="tns:TransactionActivityAttributeType"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="TransactionActivityAttributeType">
+        <xs:sequence/>
+        <xs:attribute name="name" type="xs:anySimpleType" use="required"/>
+        <xs:attribute name="value" type="xs:anySimpleType" use="required"/>
+      </xs:complexType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="processChangeAttributeResponse">
+    <wsdl:part element="ns2:AcknowledgeChangeAttribute" name="body"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="processAddStage">
+    <wsdl:part element="ns2:ProcessAddStage" name="body"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getStagesResponse">
+    <wsdl:part element="ns2:ShowStages" name="body"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="processAddStageResponse">
+    <wsdl:part element="ns2:AcknowledgeAddStage" name="body"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="processRemoveStages">
+    <wsdl:part element="ns2:ProcessRemoveStages" name="body"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="findStages">
+    <wsdl:part element="ns2:FindStages" name="body"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="processChangeStage">
+    <wsdl:part element="ns2:ProcessChangeStage" name="body"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="processRemoveProcessesResponse">
+    <wsdl:part element="ns2:AcknowledgeRemoveProcesses" name="body"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="processAddQualifier">
+    <wsdl:part element="ns2:ProcessAddQualifier" name="body"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getAttribute">
+    <wsdl:part element="ns2:GetAttribute" name="body"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="processRemoveAttributesResponse">
+    <wsdl:part element="ns2:AcknowledgeRemoveAttributes" name="body"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="processRemoveProcesses">
+    <wsdl:part element="ns2:ProcessRemoveProcesses" name="body"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="processTransactionTracking">
+    <wsdl:part element="ns2:ProcessTransactionTracking" name="body"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="processAddQualifierResponse">
+    <wsdl:part element="ns2:AcknowledgeAddQualifier" name="body"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="findStagesResponse">
+    <wsdl:part element="ns2:ShowFoundStages" name="body"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="processAddAttributeResponse">
+    <wsdl:part element="ns2:AcknowledgeAddAttribute" name="body"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="processAddProcess">
+    <wsdl:part element="ns2:ProcessAddProcess" name="body"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getAttributeResponse">
+    <wsdl:part element="ns2:ShowAttribute" name="body"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="processChangeProcessResponse">
+    <wsdl:part element="ns2:AcknowledgeChangeProcess" name="body"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="processChangeProcess">
+    <wsdl:part element="ns2:ProcessChangeProcess" name="body"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="processTransactionTrackingResponse">
+    <wsdl:part element="ns2:AcknowledgeTransactionTracking" name="body"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getProcess">
+    <wsdl:part element="ns2:GetProcess" name="body"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="processRemoveAttributes">
+    <wsdl:part element="ns2:ProcessRemoveAttributes" name="body"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="processRemoveStagesResponse">
+    <wsdl:part element="ns2:AcknowledgeRemoveStages" name="body"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getStages">
+    <wsdl:part element="ns2:GetStages" name="body"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="findAttributesResponse">
+    <wsdl:part element="ns2:ShowFoundAttributes" name="body"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="processAddProcessResponse">
+    <wsdl:part element="ns2:AcknowledgeAddProcess" name="body"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getStage">
+    <wsdl:part element="ns2:GetStage" name="body"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="processAddAttribute">
+    <wsdl:part element="ns2:ProcessAddAttribute" name="body"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getAttributesResponse">
+    <wsdl:part element="ns2:ShowAttributes" name="body"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="processChangeStageResponse">
+    <wsdl:part element="ns2:AcknowledgeChangeStage" name="body"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getProcessResponse">
+    <wsdl:part element="ns2:ShowProcess" name="body"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getProcessesResponse">
+    <wsdl:part element="ns2:ShowProcesses" name="body"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="processChangeAttribute">
+    <wsdl:part element="ns2:ProcessChangeAttribute" name="body"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="findAttributes">
+    <wsdl:part element="ns2:FindAttributes" name="body"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getStageResponse">
+    <wsdl:part element="ns2:ShowStage" name="body"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getProcesses">
+    <wsdl:part element="ns2:GetProcesses" name="body"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getAttributes">
+    <wsdl:part element="ns2:GetAttributes" name="body"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="BAM">
+    <wsdl:operation name="processTransactionTracking">
+      <wsdl:input message="ns1:processTransactionTracking" name="processTransactionTracking"></wsdl:input>
+      <wsdl:output message="ns1:processTransactionTrackingResponse" name="processTransactionTrackingResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAttributes">
+      <wsdl:input message="ns1:getAttributes" name="getAttributes"></wsdl:input>
+      <wsdl:output message="ns1:getAttributesResponse" name="getAttributesResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="processRemoveProcesses">
+      <wsdl:input message="ns1:processRemoveProcesses" name="processRemoveProcesses"></wsdl:input>
+      <wsdl:output message="ns1:processRemoveProcessesResponse" name="processRemoveProcessesResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="findAttributes">
+      <wsdl:input message="ns1:findAttributes" name="findAttributes"></wsdl:input>
+      <wsdl:output message="ns1:findAttributesResponse" name="findAttributesResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getStages">
+      <wsdl:input message="ns1:getStages" name="getStages"></wsdl:input>
+      <wsdl:output message="ns1:getStagesResponse" name="getStagesResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="processAddStage">
+      <wsdl:input message="ns1:processAddStage" name="processAddStage"></wsdl:input>
+      <wsdl:output message="ns1:processAddStageResponse" name="processAddStageResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="processAddQualifier">
+      <wsdl:input message="ns1:processAddQualifier" name="processAddQualifier"></wsdl:input>
+      <wsdl:output message="ns1:processAddQualifierResponse" name="processAddQualifierResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="findStages">
+      <wsdl:input message="ns1:findStages" name="findStages"></wsdl:input>
+      <wsdl:output message="ns1:findStagesResponse" name="findStagesResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getProcess">
+      <wsdl:input message="ns1:getProcess" name="getProcess"></wsdl:input>
+      <wsdl:output message="ns1:getProcessResponse" name="getProcessResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="processAddProcess">
+      <wsdl:input message="ns1:processAddProcess" name="processAddProcess"></wsdl:input>
+      <wsdl:output message="ns1:processAddProcessResponse" name="processAddProcessResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getProcesses">
+      <wsdl:input message="ns1:getProcesses" name="getProcesses"></wsdl:input>
+      <wsdl:output message="ns1:getProcessesResponse" name="getProcessesResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getStage">
+      <wsdl:input message="ns1:getStage" name="getStage"></wsdl:input>
+      <wsdl:output message="ns1:getStageResponse" name="getStageResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="processChangeProcess">
+      <wsdl:input message="ns1:processChangeProcess" name="processChangeProcess"></wsdl:input>
+      <wsdl:output message="ns1:processChangeProcessResponse" name="processChangeProcessResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="processChangeAttribute">
+      <wsdl:input message="ns1:processChangeAttribute" name="processChangeAttribute"></wsdl:input>
+      <wsdl:output message="ns1:processChangeAttributeResponse" name="processChangeAttributeResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAttribute">
+      <wsdl:input message="ns1:getAttribute" name="getAttribute"></wsdl:input>
+      <wsdl:output message="ns1:getAttributeResponse" name="getAttributeResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="processRemoveStages">
+      <wsdl:input message="ns1:processRemoveStages" name="processRemoveStages"></wsdl:input>
+      <wsdl:output message="ns1:processRemoveStagesResponse" name="processRemoveStagesResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="processAddAttribute">
+      <wsdl:input message="ns1:processAddAttribute" name="processAddAttribute"></wsdl:input>
+      <wsdl:output message="ns1:processAddAttributeResponse" name="processAddAttributeResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="processRemoveAttributes">
+      <wsdl:input message="ns1:processRemoveAttributes" name="processRemoveAttributes"></wsdl:input>
+      <wsdl:output message="ns1:processRemoveAttributesResponse" name="processRemoveAttributesResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="processChangeStage">
+      <wsdl:input message="ns1:processChangeStage" name="processChangeStage"></wsdl:input>
+      <wsdl:output message="ns1:processChangeStageResponse" name="processChangeStageResponse"></wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:8480/bam-ws-1.0/BamQoSService</con:endpoint></con:endpoints><con:operation isOneWay="false" action="findAttributes" name="findAttributes" bindingOperationName="findAttributes" type="Request-Response" outputName="findAttributesResponse" inputName="findAttributes" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8480/bam-ws-1.0/BamQoSService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:netflexity:schema:software:bam:messages:1.0">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <urn:FindAttributes>
+         <urn:attributeName>?</urn:attributeName>
+      </urn:FindAttributes>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="findAttributes"/></con:call></con:operation><con:operation isOneWay="false" action="findStages" name="findStages" bindingOperationName="findStages" type="Request-Response" outputName="findStagesResponse" inputName="findStages" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8480/bam-ws-1.0/BamQoSService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:netflexity:schema:software:bam:messages:1.0">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <urn:FindStages>
+         <urn:stageName>?</urn:stageName>
+      </urn:FindStages>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="findStages"/></con:call></con:operation><con:operation isOneWay="false" action="getAttribute" name="getAttribute" bindingOperationName="getAttribute" type="Request-Response" outputName="getAttributeResponse" inputName="getAttribute" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8480/bam-ws-1.0/BamQoSService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:netflexity:schema:software:bam:messages:1.0">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <urn:GetAttribute>
+         <urn:attributeId>?</urn:attributeId>
+      </urn:GetAttribute>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="getAttribute"/></con:call></con:operation><con:operation isOneWay="false" action="getAttributes" name="getAttributes" bindingOperationName="getAttributes" type="Request-Response" outputName="getAttributesResponse" inputName="getAttributes" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8480/bam-ws-1.0/BamQoSService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:netflexity:schema:software:bam:messages:1.0" xmlns:urn1="urn:netflexity:schema:software:common:types:1.0">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <urn:GetAttributes>
+         <urn:party>
+            <!--Optional:-->
+            <urn1:changeDate>?</urn1:changeDate>
+            <!--Optional:-->
+            <urn1:changeBy>?</urn1:changeBy>
+            <!--Optional:-->
+            <urn1:status>?</urn1:status>
+            <urn1:id>?</urn1:id>
+            <urn1:companyName>?</urn1:companyName>
+            <!--Optional:-->
+            <urn1:addressLine1>?</urn1:addressLine1>
+            <!--Optional:-->
+            <urn1:addressLine2>?</urn1:addressLine2>
+            <!--Optional:-->
+            <urn1:city>?</urn1:city>
+            <!--Optional:-->
+            <urn1:stateProvince>?</urn1:stateProvince>
+            <!--Optional:-->
+            <urn1:postalCode>?</urn1:postalCode>
+            <!--Optional:-->
+            <urn1:countryCode>?</urn1:countryCode>
+            <!--Optional:-->
+            <urn1:billingContact>
+               <urn1:name>?</urn1:name>
+               <!--Optional:-->
+               <urn1:email>?</urn1:email>
+               <!--Optional:-->
+               <urn1:phone>?</urn1:phone>
+            </urn1:billingContact>
+            <!--Optional:-->
+            <urn1:accounts>
+               <!--1 or more repetitions:-->
+               <urn1:user>
+                  <!--Optional:-->
+                  <urn1:changeDate>?</urn1:changeDate>
+                  <!--Optional:-->
+                  <urn1:changeBy>?</urn1:changeBy>
+                  <!--Optional:-->
+                  <urn1:status>?</urn1:status>
+                  <urn1:id>?</urn1:id>
+                  <urn1:partyId>?</urn1:partyId>
+                  <urn1:uuid>?</urn1:uuid>
+                  <urn1:licenseContent>cid:543701941063</urn1:licenseContent>
+                  <urn1:effectiveDate>?</urn1:effectiveDate>
+                  <urn1:expirationDate>?</urn1:expirationDate>
+                  <urn1:creationDate>?</urn1:creationDate>
+                  <!--Optional:-->
+                  <urn1:party/>
+                  <!--Optional:-->
+                  <urn1:users>
+                     <!--1 or more repetitions:-->
+                     <urn1:user>
+                        <!--Optional:-->
+                        <urn1:changeDate>?</urn1:changeDate>
+                        <!--Optional:-->
+                        <urn1:changeBy>?</urn1:changeBy>
+                        <!--Optional:-->
+                        <urn1:status>?</urn1:status>
+                        <urn1:id>?</urn1:id>
+                        <urn1:accountId>?</urn1:accountId>
+                        <urn1:username>?</urn1:username>
+                        <urn1:password>?</urn1:password>
+                        <!--Optional:-->
+                        <urn1:account/>
+                        <!--Optional:-->
+                        <urn1:roles>
+                           <!--1 or more repetitions:-->
+                           <urn1:role>?</urn1:role>
+                        </urn1:roles>
+                     </urn1:user>
+                  </urn1:users>
+               </urn1:user>
+            </urn1:accounts>
+         </urn:party>
+      </urn:GetAttributes>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="getAttributes"/></con:call></con:operation><con:operation isOneWay="false" action="getProcess" name="getProcess" bindingOperationName="getProcess" type="Request-Response" outputName="getProcessResponse" inputName="getProcess" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8480/bam-ws-1.0/BamQoSService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:netflexity:schema:software:bam:messages:1.0">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <urn:GetProcess>
+         <urn:processId>?</urn:processId>
+      </urn:GetProcess>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="getProcess"/></con:call></con:operation><con:operation isOneWay="false" action="getProcesses" name="getProcesses" bindingOperationName="getProcesses" type="Request-Response" outputName="getProcessesResponse" inputName="getProcesses" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8480/bam-ws-1.0/BamQoSService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:netflexity:schema:software:bam:messages:1.0" xmlns:urn1="urn:netflexity:schema:software:common:types:1.0">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <urn:GetProcesses>
+         <urn:party>
+            <!--Optional:-->
+            <urn1:changeDate>?</urn1:changeDate>
+            <!--Optional:-->
+            <urn1:changeBy>?</urn1:changeBy>
+            <!--Optional:-->
+            <urn1:status>?</urn1:status>
+            <urn1:id>?</urn1:id>
+            <urn1:companyName>?</urn1:companyName>
+            <!--Optional:-->
+            <urn1:addressLine1>?</urn1:addressLine1>
+            <!--Optional:-->
+            <urn1:addressLine2>?</urn1:addressLine2>
+            <!--Optional:-->
+            <urn1:city>?</urn1:city>
+            <!--Optional:-->
+            <urn1:stateProvince>?</urn1:stateProvince>
+            <!--Optional:-->
+            <urn1:postalCode>?</urn1:postalCode>
+            <!--Optional:-->
+            <urn1:countryCode>?</urn1:countryCode>
+            <!--Optional:-->
+            <urn1:billingContact>
+               <urn1:name>?</urn1:name>
+               <!--Optional:-->
+               <urn1:email>?</urn1:email>
+               <!--Optional:-->
+               <urn1:phone>?</urn1:phone>
+            </urn1:billingContact>
+            <!--Optional:-->
+            <urn1:accounts>
+               <!--1 or more repetitions:-->
+               <urn1:user>
+                  <!--Optional:-->
+                  <urn1:changeDate>?</urn1:changeDate>
+                  <!--Optional:-->
+                  <urn1:changeBy>?</urn1:changeBy>
+                  <!--Optional:-->
+                  <urn1:status>?</urn1:status>
+                  <urn1:id>?</urn1:id>
+                  <urn1:partyId>?</urn1:partyId>
+                  <urn1:uuid>?</urn1:uuid>
+                  <urn1:licenseContent>cid:295575384880</urn1:licenseContent>
+                  <urn1:effectiveDate>?</urn1:effectiveDate>
+                  <urn1:expirationDate>?</urn1:expirationDate>
+                  <urn1:creationDate>?</urn1:creationDate>
+                  <!--Optional:-->
+                  <urn1:party/>
+                  <!--Optional:-->
+                  <urn1:users>
+                     <!--1 or more repetitions:-->
+                     <urn1:user>
+                        <!--Optional:-->
+                        <urn1:changeDate>?</urn1:changeDate>
+                        <!--Optional:-->
+                        <urn1:changeBy>?</urn1:changeBy>
+                        <!--Optional:-->
+                        <urn1:status>?</urn1:status>
+                        <urn1:id>?</urn1:id>
+                        <urn1:accountId>?</urn1:accountId>
+                        <urn1:username>?</urn1:username>
+                        <urn1:password>?</urn1:password>
+                        <!--Optional:-->
+                        <urn1:account/>
+                        <!--Optional:-->
+                        <urn1:roles>
+                           <!--1 or more repetitions:-->
+                           <urn1:role>?</urn1:role>
+                        </urn1:roles>
+                     </urn1:user>
+                  </urn1:users>
+               </urn1:user>
+            </urn1:accounts>
+         </urn:party>
+      </urn:GetProcesses>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="getProcesses"/></con:call></con:operation><con:operation isOneWay="false" action="getStage" name="getStage" bindingOperationName="getStage" type="Request-Response" outputName="getStageResponse" inputName="getStage" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8480/bam-ws-1.0/BamQoSService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:netflexity:schema:software:bam:messages:1.0">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <urn:GetStage>
+         <urn:stageId>?</urn:stageId>
+      </urn:GetStage>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="getStage"/></con:call></con:operation><con:operation isOneWay="false" action="getStages" name="getStages" bindingOperationName="getStages" type="Request-Response" outputName="getStagesResponse" inputName="getStages" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8480/bam-ws-1.0/BamQoSService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:netflexity:schema:software:bam:messages:1.0" xmlns:urn1="urn:netflexity:schema:software:common:types:1.0">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <urn:GetStages>
+         <urn:party>
+            <!--Optional:-->
+            <urn1:changeDate>?</urn1:changeDate>
+            <!--Optional:-->
+            <urn1:changeBy>?</urn1:changeBy>
+            <!--Optional:-->
+            <urn1:status>?</urn1:status>
+            <urn1:id>?</urn1:id>
+            <urn1:companyName>?</urn1:companyName>
+            <!--Optional:-->
+            <urn1:addressLine1>?</urn1:addressLine1>
+            <!--Optional:-->
+            <urn1:addressLine2>?</urn1:addressLine2>
+            <!--Optional:-->
+            <urn1:city>?</urn1:city>
+            <!--Optional:-->
+            <urn1:stateProvince>?</urn1:stateProvince>
+            <!--Optional:-->
+            <urn1:postalCode>?</urn1:postalCode>
+            <!--Optional:-->
+            <urn1:countryCode>?</urn1:countryCode>
+            <!--Optional:-->
+            <urn1:billingContact>
+               <urn1:name>?</urn1:name>
+               <!--Optional:-->
+               <urn1:email>?</urn1:email>
+               <!--Optional:-->
+               <urn1:phone>?</urn1:phone>
+            </urn1:billingContact>
+            <!--Optional:-->
+            <urn1:accounts>
+               <!--1 or more repetitions:-->
+               <urn1:user>
+                  <!--Optional:-->
+                  <urn1:changeDate>?</urn1:changeDate>
+                  <!--Optional:-->
+                  <urn1:changeBy>?</urn1:changeBy>
+                  <!--Optional:-->
+                  <urn1:status>?</urn1:status>
+                  <urn1:id>?</urn1:id>
+                  <urn1:partyId>?</urn1:partyId>
+                  <urn1:uuid>?</urn1:uuid>
+                  <urn1:licenseContent>cid:1163995622989</urn1:licenseContent>
+                  <urn1:effectiveDate>?</urn1:effectiveDate>
+                  <urn1:expirationDate>?</urn1:expirationDate>
+                  <urn1:creationDate>?</urn1:creationDate>
+                  <!--Optional:-->
+                  <urn1:party/>
+                  <!--Optional:-->
+                  <urn1:users>
+                     <!--1 or more repetitions:-->
+                     <urn1:user>
+                        <!--Optional:-->
+                        <urn1:changeDate>?</urn1:changeDate>
+                        <!--Optional:-->
+                        <urn1:changeBy>?</urn1:changeBy>
+                        <!--Optional:-->
+                        <urn1:status>?</urn1:status>
+                        <urn1:id>?</urn1:id>
+                        <urn1:accountId>?</urn1:accountId>
+                        <urn1:username>?</urn1:username>
+                        <urn1:password>?</urn1:password>
+                        <!--Optional:-->
+                        <urn1:account/>
+                        <!--Optional:-->
+                        <urn1:roles>
+                           <!--1 or more repetitions:-->
+                           <urn1:role>?</urn1:role>
+                        </urn1:roles>
+                     </urn1:user>
+                  </urn1:users>
+               </urn1:user>
+            </urn1:accounts>
+         </urn:party>
+      </urn:GetStages>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="getStages"/></con:call></con:operation><con:operation isOneWay="false" action="processAddAttribute" name="processAddAttribute" bindingOperationName="processAddAttribute" type="Request-Response" outputName="processAddAttributeResponse" inputName="processAddAttribute" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8480/bam-ws-1.0/BamQoSService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:netflexity:schema:software:bam:messages:1.0" xmlns:urn1="urn:netflexity:schema:software:bam:types:1.0">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <urn:ProcessAddAttribute>
+         <urn:attribute>
+            <!--Optional:-->
+            <urn1:changeDate>?</urn1:changeDate>
+            <!--Optional:-->
+            <urn1:changeBy>?</urn1:changeBy>
+            <!--Optional:-->
+            <urn1:status>?</urn1:status>
+            <urn1:id>?</urn1:id>
+            <urn1:partyId>?</urn1:partyId>
+            <urn1:name>?</urn1:name>
+            <!--Optional:-->
+            <urn1:expression>?</urn1:expression>
+            <!--Optional:-->
+            <urn1:startPosition>?</urn1:startPosition>
+            <!--Optional:-->
+            <urn1:endPosition>?</urn1:endPosition>
+            <!--Optional:-->
+            <urn1:delimiter>?</urn1:delimiter>
+            <!--Optional:-->
+            <urn1:position>?</urn1:position>
+            <urn1:required>?</urn1:required>
+            <!--Optional:-->
+            <urn1:datatype>?</urn1:datatype>
+         </urn:attribute>
+      </urn:ProcessAddAttribute>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="processAddAttribute"/></con:call></con:operation><con:operation isOneWay="false" action="processAddProcess" name="processAddProcess" bindingOperationName="processAddProcess" type="Request-Response" outputName="processAddProcessResponse" inputName="processAddProcess" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8480/bam-ws-1.0/BamQoSService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:netflexity:schema:software:bam:messages:1.0" xmlns:urn1="urn:netflexity:schema:software:bam:types:1.0">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <urn:ProcessAddProcess>
+         <urn:process>
+            <!--Optional:-->
+            <urn1:changeDate>?</urn1:changeDate>
+            <!--Optional:-->
+            <urn1:changeBy>?</urn1:changeBy>
+            <!--Optional:-->
+            <urn1:status>?</urn1:status>
+            <urn1:id>?</urn1:id>
+            <urn1:partyId>?</urn1:partyId>
+            <urn1:name>?</urn1:name>
+            <!--Optional:-->
+            <urn1:description>?</urn1:description>
+            <!--Optional:-->
+            <urn1:flows>
+               <!--1 or more repetitions:-->
+               <urn1:flow>
+                  <!--Optional:-->
+                  <urn1:changeDate>?</urn1:changeDate>
+                  <!--Optional:-->
+                  <urn1:changeBy>?</urn1:changeBy>
+                  <!--Optional:-->
+                  <urn1:status>?</urn1:status>
+                  <urn1:id>?</urn1:id>
+                  <!--Optional:-->
+                  <urn1:uuid>?</urn1:uuid>
+                  <urn1:processId>?</urn1:processId>
+                  <urn1:stageId>?</urn1:stageId>
+                  <urn1:stageTypeId>?</urn1:stageTypeId>
+                  <urn1:transactionQualifierId>?</urn1:transactionQualifierId>
+                  <urn1:storeMessagePayload>?</urn1:storeMessagePayload>
+                  <!--Optional:-->
+                  <urn1:process/>
+                  <!--Optional:-->
+                  <urn1:stage>
+                     <!--Optional:-->
+                     <urn1:changeDate>?</urn1:changeDate>
+                     <!--Optional:-->
+                     <urn1:changeBy>?</urn1:changeBy>
+                     <!--Optional:-->
+                     <urn1:status>?</urn1:status>
+                     <urn1:id>?</urn1:id>
+                     <urn1:partyId>?</urn1:partyId>
+                     <urn1:name>?</urn1:name>
+                     <!--Optional:-->
+                     <urn1:description>?</urn1:description>
+                     <urn1:qualifierId>?</urn1:qualifierId>
+                     <urn1:qualifier>
+                        <urn1:id>?</urn1:id>
+                        <urn1:partyId>?</urn1:partyId>
+                        <urn1:name>?</urn1:name>
+                        <!--Optional:-->
+                        <urn1:staticValue>?</urn1:staticValue>
+                        <!--Optional:-->
+                        <urn1:qualifierAttributes>
+                           <!--1 or more repetitions:-->
+                           <urn1:attribute>
+                              <!--Optional:-->
+                              <urn1:changeDate>?</urn1:changeDate>
+                              <!--Optional:-->
+                              <urn1:changeBy>?</urn1:changeBy>
+                              <!--Optional:-->
+                              <urn1:status>?</urn1:status>
+                              <urn1:id>?</urn1:id>
+                              <urn1:partyId>?</urn1:partyId>
+                              <urn1:name>?</urn1:name>
+                              <!--Optional:-->
+                              <urn1:expression>?</urn1:expression>
+                              <!--Optional:-->
+                              <urn1:startPosition>?</urn1:startPosition>
+                              <!--Optional:-->
+                              <urn1:endPosition>?</urn1:endPosition>
+                              <!--Optional:-->
+                              <urn1:delimiter>?</urn1:delimiter>
+                              <!--Optional:-->
+                              <urn1:position>?</urn1:position>
+                              <urn1:required>?</urn1:required>
+                              <!--Optional:-->
+                              <urn1:datatype>?</urn1:datatype>
+                           </urn1:attribute>
+                        </urn1:qualifierAttributes>
+                     </urn1:qualifier>
+                     <!--Optional:-->
+                     <urn1:stageAttributes>
+                        <!--1 or more repetitions:-->
+                        <urn1:attribute>
+                           <!--Optional:-->
+                           <urn1:changeDate>?</urn1:changeDate>
+                           <!--Optional:-->
+                           <urn1:changeBy>?</urn1:changeBy>
+                           <!--Optional:-->
+                           <urn1:status>?</urn1:status>
+                           <urn1:id>?</urn1:id>
+                           <urn1:partyId>?</urn1:partyId>
+                           <urn1:name>?</urn1:name>
+                           <!--Optional:-->
+                           <urn1:expression>?</urn1:expression>
+                           <!--Optional:-->
+                           <urn1:startPosition>?</urn1:startPosition>
+                           <!--Optional:-->
+                           <urn1:endPosition>?</urn1:endPosition>
+                           <!--Optional:-->
+                           <urn1:delimiter>?</urn1:delimiter>
+                           <!--Optional:-->
+                           <urn1:position>?</urn1:position>
+                           <urn1:required>?</urn1:required>
+                           <!--Optional:-->
+                           <urn1:datatype>?</urn1:datatype>
+                        </urn1:attribute>
+                     </urn1:stageAttributes>
+                  </urn1:stage>
+               </urn1:flow>
+            </urn1:flows>
+         </urn:process>
+      </urn:ProcessAddProcess>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="processAddProcess"/></con:call></con:operation><con:operation isOneWay="false" action="processAddQualifier" name="processAddQualifier" bindingOperationName="processAddQualifier" type="Request-Response" outputName="processAddQualifierResponse" inputName="processAddQualifier" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8480/bam-ws-1.0/BamQoSService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:netflexity:schema:software:bam:messages:1.0" xmlns:urn1="urn:netflexity:schema:software:bam:types:1.0">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <urn:ProcessAddQualifier>
+         <urn:qualifier>
+            <urn1:id>?</urn1:id>
+            <urn1:partyId>?</urn1:partyId>
+            <urn1:name>?</urn1:name>
+            <!--Optional:-->
+            <urn1:staticValue>?</urn1:staticValue>
+            <!--Optional:-->
+            <urn1:qualifierAttributes>
+               <!--1 or more repetitions:-->
+               <urn1:attribute>
+                  <!--Optional:-->
+                  <urn1:changeDate>?</urn1:changeDate>
+                  <!--Optional:-->
+                  <urn1:changeBy>?</urn1:changeBy>
+                  <!--Optional:-->
+                  <urn1:status>?</urn1:status>
+                  <urn1:id>?</urn1:id>
+                  <urn1:partyId>?</urn1:partyId>
+                  <urn1:name>?</urn1:name>
+                  <!--Optional:-->
+                  <urn1:expression>?</urn1:expression>
+                  <!--Optional:-->
+                  <urn1:startPosition>?</urn1:startPosition>
+                  <!--Optional:-->
+                  <urn1:endPosition>?</urn1:endPosition>
+                  <!--Optional:-->
+                  <urn1:delimiter>?</urn1:delimiter>
+                  <!--Optional:-->
+                  <urn1:position>?</urn1:position>
+                  <urn1:required>?</urn1:required>
+                  <!--Optional:-->
+                  <urn1:datatype>?</urn1:datatype>
+               </urn1:attribute>
+            </urn1:qualifierAttributes>
+         </urn:qualifier>
+      </urn:ProcessAddQualifier>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="processAddQualifier"/></con:call></con:operation><con:operation isOneWay="false" action="processAddStage" name="processAddStage" bindingOperationName="processAddStage" type="Request-Response" outputName="processAddStageResponse" inputName="processAddStage" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8480/bam-ws-1.0/BamQoSService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:netflexity:schema:software:bam:messages:1.0" xmlns:urn1="urn:netflexity:schema:software:bam:types:1.0">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <urn:ProcessAddStage>
+         <urn:stage>
+            <!--Optional:-->
+            <urn1:changeDate>?</urn1:changeDate>
+            <!--Optional:-->
+            <urn1:changeBy>?</urn1:changeBy>
+            <!--Optional:-->
+            <urn1:status>?</urn1:status>
+            <urn1:id>?</urn1:id>
+            <urn1:partyId>?</urn1:partyId>
+            <urn1:name>?</urn1:name>
+            <!--Optional:-->
+            <urn1:description>?</urn1:description>
+            <urn1:qualifierId>?</urn1:qualifierId>
+            <urn1:qualifier>
+               <urn1:id>?</urn1:id>
+               <urn1:partyId>?</urn1:partyId>
+               <urn1:name>?</urn1:name>
+               <!--Optional:-->
+               <urn1:staticValue>?</urn1:staticValue>
+               <!--Optional:-->
+               <urn1:qualifierAttributes>
+                  <!--1 or more repetitions:-->
+                  <urn1:attribute>
+                     <!--Optional:-->
+                     <urn1:changeDate>?</urn1:changeDate>
+                     <!--Optional:-->
+                     <urn1:changeBy>?</urn1:changeBy>
+                     <!--Optional:-->
+                     <urn1:status>?</urn1:status>
+                     <urn1:id>?</urn1:id>
+                     <urn1:partyId>?</urn1:partyId>
+                     <urn1:name>?</urn1:name>
+                     <!--Optional:-->
+                     <urn1:expression>?</urn1:expression>
+                     <!--Optional:-->
+                     <urn1:startPosition>?</urn1:startPosition>
+                     <!--Optional:-->
+                     <urn1:endPosition>?</urn1:endPosition>
+                     <!--Optional:-->
+                     <urn1:delimiter>?</urn1:delimiter>
+                     <!--Optional:-->
+                     <urn1:position>?</urn1:position>
+                     <urn1:required>?</urn1:required>
+                     <!--Optional:-->
+                     <urn1:datatype>?</urn1:datatype>
+                  </urn1:attribute>
+               </urn1:qualifierAttributes>
+            </urn1:qualifier>
+            <!--Optional:-->
+            <urn1:stageAttributes>
+               <!--1 or more repetitions:-->
+               <urn1:attribute>
+                  <!--Optional:-->
+                  <urn1:changeDate>?</urn1:changeDate>
+                  <!--Optional:-->
+                  <urn1:changeBy>?</urn1:changeBy>
+                  <!--Optional:-->
+                  <urn1:status>?</urn1:status>
+                  <urn1:id>?</urn1:id>
+                  <urn1:partyId>?</urn1:partyId>
+                  <urn1:name>?</urn1:name>
+                  <!--Optional:-->
+                  <urn1:expression>?</urn1:expression>
+                  <!--Optional:-->
+                  <urn1:startPosition>?</urn1:startPosition>
+                  <!--Optional:-->
+                  <urn1:endPosition>?</urn1:endPosition>
+                  <!--Optional:-->
+                  <urn1:delimiter>?</urn1:delimiter>
+                  <!--Optional:-->
+                  <urn1:position>?</urn1:position>
+                  <urn1:required>?</urn1:required>
+                  <!--Optional:-->
+                  <urn1:datatype>?</urn1:datatype>
+               </urn1:attribute>
+            </urn1:stageAttributes>
+         </urn:stage>
+      </urn:ProcessAddStage>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="processAddStage"/></con:call></con:operation><con:operation isOneWay="false" action="processChangeAttribute" name="processChangeAttribute" bindingOperationName="processChangeAttribute" type="Request-Response" outputName="processChangeAttributeResponse" inputName="processChangeAttribute" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8480/bam-ws-1.0/BamQoSService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:netflexity:schema:software:bam:messages:1.0" xmlns:urn1="urn:netflexity:schema:software:bam:types:1.0">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <urn:ProcessChangeAttribute>
+         <urn:attribute>
+            <!--Optional:-->
+            <urn1:changeDate>?</urn1:changeDate>
+            <!--Optional:-->
+            <urn1:changeBy>?</urn1:changeBy>
+            <!--Optional:-->
+            <urn1:status>?</urn1:status>
+            <urn1:id>?</urn1:id>
+            <urn1:partyId>?</urn1:partyId>
+            <urn1:name>?</urn1:name>
+            <!--Optional:-->
+            <urn1:expression>?</urn1:expression>
+            <!--Optional:-->
+            <urn1:startPosition>?</urn1:startPosition>
+            <!--Optional:-->
+            <urn1:endPosition>?</urn1:endPosition>
+            <!--Optional:-->
+            <urn1:delimiter>?</urn1:delimiter>
+            <!--Optional:-->
+            <urn1:position>?</urn1:position>
+            <urn1:required>?</urn1:required>
+            <!--Optional:-->
+            <urn1:datatype>?</urn1:datatype>
+         </urn:attribute>
+      </urn:ProcessChangeAttribute>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="processChangeAttribute"/></con:call></con:operation><con:operation isOneWay="false" action="processChangeProcess" name="processChangeProcess" bindingOperationName="processChangeProcess" type="Request-Response" outputName="processChangeProcessResponse" inputName="processChangeProcess" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8480/bam-ws-1.0/BamQoSService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:netflexity:schema:software:bam:messages:1.0" xmlns:urn1="urn:netflexity:schema:software:bam:types:1.0">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <urn:ProcessChangeProcess>
+         <urn:process>
+            <!--Optional:-->
+            <urn1:changeDate>?</urn1:changeDate>
+            <!--Optional:-->
+            <urn1:changeBy>?</urn1:changeBy>
+            <!--Optional:-->
+            <urn1:status>?</urn1:status>
+            <urn1:id>?</urn1:id>
+            <urn1:partyId>?</urn1:partyId>
+            <urn1:name>?</urn1:name>
+            <!--Optional:-->
+            <urn1:description>?</urn1:description>
+            <!--Optional:-->
+            <urn1:flows>
+               <!--1 or more repetitions:-->
+               <urn1:flow>
+                  <!--Optional:-->
+                  <urn1:changeDate>?</urn1:changeDate>
+                  <!--Optional:-->
+                  <urn1:changeBy>?</urn1:changeBy>
+                  <!--Optional:-->
+                  <urn1:status>?</urn1:status>
+                  <urn1:id>?</urn1:id>
+                  <!--Optional:-->
+                  <urn1:uuid>?</urn1:uuid>
+                  <urn1:processId>?</urn1:processId>
+                  <urn1:stageId>?</urn1:stageId>
+                  <urn1:stageTypeId>?</urn1:stageTypeId>
+                  <urn1:transactionQualifierId>?</urn1:transactionQualifierId>
+                  <urn1:storeMessagePayload>?</urn1:storeMessagePayload>
+                  <!--Optional:-->
+                  <urn1:process/>
+                  <!--Optional:-->
+                  <urn1:stage>
+                     <!--Optional:-->
+                     <urn1:changeDate>?</urn1:changeDate>
+                     <!--Optional:-->
+                     <urn1:changeBy>?</urn1:changeBy>
+                     <!--Optional:-->
+                     <urn1:status>?</urn1:status>
+                     <urn1:id>?</urn1:id>
+                     <urn1:partyId>?</urn1:partyId>
+                     <urn1:name>?</urn1:name>
+                     <!--Optional:-->
+                     <urn1:description>?</urn1:description>
+                     <urn1:qualifierId>?</urn1:qualifierId>
+                     <urn1:qualifier>
+                        <urn1:id>?</urn1:id>
+                        <urn1:partyId>?</urn1:partyId>
+                        <urn1:name>?</urn1:name>
+                        <!--Optional:-->
+                        <urn1:staticValue>?</urn1:staticValue>
+                        <!--Optional:-->
+                        <urn1:qualifierAttributes>
+                           <!--1 or more repetitions:-->
+                           <urn1:attribute>
+                              <!--Optional:-->
+                              <urn1:changeDate>?</urn1:changeDate>
+                              <!--Optional:-->
+                              <urn1:changeBy>?</urn1:changeBy>
+                              <!--Optional:-->
+                              <urn1:status>?</urn1:status>
+                              <urn1:id>?</urn1:id>
+                              <urn1:partyId>?</urn1:partyId>
+                              <urn1:name>?</urn1:name>
+                              <!--Optional:-->
+                              <urn1:expression>?</urn1:expression>
+                              <!--Optional:-->
+                              <urn1:startPosition>?</urn1:startPosition>
+                              <!--Optional:-->
+                              <urn1:endPosition>?</urn1:endPosition>
+                              <!--Optional:-->
+                              <urn1:delimiter>?</urn1:delimiter>
+                              <!--Optional:-->
+                              <urn1:position>?</urn1:position>
+                              <urn1:required>?</urn1:required>
+                              <!--Optional:-->
+                              <urn1:datatype>?</urn1:datatype>
+                           </urn1:attribute>
+                        </urn1:qualifierAttributes>
+                     </urn1:qualifier>
+                     <!--Optional:-->
+                     <urn1:stageAttributes>
+                        <!--1 or more repetitions:-->
+                        <urn1:attribute>
+                           <!--Optional:-->
+                           <urn1:changeDate>?</urn1:changeDate>
+                           <!--Optional:-->
+                           <urn1:changeBy>?</urn1:changeBy>
+                           <!--Optional:-->
+                           <urn1:status>?</urn1:status>
+                           <urn1:id>?</urn1:id>
+                           <urn1:partyId>?</urn1:partyId>
+                           <urn1:name>?</urn1:name>
+                           <!--Optional:-->
+                           <urn1:expression>?</urn1:expression>
+                           <!--Optional:-->
+                           <urn1:startPosition>?</urn1:startPosition>
+                           <!--Optional:-->
+                           <urn1:endPosition>?</urn1:endPosition>
+                           <!--Optional:-->
+                           <urn1:delimiter>?</urn1:delimiter>
+                           <!--Optional:-->
+                           <urn1:position>?</urn1:position>
+                           <urn1:required>?</urn1:required>
+                           <!--Optional:-->
+                           <urn1:datatype>?</urn1:datatype>
+                        </urn1:attribute>
+                     </urn1:stageAttributes>
+                  </urn1:stage>
+               </urn1:flow>
+            </urn1:flows>
+         </urn:process>
+      </urn:ProcessChangeProcess>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="processChangeProcess"/></con:call></con:operation><con:operation isOneWay="false" action="processChangeStage" name="processChangeStage" bindingOperationName="processChangeStage" type="Request-Response" outputName="processChangeStageResponse" inputName="processChangeStage" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8480/bam-ws-1.0/BamQoSService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:netflexity:schema:software:bam:messages:1.0" xmlns:urn1="urn:netflexity:schema:software:bam:types:1.0">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <urn:ProcessChangeStage>
+         <urn:stage>
+            <!--Optional:-->
+            <urn1:changeDate>?</urn1:changeDate>
+            <!--Optional:-->
+            <urn1:changeBy>?</urn1:changeBy>
+            <!--Optional:-->
+            <urn1:status>?</urn1:status>
+            <urn1:id>?</urn1:id>
+            <urn1:partyId>?</urn1:partyId>
+            <urn1:name>?</urn1:name>
+            <!--Optional:-->
+            <urn1:description>?</urn1:description>
+            <urn1:qualifierId>?</urn1:qualifierId>
+            <urn1:qualifier>
+               <urn1:id>?</urn1:id>
+               <urn1:partyId>?</urn1:partyId>
+               <urn1:name>?</urn1:name>
+               <!--Optional:-->
+               <urn1:staticValue>?</urn1:staticValue>
+               <!--Optional:-->
+               <urn1:qualifierAttributes>
+                  <!--1 or more repetitions:-->
+                  <urn1:attribute>
+                     <!--Optional:-->
+                     <urn1:changeDate>?</urn1:changeDate>
+                     <!--Optional:-->
+                     <urn1:changeBy>?</urn1:changeBy>
+                     <!--Optional:-->
+                     <urn1:status>?</urn1:status>
+                     <urn1:id>?</urn1:id>
+                     <urn1:partyId>?</urn1:partyId>
+                     <urn1:name>?</urn1:name>
+                     <!--Optional:-->
+                     <urn1:expression>?</urn1:expression>
+                     <!--Optional:-->
+                     <urn1:startPosition>?</urn1:startPosition>
+                     <!--Optional:-->
+                     <urn1:endPosition>?</urn1:endPosition>
+                     <!--Optional:-->
+                     <urn1:delimiter>?</urn1:delimiter>
+                     <!--Optional:-->
+                     <urn1:position>?</urn1:position>
+                     <urn1:required>?</urn1:required>
+                     <!--Optional:-->
+                     <urn1:datatype>?</urn1:datatype>
+                  </urn1:attribute>
+               </urn1:qualifierAttributes>
+            </urn1:qualifier>
+            <!--Optional:-->
+            <urn1:stageAttributes>
+               <!--1 or more repetitions:-->
+               <urn1:attribute>
+                  <!--Optional:-->
+                  <urn1:changeDate>?</urn1:changeDate>
+                  <!--Optional:-->
+                  <urn1:changeBy>?</urn1:changeBy>
+                  <!--Optional:-->
+                  <urn1:status>?</urn1:status>
+                  <urn1:id>?</urn1:id>
+                  <urn1:partyId>?</urn1:partyId>
+                  <urn1:name>?</urn1:name>
+                  <!--Optional:-->
+                  <urn1:expression>?</urn1:expression>
+                  <!--Optional:-->
+                  <urn1:startPosition>?</urn1:startPosition>
+                  <!--Optional:-->
+                  <urn1:endPosition>?</urn1:endPosition>
+                  <!--Optional:-->
+                  <urn1:delimiter>?</urn1:delimiter>
+                  <!--Optional:-->
+                  <urn1:position>?</urn1:position>
+                  <urn1:required>?</urn1:required>
+                  <!--Optional:-->
+                  <urn1:datatype>?</urn1:datatype>
+               </urn1:attribute>
+            </urn1:stageAttributes>
+         </urn:stage>
+      </urn:ProcessChangeStage>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="processChangeStage"/></con:call></con:operation><con:operation isOneWay="false" action="processRemoveAttributes" name="processRemoveAttributes" bindingOperationName="processRemoveAttributes" type="Request-Response" outputName="processRemoveAttributesResponse" inputName="processRemoveAttributes" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8480/bam-ws-1.0/BamQoSService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:netflexity:schema:software:bam:messages:1.0" xmlns:urn1="urn:netflexity:schema:software:bam:types:1.0">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <urn:ProcessRemoveAttributes>
+         <urn:attributes>
+            <!--1 or more repetitions:-->
+            <urn1:attribute>
+               <!--Optional:-->
+               <urn1:changeDate>?</urn1:changeDate>
+               <!--Optional:-->
+               <urn1:changeBy>?</urn1:changeBy>
+               <!--Optional:-->
+               <urn1:status>?</urn1:status>
+               <urn1:id>?</urn1:id>
+               <urn1:partyId>?</urn1:partyId>
+               <urn1:name>?</urn1:name>
+               <!--Optional:-->
+               <urn1:expression>?</urn1:expression>
+               <!--Optional:-->
+               <urn1:startPosition>?</urn1:startPosition>
+               <!--Optional:-->
+               <urn1:endPosition>?</urn1:endPosition>
+               <!--Optional:-->
+               <urn1:delimiter>?</urn1:delimiter>
+               <!--Optional:-->
+               <urn1:position>?</urn1:position>
+               <urn1:required>?</urn1:required>
+               <!--Optional:-->
+               <urn1:datatype>?</urn1:datatype>
+            </urn1:attribute>
+         </urn:attributes>
+      </urn:ProcessRemoveAttributes>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="processRemoveAttributes"/></con:call></con:operation><con:operation isOneWay="false" action="processRemoveProcesses" name="processRemoveProcesses" bindingOperationName="processRemoveProcesses" type="Request-Response" outputName="processRemoveProcessesResponse" inputName="processRemoveProcesses" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8480/bam-ws-1.0/BamQoSService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:netflexity:schema:software:bam:messages:1.0" xmlns:urn1="urn:netflexity:schema:software:bam:types:1.0">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <urn:ProcessRemoveProcesses>
+         <urn:processes>
+            <!--1 or more repetitions:-->
+            <urn1:process>
+               <!--Optional:-->
+               <urn1:changeDate>?</urn1:changeDate>
+               <!--Optional:-->
+               <urn1:changeBy>?</urn1:changeBy>
+               <!--Optional:-->
+               <urn1:status>?</urn1:status>
+               <urn1:id>?</urn1:id>
+               <urn1:partyId>?</urn1:partyId>
+               <urn1:name>?</urn1:name>
+               <!--Optional:-->
+               <urn1:description>?</urn1:description>
+               <!--Optional:-->
+               <urn1:flows>
+                  <!--1 or more repetitions:-->
+                  <urn1:flow>
+                     <!--Optional:-->
+                     <urn1:changeDate>?</urn1:changeDate>
+                     <!--Optional:-->
+                     <urn1:changeBy>?</urn1:changeBy>
+                     <!--Optional:-->
+                     <urn1:status>?</urn1:status>
+                     <urn1:id>?</urn1:id>
+                     <!--Optional:-->
+                     <urn1:uuid>?</urn1:uuid>
+                     <urn1:processId>?</urn1:processId>
+                     <urn1:stageId>?</urn1:stageId>
+                     <urn1:stageTypeId>?</urn1:stageTypeId>
+                     <urn1:transactionQualifierId>?</urn1:transactionQualifierId>
+                     <urn1:storeMessagePayload>?</urn1:storeMessagePayload>
+                     <!--Optional:-->
+                     <urn1:process/>
+                     <!--Optional:-->
+                     <urn1:stage>
+                        <!--Optional:-->
+                        <urn1:changeDate>?</urn1:changeDate>
+                        <!--Optional:-->
+                        <urn1:changeBy>?</urn1:changeBy>
+                        <!--Optional:-->
+                        <urn1:status>?</urn1:status>
+                        <urn1:id>?</urn1:id>
+                        <urn1:partyId>?</urn1:partyId>
+                        <urn1:name>?</urn1:name>
+                        <!--Optional:-->
+                        <urn1:description>?</urn1:description>
+                        <urn1:qualifierId>?</urn1:qualifierId>
+                        <urn1:qualifier>
+                           <urn1:id>?</urn1:id>
+                           <urn1:partyId>?</urn1:partyId>
+                           <urn1:name>?</urn1:name>
+                           <!--Optional:-->
+                           <urn1:staticValue>?</urn1:staticValue>
+                           <!--Optional:-->
+                           <urn1:qualifierAttributes>
+                              <!--1 or more repetitions:-->
+                              <urn1:attribute>
+                                 <!--Optional:-->
+                                 <urn1:changeDate>?</urn1:changeDate>
+                                 <!--Optional:-->
+                                 <urn1:changeBy>?</urn1:changeBy>
+                                 <!--Optional:-->
+                                 <urn1:status>?</urn1:status>
+                                 <urn1:id>?</urn1:id>
+                                 <urn1:partyId>?</urn1:partyId>
+                                 <urn1:name>?</urn1:name>
+                                 <!--Optional:-->
+                                 <urn1:expression>?</urn1:expression>
+                                 <!--Optional:-->
+                                 <urn1:startPosition>?</urn1:startPosition>
+                                 <!--Optional:-->
+                                 <urn1:endPosition>?</urn1:endPosition>
+                                 <!--Optional:-->
+                                 <urn1:delimiter>?</urn1:delimiter>
+                                 <!--Optional:-->
+                                 <urn1:position>?</urn1:position>
+                                 <urn1:required>?</urn1:required>
+                                 <!--Optional:-->
+                                 <urn1:datatype>?</urn1:datatype>
+                              </urn1:attribute>
+                           </urn1:qualifierAttributes>
+                        </urn1:qualifier>
+                        <!--Optional:-->
+                        <urn1:stageAttributes>
+                           <!--1 or more repetitions:-->
+                           <urn1:attribute>
+                              <!--Optional:-->
+                              <urn1:changeDate>?</urn1:changeDate>
+                              <!--Optional:-->
+                              <urn1:changeBy>?</urn1:changeBy>
+                              <!--Optional:-->
+                              <urn1:status>?</urn1:status>
+                              <urn1:id>?</urn1:id>
+                              <urn1:partyId>?</urn1:partyId>
+                              <urn1:name>?</urn1:name>
+                              <!--Optional:-->
+                              <urn1:expression>?</urn1:expression>
+                              <!--Optional:-->
+                              <urn1:startPosition>?</urn1:startPosition>
+                              <!--Optional:-->
+                              <urn1:endPosition>?</urn1:endPosition>
+                              <!--Optional:-->
+                              <urn1:delimiter>?</urn1:delimiter>
+                              <!--Optional:-->
+                              <urn1:position>?</urn1:position>
+                              <urn1:required>?</urn1:required>
+                              <!--Optional:-->
+                              <urn1:datatype>?</urn1:datatype>
+                           </urn1:attribute>
+                        </urn1:stageAttributes>
+                     </urn1:stage>
+                  </urn1:flow>
+               </urn1:flows>
+            </urn1:process>
+         </urn:processes>
+      </urn:ProcessRemoveProcesses>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="processRemoveProcesses"/></con:call></con:operation><con:operation isOneWay="false" action="processRemoveStages" name="processRemoveStages" bindingOperationName="processRemoveStages" type="Request-Response" outputName="processRemoveStagesResponse" inputName="processRemoveStages" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8480/bam-ws-1.0/BamQoSService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:netflexity:schema:software:bam:messages:1.0" xmlns:urn1="urn:netflexity:schema:software:bam:types:1.0">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <urn:ProcessRemoveStages>
+         <urn:stages>
+            <!--1 or more repetitions:-->
+            <urn1:stage>
+               <!--Optional:-->
+               <urn1:changeDate>?</urn1:changeDate>
+               <!--Optional:-->
+               <urn1:changeBy>?</urn1:changeBy>
+               <!--Optional:-->
+               <urn1:status>?</urn1:status>
+               <urn1:id>?</urn1:id>
+               <urn1:partyId>?</urn1:partyId>
+               <urn1:name>?</urn1:name>
+               <!--Optional:-->
+               <urn1:description>?</urn1:description>
+               <urn1:qualifierId>?</urn1:qualifierId>
+               <urn1:qualifier>
+                  <urn1:id>?</urn1:id>
+                  <urn1:partyId>?</urn1:partyId>
+                  <urn1:name>?</urn1:name>
+                  <!--Optional:-->
+                  <urn1:staticValue>?</urn1:staticValue>
+                  <!--Optional:-->
+                  <urn1:qualifierAttributes>
+                     <!--1 or more repetitions:-->
+                     <urn1:attribute>
+                        <!--Optional:-->
+                        <urn1:changeDate>?</urn1:changeDate>
+                        <!--Optional:-->
+                        <urn1:changeBy>?</urn1:changeBy>
+                        <!--Optional:-->
+                        <urn1:status>?</urn1:status>
+                        <urn1:id>?</urn1:id>
+                        <urn1:partyId>?</urn1:partyId>
+                        <urn1:name>?</urn1:name>
+                        <!--Optional:-->
+                        <urn1:expression>?</urn1:expression>
+                        <!--Optional:-->
+                        <urn1:startPosition>?</urn1:startPosition>
+                        <!--Optional:-->
+                        <urn1:endPosition>?</urn1:endPosition>
+                        <!--Optional:-->
+                        <urn1:delimiter>?</urn1:delimiter>
+                        <!--Optional:-->
+                        <urn1:position>?</urn1:position>
+                        <urn1:required>?</urn1:required>
+                        <!--Optional:-->
+                        <urn1:datatype>?</urn1:datatype>
+                     </urn1:attribute>
+                  </urn1:qualifierAttributes>
+               </urn1:qualifier>
+               <!--Optional:-->
+               <urn1:stageAttributes>
+                  <!--1 or more repetitions:-->
+                  <urn1:attribute>
+                     <!--Optional:-->
+                     <urn1:changeDate>?</urn1:changeDate>
+                     <!--Optional:-->
+                     <urn1:changeBy>?</urn1:changeBy>
+                     <!--Optional:-->
+                     <urn1:status>?</urn1:status>
+                     <urn1:id>?</urn1:id>
+                     <urn1:partyId>?</urn1:partyId>
+                     <urn1:name>?</urn1:name>
+                     <!--Optional:-->
+                     <urn1:expression>?</urn1:expression>
+                     <!--Optional:-->
+                     <urn1:startPosition>?</urn1:startPosition>
+                     <!--Optional:-->
+                     <urn1:endPosition>?</urn1:endPosition>
+                     <!--Optional:-->
+                     <urn1:delimiter>?</urn1:delimiter>
+                     <!--Optional:-->
+                     <urn1:position>?</urn1:position>
+                     <urn1:required>?</urn1:required>
+                     <!--Optional:-->
+                     <urn1:datatype>?</urn1:datatype>
+                  </urn1:attribute>
+               </urn1:stageAttributes>
+            </urn1:stage>
+         </urn:stages>
+      </urn:ProcessRemoveStages>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="processRemoveStages"/></con:call></con:operation><con:operation isOneWay="false" action="processTransactionTracking" name="processTransactionTracking" bindingOperationName="processTransactionTracking" type="Request-Response" outputName="processTransactionTrackingResponse" inputName="processTransactionTracking" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8480/bam-ws-1.0/BamQoSService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:netflexity:schema:software:bam:messages:1.0">
+
+   <soapenv:Header/>
+
+   <soapenv:Body>
+
+      <urn:ProcessTransactionTracking>
+
+         <urn:flowUuid>34</urn:flowUuid>
+
+         <!--Optional:-->
+
+         <urn:transactionUuid>345234</urn:transactionUuid>
+
+         <!--Optional:-->
+
+         <urn:transactionContent>cid:279254267657</urn:transactionContent>
+
+      </urn:ProcessTransactionTracking>
+
+   </soapenv:Body>
+
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="processTransactionTracking"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:testSuite name="TestSuite 1"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="TestCase 1" searchProperties="true"><con:settings/><con:testStep type="request" name="processTransactionTracking - Request 1"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>BamAcknowledgeServiceServiceSoapBinding</con:interface><con:operation>processTransactionTracking</con:operation><con:request name="processTransactionTracking - Request 1" outgoingWss="" incomingWss="" wssPasswordType=""><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8480/bam-ws-1.0/BamQoSService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:netflexity:schema:software:bam:messages:1.0">
+
+   <soapenv:Header/>
+
+   <soapenv:Body>
+
+      <urn:ProcessTransactionTracking>
+
+         <urn:flowUuid>34</urn:flowUuid>
+
+         <!--Optional:-->
+
+         <urn:transactionUuid>345234</urn:transactionUuid>
+
+         <!--Optional:-->
+
+         <urn:transactionContent>cid:279254267657</urn:transactionContent>
+
+      </urn:ProcessTransactionTracking>
+
+   </soapenv:Body>
+
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response"/><con:wsaConfig mustUnderstand="NONE" version="200508" action="processTransactionTracking"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:loadTest name="LoadTest 1"><con:settings><con:setting id="HttpSettings@close-connections">false</con:setting></con:settings><con:threadCount>500</con:threadCount><con:startDelay>0</con:startDelay><con:sampleInterval>250</con:sampleInterval><con:calculateTPSOnTimePassed>true</con:calculateTPSOnTimePassed><con:resetStatisticsOnThreadCountChange>true</con:resetStatisticsOnThreadCountChange><con:historyLimit>-1</con:historyLimit><con:testLimit>60</con:testLimit><con:limitType>TIME</con:limitType><con:loadStrategy><con:type>Simple</con:type><con:config><testDelay>100</testDelay><randomFactor>0.5</randomFactor></con:config></con:loadStrategy><con:assertion type="Step Status" name="Step Status"/><con:maxAssertionErrors>100</con:maxAssertionErrors><con:cancelExcessiveThreads>true</con:cancelExcessiveThreads><con:strategyInterval>500</con:strategyInterval></con:loadTest><con:properties/></con:testCase><con:properties/></con:testSuite><con:properties/><con:wssContainer/></con:soapui-project>

@@ -1,0 +1,33 @@
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence 
+             					 http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd" version="1.0">
+    
+    <persistence-unit name="netflexity-bam-db" transaction-type="RESOURCE_LOCAL">
+    	<provider>org.hibernate.ejb.HibernatePersistence</provider>
+    	<!-- Entities -->
+    	<class>com.netflexity.bam.business.domain.model.BpmAttribute</class>
+    	<class>com.netflexity.bam.business.domain.model.BpmCondition</class>
+    	<class>com.netflexity.bam.business.domain.model.BpmEvent</class>
+    	<class>com.netflexity.bam.business.domain.model.BpmFlow</class>
+    	<class>com.netflexity.bam.business.domain.model.BpmFlowTransaction</class>
+    	<class>com.netflexity.bam.business.domain.model.BpmFlowTransactionPayload</class>
+    	<class>com.netflexity.bam.business.domain.model.BpmMonitor</class>
+    	<class>com.netflexity.bam.business.domain.model.BpmProcess</class>
+    	<class>com.netflexity.bam.business.domain.model.BpmQualifier</class>
+    	<class>com.netflexity.bam.business.domain.model.BpmQualifierAttribute</class>
+    	<class>com.netflexity.bam.business.domain.model.BpmSchedule</class>
+    	<class>com.netflexity.bam.business.domain.model.BpmStage</class>
+    	<class>com.netflexity.bam.business.domain.model.BpmTransaction</class>
+    	<class>com.netflexity.bam.business.domain.model.BpmTransactionSummary</class>
+    	<class>com.netflexity.bam.business.domain.model.BpmBinding</class>
+        <!-- MySQL -->
+        <properties>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="hibernate.show_sql" value="false"/>
+            <property name="hibernate.format_sql" value="false"/>
+        </properties>
+    </persistence-unit>
+    
+</persistence>

@@ -1,0 +1,443 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:msg="urn:netflexity:schema:software:bam:messages:1.0" 
+				  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" 
+				  xmlns:tns="urn:netflexity:ws:software:bam:services:1.0" 
+				  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+				  targetNamespace="urn:netflexity:ws:software:bam:services:1.0">
+	
+	<wsdl:types>
+		<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+			<xsd:import namespace="urn:netflexity:schema:software:bam:messages:1.0" schemaLocation="bam-messages-1.0.xsd"/>
+		</xsd:schema>
+	</wsdl:types>
+	
+	<wsdl:message name="processTransactionTracking">
+		<wsdl:part name="body" element="msg:ProcessTransactionTracking"/>
+	</wsdl:message>
+	
+	<wsdl:message name="acknowledgeTransactionTracking">
+		<wsdl:part name="body" element="msg:AcknowledgeTransactionTracking"/>
+	</wsdl:message>
+	
+	<wsdl:message name="getTransactionSummaryRequest">
+		<wsdl:part name="body" element="msg:getTransactionSummary"/>
+	</wsdl:message>
+	
+	<wsdl:message name="getTransactionSummaryResponse">
+		<wsdl:part name="body" element="msg:getTransactionSummaryResponse"/>
+	</wsdl:message>
+	
+	<wsdl:message name="getTransactionsRequest">
+		<wsdl:part name="body" element="msg:getTransactions"/>
+	</wsdl:message>
+	
+	<wsdl:message name="getTransactionsResponse">
+		<wsdl:part name="body" element="msg:getTransactionsResponse"/>
+	</wsdl:message>
+	
+	<wsdl:message name="getProcessesRequest">
+		<wsdl:part name="body" element="msg:getProcesses"/>
+	</wsdl:message>
+	
+	<wsdl:message name="getProcessesResponse">
+		<wsdl:part name="body" element="msg:getProcessesResponse"/>
+	</wsdl:message>
+	
+	<wsdl:message name="getStagesRequest">
+		<wsdl:part name="body" element="msg:getStages"/>
+	</wsdl:message>
+	
+	<wsdl:message name="getStagesResponse">
+		<wsdl:part name="body" element="msg:getStagesResponse"/>
+	</wsdl:message>
+	
+	<wsdl:message name="getAttributesRequest">
+		<wsdl:part name="body" element="msg:getAttributes"/>
+	</wsdl:message>
+	
+	<wsdl:message name="getAttributesResponse">
+		<wsdl:part name="body" element="msg:getAttributesResponse"/>
+	</wsdl:message>
+	
+	<wsdl:message name="deleteProcessesRequest">
+		<wsdl:part name="body" element="msg:deleteProcesses"/>
+	</wsdl:message>
+	
+	<wsdl:message name="deleteProcessesResponse">
+		<wsdl:part name="body" element="msg:deleteProcessesResponse"/>
+	</wsdl:message>
+	
+	<wsdl:message name="deleteStagesRequest">
+		<wsdl:part name="body" element="msg:deleteStages"/>
+	</wsdl:message>
+	
+	<wsdl:message name="deleteStagesResponse">
+		<wsdl:part name="body" element="msg:deleteStagesResponse"/>
+	</wsdl:message>
+	
+	<wsdl:message name="deleteAttributesRequest">
+		<wsdl:part name="body" element="msg:deleteAttributes"/>
+	</wsdl:message>
+	
+	<wsdl:message name="deleteAttributesResponse">
+		<wsdl:part name="body" element="msg:deleteAttributesResponse"/>
+	</wsdl:message>
+	
+	<wsdl:message name="updateProcessRequest">
+		<wsdl:part name="body" element="msg:updateProcess"/>
+	</wsdl:message>
+	
+	<wsdl:message name="updateProcessResponse">
+		<wsdl:part name="body" element="msg:updateProcessResponse"/>
+	</wsdl:message>
+	
+	<wsdl:message name="updateStageRequest">
+		<wsdl:part name="body" element="msg:updateStage"/>
+	</wsdl:message>
+	
+	<wsdl:message name="updateStageResponse">
+		<wsdl:part name="body" element="msg:updateStageResponse"/>
+	</wsdl:message>
+	
+	<wsdl:message name="updateAttributeRequest">
+		<wsdl:part name="body" element="msg:updateAttribute"/>
+	</wsdl:message>
+	
+	<wsdl:message name="updateAttributeResponse">
+		<wsdl:part name="body" element="msg:updateAttributeResponse"/>
+	</wsdl:message>
+	
+	<wsdl:message name="createProcessRequest">
+		<wsdl:part name="body" element="msg:createProcess"/>
+	</wsdl:message>
+	
+	<wsdl:message name="createProcessResponse">
+		<wsdl:part name="body" element="msg:createProcessResponse"/>
+	</wsdl:message>
+	
+	<wsdl:message name="createStageRequest">
+		<wsdl:part name="body" element="msg:createStage"/>
+	</wsdl:message>
+	
+	<wsdl:message name="createStageResponse">
+		<wsdl:part name="body" element="msg:createStageResponse"/>
+	</wsdl:message>
+	
+	<wsdl:message name="createAttributeRequest">
+		<wsdl:part name="body" element="msg:createAttribute"/>
+	</wsdl:message>
+	
+	<wsdl:message name="createAttributeResponse">
+		<wsdl:part name="body" element="msg:createAttributeResponse"/>
+	</wsdl:message>
+	
+	<wsdl:message name="createMonitorRequest">
+		<wsdl:part name="body" element="msg:createMonitor"/>
+	</wsdl:message>
+	
+	<wsdl:message name="createMonitorResponse">
+		<wsdl:part name="body" element="msg:createMonitorResponse"/>
+	</wsdl:message>
+	
+	<wsdl:message name="startMonitorRequest">
+		<wsdl:part name="body" element="msg:startMonitor"/>
+	</wsdl:message>
+	
+	<wsdl:message name="startMonitorResponse">
+		<wsdl:part name="body" element="msg:startMonitorResponse"/>
+	</wsdl:message>
+	
+	<wsdl:portType name="BAMInternal">
+		
+		<wsdl:operation name="getTransactionSummary">
+			<wsdl:input message="tns:getTransactionSummaryRequest"/>
+			<wsdl:output message="tns:getTransactionSummaryResponse"/>
+		</wsdl:operation>
+		
+		<wsdl:operation name="getTransactions">
+			<wsdl:input message="tns:getTransactionsRequest"/>
+			<wsdl:output message="tns:getTransactionsResponse"/>
+		</wsdl:operation>
+		
+		<wsdl:operation name="getProcesses">
+			<wsdl:input message="tns:getProcessesRequest"/>
+			<wsdl:output message="tns:getProcessesResponse"/>
+		</wsdl:operation>
+		
+		<wsdl:operation name="getStages">
+			<wsdl:input message="tns:getStagesRequest"/>
+			<wsdl:output message="tns:getStagesResponse"/>
+		</wsdl:operation>
+		
+		<wsdl:operation name="getAttributes">
+			<wsdl:input message="tns:getAttributesRequest"/>
+			<wsdl:output message="tns:getAttributesResponse"/>
+		</wsdl:operation>
+		
+		<wsdl:operation name="deleteProcesses">
+			<wsdl:input message="tns:deleteProcessesRequest"/>
+			<wsdl:output message="tns:deleteProcessesResponse"/>
+		</wsdl:operation>
+		
+		<wsdl:operation name="deleteStages">
+			<wsdl:input message="tns:deleteStagesRequest"/>
+			<wsdl:output message="tns:deleteStagesResponse"/>
+		</wsdl:operation>
+		
+		<wsdl:operation name="deleteAttributes">
+			<wsdl:input message="tns:deleteAttributesRequest"/>
+			<wsdl:output message="tns:deleteAttributesResponse"/>
+		</wsdl:operation>
+		
+		<wsdl:operation name="updateProcess">
+			<wsdl:input message="tns:updateProcessRequest"/>
+			<wsdl:output message="tns:updateProcessResponse"/>
+		</wsdl:operation>
+		
+		<wsdl:operation name="updateStage">
+			<wsdl:input message="tns:updateStageRequest"/>
+			<wsdl:output message="tns:updateStageResponse"/>
+		</wsdl:operation>
+		
+		<wsdl:operation name="updateAttribute">
+			<wsdl:input message="tns:updateAttributeRequest"/>
+			<wsdl:output message="tns:updateAttributeResponse"/>
+		</wsdl:operation>
+		
+		<wsdl:operation name="createProcess">
+			<wsdl:input message="tns:createProcessRequest"/>
+			<wsdl:output message="tns:createProcessResponse"/>
+		</wsdl:operation>
+		
+		<wsdl:operation name="createStage">
+			<wsdl:input message="tns:createStageRequest"/>
+			<wsdl:output message="tns:createStageResponse"/>
+		</wsdl:operation>
+		
+		<wsdl:operation name="createAttribute">
+			<wsdl:input message="tns:createAttributeRequest"/>
+			<wsdl:output message="tns:createAttributeResponse"/>
+		</wsdl:operation>
+		
+		<wsdl:operation name="createMonitor">
+			<wsdl:input message="tns:createMonitorRequest"/>
+			<wsdl:output message="tns:createMonitorResponse"/>
+		</wsdl:operation>
+		
+	</wsdl:portType>
+	
+	<wsdl:binding name="BAMInternalServiceSOAP" type="tns:BAMInternal">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		
+		<wsdl:operation name="getTransactionSummary">
+			<soap:operation soapAction="getTransactionSummary"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		
+		<wsdl:operation name="getTransactions">
+			<soap:operation soapAction="getTransactions"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		
+		<wsdl:operation name="getProcesses">
+			<soap:operation soapAction="getProcesses"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		
+		<wsdl:operation name="getStages">
+			<soap:operation soapAction="getStages"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		
+		<wsdl:operation name="getAttributes">
+			<soap:operation soapAction="getAttributes"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		
+		<wsdl:operation name="deleteProcesses">
+			<soap:operation soapAction="deleteProcesses"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		
+		<wsdl:operation name="deleteStages">
+			<soap:operation soapAction="deleteStages"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		
+		<wsdl:operation name="deleteAttributes">
+			<soap:operation soapAction="deleteAttributes"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		
+		<wsdl:operation name="updateProcess">
+			<soap:operation soapAction="updateProcess"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		
+		<wsdl:operation name="updateStage">
+			<soap:operation soapAction="updateStage"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		
+		<wsdl:operation name="updateAttribute">
+			<soap:operation soapAction="updateAttribute"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		
+		<wsdl:operation name="createProcess">
+			<soap:operation soapAction="createProcess"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		
+		<wsdl:operation name="createStage">
+			<soap:operation soapAction="createStage"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		
+		<wsdl:operation name="createAttribute">
+			<soap:operation soapAction="createAttribute"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		
+		<wsdl:operation name="createMonitor">
+			<soap:operation soapAction="createMonitor"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		
+	</wsdl:binding>
+	
+	
+	<wsdl:portType name="BAM">
+		<wsdl:operation name="processTransactionTracking">
+			<wsdl:input message="tns:processTransactionTracking"/>
+			<wsdl:output message="tns:acknowledgeTransactionTracking"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	
+	<wsdl:binding name="BAMServiceSOAP" type="tns:BAM">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="processTransactionTracking">
+			<soap:operation soapAction="processTransactionTracking"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	
+	<wsdl:portType name="BamMonitorService">
+		<wsdl:operation name="startMonitor">
+			<wsdl:input message="tns:startMonitorRequest"/>
+			<wsdl:output message="tns:startMonitorResponse"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	
+	<wsdl:binding name="BamMonitorServiceSOAP" type="tns:BamMonitorService">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="startMonitor">
+			<soap:operation soapAction="startMonitor"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	
+	<wsdl:service name="BAMInternalService">
+		<wsdl:port name="BAMInternalServiceSOAP" binding="tns:BAMInternalServiceSOAP">
+			<soap:address location="http://localhost:8080/bam-ws-1.0/BamInternalService"/>
+		</wsdl:port>
+	</wsdl:service>
+	
+	<wsdl:service name="BAMService">
+		<wsdl:port name="BAMServiceSOAP" binding="tns:BAMServiceSOAP">
+			<soap:address location="http://localhost:8080/bam-ws-1.0/BamService"/>
+		</wsdl:port>
+	</wsdl:service>
+	
+	<wsdl:service name="BamMonitorService">
+		<wsdl:port name="BamMonitorServiceSOAP" binding="tns:BamMonitorServiceSOAP">
+			<soap:address location="http://localhost:8080/bam-ws-1.0/BamMonitorService"/>
+		</wsdl:port>
+	</wsdl:service>
+	
+</wsdl:definitions>
