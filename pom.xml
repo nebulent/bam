@@ -94,4 +94,11 @@
             <url>http://repository.codehaus.org/</url>
         </repository>
     </repositories>
+    <pluginRepositories>
+    	<pluginRepository>
+            <id>nebulent.repository</id>
+            <name>nebulent.repository</name>
+            <url>http://repo.nebulent.com/artifactory/repo</url>
+    	</pluginRepository>
+    </pluginRepositories>
 </project>
