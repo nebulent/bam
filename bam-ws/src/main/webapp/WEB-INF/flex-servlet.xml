@@ -9,6 +9,6 @@
     <flex:message-broker/>
     
     <!-- ===== BAM Internal Service Endpoint======= -->
-    <flex:remoting-destination ref="bamInternalService"/>
+    <flex:remoting-destination destination-id="bamBlazeDsService" ref="bamInternalService"/>
 
 </beans>

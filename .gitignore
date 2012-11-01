@@ -17,3 +17,8 @@
 /bam-ws/target
 /bam-ws/.classpath
 /bam-ws/.project
+/bam-ui/.project
+/bam-ui/.classpath
+/bam-ui/target-eclipse
+/bam-ui/target
+/bam-ui/.settings
