@@ -217,7 +217,12 @@ public class BamInternalServiceImpl implements BAMInternal, BAM, BamServiceError
 	 */
 	public GetStagesResponse getStages(GetStages body) {
 		body.setPartyId(securityManagementService.getPartyId(body));
-		List<BpmStage> stages = metadataRepository.getStages(body.getPartyId());
+		List<BpmStage> stages = new ArrayList<BpmStage>();
+		if (StringUtils.isBlank(body.getStageId())) {
+			stages = metadataRepository.getStages(body.getPartyId());;
+		} else {
+			stages.add(metadataRepository.getStage(body.getPartyId(), Long.parseLong(body.getStageId())));
+		}
 		List<StageType> stagesResponse = null;
 		if(stages != null && !stages.isEmpty()) {
 			stagesResponse = new ArrayList<StageType>();

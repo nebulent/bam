@@ -154,6 +154,7 @@
 		<xs:complexType>
 			<xs:complexContent>
 				<xs:extension base="userAwareMessage">
+					<xs:attribute name="stageId" type="xs:string" use="optional"/>
 					<xs:attribute name="partyId" type="xs:string" use="optional"/>
 				</xs:extension>
 			</xs:complexContent>

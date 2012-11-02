@@ -97,7 +97,7 @@ public class JpaMetadataRepository extends JpaAbstractRepository implements Meta
 
 
 	/* (non-Javadoc)
-	 * @see com.netflexity.bam.business.repository.MetadataRepository#getProcess(java.lang.String, int)
+	 * @see com.netflexity.bam.business.repository.MetadataRepository#getProcess(java.lang.String, long)
 	 */
 	@Override
 	public BpmProcess getProcess(String companyId, long processId)
@@ -125,6 +125,20 @@ public class JpaMetadataRepository extends JpaAbstractRepository implements Meta
         return query.getResultList();
     }
 
+    /* (non-Javadoc)
+     * @see com.netflexity.bam.business.repository.MetadataRepository#getStage(java.lang.String, long)
+     */
+    @Override
+    public BpmStage getStage(String partyId, long stageId)
+    		throws RepositoryException {
+    	Query query;
+        query = entityManager.createQuery("select stage from com.netflexity.bam.business.domain.model.BpmStage stage " +
+        		"where stage.partyId = :PARTY_ID and stage.id = :ID");
+        query.setParameter(PARTY_ID, partyId);
+        query.setParameter(ID, stageId);
+        return (BpmStage) query.getSingleResult();
+    }
+    
     /* (non-Javadoc)
      * @see com.netflexity.bam.business.repository.MetadataRepository#getStages(java.lang.String)
      */

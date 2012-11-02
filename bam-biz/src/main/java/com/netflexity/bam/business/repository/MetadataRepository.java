@@ -35,6 +35,14 @@ public interface MetadataRepository {
 	List<BpmProcess> getProcesses(String companyId) throws RepositoryException;
 	
 	/**
+	 * @param companyId
+	 * @param stageId
+	 * @return
+	 * @throws RepositoryException
+	 */
+	BpmStage getStage(String partyId, long stageId) throws RepositoryException;
+	
+	/**
 	 * @param partyId
 	 * @return
 	 * @throws RepositoryException
@@ -47,7 +55,7 @@ public interface MetadataRepository {
 	 * @throws RepositoryException
 	 */
      List<BpmStage> getStagesByName(String name) throws RepositoryException;
-
+     
 	/**
 	 * @param partyId
 	 * @return
