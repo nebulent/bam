@@ -95,6 +95,21 @@ public class JpaMetadataRepository extends JpaAbstractRepository implements Meta
         return query.getResultList();
     }
 
+
+	/* (non-Javadoc)
+	 * @see com.netflexity.bam.business.repository.MetadataRepository#getProcess(java.lang.String, int)
+	 */
+	@Override
+	public BpmProcess getProcess(String companyId, long processId)
+			throws RepositoryException {
+        Query query;
+        query = entityManager.createQuery("select process from com.netflexity.bam.business.domain.model.BpmProcess process " +
+        		"where process.partyId = :PARTY_ID and process.id = :ID");
+        query.setParameter(PARTY_ID, companyId);
+        query.setParameter(ID, processId);
+        return (BpmProcess) query.getSingleResult();
+	}
+	
     /* (non-Javadoc)
      * @see com.netflexity.bam.business.repository.MetadataRepository#getProcesses(java.lang.String)
      */

@@ -64,11 +64,11 @@ bam.service.internal.url  = ""
 environments {
     development {
         grails.logging.jul.usebridge = true
-        bam.service.internal.url = "http://tomcat.nebulent.com/bam-ws/ws/BAMInternal"
+        bam.service.internal.url = "http://192.168.0.123:8080/bam-ws/ws/BAMInternal"
     }
     production {
         grails.logging.jul.usebridge = false
-        bam.service.internal.url = "http://tomcat.nebulent.com/bam-ws/ws/BAMInternal"
+        bam.service.internal.url = "http://192.168.0.123:8080/bam-ws/ws/BAMInternal"
     }
 }
 
@@ -83,12 +83,11 @@ cxf {
 
 // log4j configuration
 log4j = {
-    // Example of changing the log pattern for the default console appender:
-    //
-    //appenders {
-    //    console name:'stdout', layout:pattern(conversionPattern: '%c{2} %m%n')
-    //}
-
+ 
+	appenders {
+		console name:'stacktrace'
+	}
+  
     error  'org.codehaus.groovy.grails.web.servlet',        // controllers
            'org.codehaus.groovy.grails.web.pages',          // GSP
            'org.codehaus.groovy.grails.web.sitemesh',       // layouts

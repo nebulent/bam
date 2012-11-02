@@ -192,7 +192,12 @@ public class BamInternalServiceImpl implements BAMInternal, BAM, BamServiceError
 	 */
 	public GetProcessesResponse getProcesses(GetProcesses body) {
 		body.setPartyId(securityManagementService.getPartyId(body));
-		List<BpmProcess> processes = metadataRepository.getProcesses(body.getPartyId());
+		List<BpmProcess> processes = new ArrayList<BpmProcess>();
+		if (StringUtils.isBlank(body.getProcessId())) {
+			processes = metadataRepository.getProcesses(body.getPartyId());
+		} else {
+			processes.add(metadataRepository.getProcess(body.getPartyId(), Long.parseLong(body.getProcessId())));
+		}
 		List<ProcessType> processesResponse = null;
 		if(processes != null && !processes.isEmpty()) {
 			processesResponse = new ArrayList<ProcessType>();

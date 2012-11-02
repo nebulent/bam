@@ -25,6 +25,13 @@ public interface MetadataRepository {
 	 * @return
 	 * @throws RepositoryException
 	 */
+	BpmProcess getProcess(String companyId, long processId) throws RepositoryException;
+	
+	/**
+	 * @param companyId
+	 * @return
+	 * @throws RepositoryException
+	 */
 	List<BpmProcess> getProcesses(String companyId) throws RepositoryException;
 	
 	/**
