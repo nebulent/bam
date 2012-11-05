@@ -35,6 +35,14 @@
 		<wsdl:part name="body" element="msg:getTransactionsResponse"/>
 	</wsdl:message>
 	
+	<wsdl:message name="getFlowsRequest">
+		<wsdl:part name="body" element="msg:getFlows"/>
+	</wsdl:message>
+	
+	<wsdl:message name="getFlowsResponse">
+		<wsdl:part name="body" element="msg:getFlowsResponse"/>
+	</wsdl:message>
+	
 	<wsdl:message name="getProcessesRequest">
 		<wsdl:part name="body" element="msg:getProcesses"/>
 	</wsdl:message>
@@ -157,6 +165,11 @@
 		<wsdl:operation name="getTransactions">
 			<wsdl:input message="tns:getTransactionsRequest"/>
 			<wsdl:output message="tns:getTransactionsResponse"/>
+		</wsdl:operation>
+		
+		<wsdl:operation name="getFlows">
+			<wsdl:input message="tns:getFlowsRequest"/>
+			<wsdl:output message="tns:getFlowsResponse"/>
 		</wsdl:operation>
 		
 		<wsdl:operation name="getProcesses">
