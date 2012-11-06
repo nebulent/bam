@@ -21,6 +21,20 @@ import com.netflexity.bam.business.domain.model.BpmStage;
 public interface MetadataRepository {
 
 	/**
+	 * @param partyId
+	 * @param flowId
+	 * @return
+	 * @throws RepositoryException
+	 */
+	BpmFlow getFlow(long flowId) throws RepositoryException;
+	
+	/**
+	 * @return
+	 * @throws RepositoryException
+	 */
+	List<BpmFlow> getFlows() throws RepositoryException;
+	
+	/**
 	 * @param companyId
 	 * @return
 	 * @throws RepositoryException

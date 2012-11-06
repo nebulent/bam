@@ -131,6 +131,24 @@
 		</xs:complexType>
 	</xs:element>
 	
+	<xs:element name="getFlows">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="userAwareMessage">
+					<xs:attribute name="flowId" type="xs:string" use="optional"></xs:attribute>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="getFlowsResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="flows" type="types:FlowType" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
 	<xs:element name="getProcesses">
 		<xs:complexType>
 			<xs:complexContent>

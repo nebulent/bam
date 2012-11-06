@@ -25,6 +25,8 @@ import netflexity.schema.software.bam.messages._1.DeleteStages;
 import netflexity.schema.software.bam.messages._1.DeleteStagesResponse;
 import netflexity.schema.software.bam.messages._1.GetAttributes;
 import netflexity.schema.software.bam.messages._1.GetAttributesResponse;
+import netflexity.schema.software.bam.messages._1.GetFlows;
+import netflexity.schema.software.bam.messages._1.GetFlowsResponse;
 import netflexity.schema.software.bam.messages._1.GetProcesses;
 import netflexity.schema.software.bam.messages._1.GetProcessesResponse;
 import netflexity.schema.software.bam.messages._1.GetStages;
@@ -43,6 +45,7 @@ import netflexity.schema.software.bam.messages._1.UpdateStage;
 import netflexity.schema.software.bam.messages._1.UpdateStageResponse;
 import netflexity.schema.software.bam.types._1.AttributeType;
 import netflexity.schema.software.bam.types._1.FlowTransactionType;
+import netflexity.schema.software.bam.types._1.FlowType;
 import netflexity.schema.software.bam.types._1.ProcessType;
 import netflexity.schema.software.bam.types._1.StageType;
 import netflexity.schema.software.bam.types._1.TransactionDetailsType;
@@ -183,6 +186,31 @@ public class BamInternalServiceImpl implements BAMInternal, BAM, BamServiceError
 		GetAttributesResponse response = new GetAttributesResponse();
 		if(attrsResponse != null && !attrsResponse.isEmpty()) {
 			response.getAttrs().addAll(attrsResponse);
+		}
+		return response;
+	}
+	
+	/* (non-Javadoc)
+	 * @see netflexity.ws.software.bam.services._1_0.BAMInternal#getFlows(netflexity.schema.software.bam.messages._1.GetFlows)
+	 */
+	public GetFlowsResponse getFlows(GetFlows body) {
+		List<BpmFlow> flows = new ArrayList<BpmFlow>();
+		if (StringUtils.isBlank(body.getFlowId())) {
+			flows = metadataRepository.getFlows();
+		}
+		else {
+			flows.add(metadataRepository.getFlow(Long.parseLong(body.getFlowId())));
+		}
+		List<FlowType> flowsResponse = null;
+		if (flows != null && !flows.isEmpty()) {
+			flowsResponse = new ArrayList<FlowType>();
+			for (BpmFlow flow : flows) {
+				flowsResponse.add(DomainUtil.toXmlType(flow));
+			}
+		}
+		GetFlowsResponse response = new GetFlowsResponse();
+		if (flowsResponse != null && !flowsResponse.isEmpty()) {
+			response.getFlows().addAll(flowsResponse);
 		}
 		return response;
 	}

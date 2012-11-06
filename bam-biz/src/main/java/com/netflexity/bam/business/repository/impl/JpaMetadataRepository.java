@@ -95,6 +95,28 @@ public class JpaMetadataRepository extends JpaAbstractRepository implements Meta
         return query.getResultList();
     }
 
+    /* (non-Javadoc)
+     * @see com.netflexity.bam.business.repository.MetadataRepository#getFlow(java.lang.String, long)
+     */
+    public BpmFlow getFlow(long flowId)
+    		throws RepositoryException {
+    	Query query;
+    	query = entityManager.createQuery("select flow from com.netflexity.bam.business.domain.model.BpmFlow flow " +
+        		"where flow.id = :ID");
+        query.setParameter(ID, flowId);
+        return (BpmFlow) query.getSingleResult();
+    }
+    
+    /* (non-Javadoc)
+     * @see com.netflexity.bam.business.repository.MetadataRepository#getFlows()
+     */
+    @SuppressWarnings("unchecked")
+	public List<BpmFlow> getFlows()
+    		throws RepositoryException {
+    	Query query;
+    	query = entityManager.createQuery("select flow from com.netflexity.bam.business.domain.model.BpmFlow flow");
+    	return query.getResultList();
+    }
 
 	/* (non-Javadoc)
 	 * @see com.netflexity.bam.business.repository.MetadataRepository#getProcess(java.lang.String, long)
@@ -128,7 +150,6 @@ public class JpaMetadataRepository extends JpaAbstractRepository implements Meta
     /* (non-Javadoc)
      * @see com.netflexity.bam.business.repository.MetadataRepository#getStage(java.lang.String, long)
      */
-    @Override
     public BpmStage getStage(String partyId, long stageId)
     		throws RepositoryException {
     	Query query;
