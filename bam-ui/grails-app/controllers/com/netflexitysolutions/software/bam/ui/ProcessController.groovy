@@ -43,7 +43,7 @@ class ProcessController {
     }
 
     def show() {
-        def processInstance = Process.get(params.id)
+        def processInstance = bamInternalService.getProcesses(new GetProcesses(processId: params.id)).processes[0]
         if (!processInstance) {
 			flash.message = message(code: 'default.not.found.message', args: [message(code: 'process.label', default: 'Process'), params.id])
             redirect action: 'list'
@@ -56,7 +56,7 @@ class ProcessController {
     def edit() {
 		switch (request.method) {
 		case 'GET':
-	        def processInstance = Process.get(params.id)
+	        def processInstance = bamInternalService.getProcesses(new GetProcesses(processId: params.id)).processes[0]
 	        if (!processInstance) {
 	            flash.message = message(code: 'default.not.found.message', args: [message(code: 'process.label', default: 'Process'), params.id])
 	            redirect action: 'list'

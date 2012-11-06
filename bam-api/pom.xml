@@ -12,7 +12,7 @@
 	<packaging>jar</packaging>
 	<name>Netflexity Solutions :: BAM :: API (Jaxb mappings)</name>
 	<url>http://www.netflexity.com</url>
-	<version>1.1</version>
+	<version>1.1-SNAPSHOT</version>
 	<build>
 		<plugins>
 			<plugin>
