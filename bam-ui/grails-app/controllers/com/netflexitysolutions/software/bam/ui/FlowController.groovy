@@ -1,10 +1,16 @@
 package com.netflexitysolutions.software.bam.ui
 
+import netflexity.schema.software.bam.messages._1.GetProcesses;
+import netflexity.schema.software.bam.messages._1.GetStages;
+import netflexity.ws.software.bam.services._1_0.BAMInternal;
+
 import org.springframework.dao.DataIntegrityViolationException
 
 class FlowController {
 
     static allowedMethods = [create: ['GET', 'POST'], edit: ['GET', 'POST'], delete: 'POST']
+
+	BAMInternal bamInternalService
 
     def index() {
         redirect action: 'list', params: params
@@ -18,7 +24,9 @@ class FlowController {
     def create() {
 		switch (request.method) {
 		case 'GET':
-        	[flowInstance: new Flow(params)]
+        	[flowInstance: new Flow(params), 
+				processes: bamInternalService.getProcesses(new GetProcesses()).processes,
+				stages: bamInternalService.getStages(new GetStages()).stages]
 			break
 		case 'POST':
 	        def flowInstance = new Flow(params)

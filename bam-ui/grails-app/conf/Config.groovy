@@ -59,12 +59,15 @@ grails.exceptionresolver.params.exclude = ['password']
 // configure auto-caching of queries by default (if false you can cache individual queries with 'cache: true')
 grails.hibernate.cache.queries = false
 
+grails.plugins.twitterbootstrap.fixtaglib = true
+grails.plugins.twitterbootstrap.defaultBundle = 'bundle_bootstrap'
+
 bam.service.internal.url  = ""
 
 environments {
     development {
         grails.logging.jul.usebridge = true
-        bam.service.internal.url = "http://192.168.0.123:8080/bam-ws/ws/BAMInternal"
+        bam.service.internal.url = "http://localhost:9090/ws/BAMInternal"
     }
     production {
         grails.logging.jul.usebridge = false
@@ -88,6 +91,8 @@ log4j = {
 		console name:'stacktrace'
 	}
   
+	info 'grails.app.controllers'
+	
     error  'org.codehaus.groovy.grails.web.servlet',        // controllers
            'org.codehaus.groovy.grails.web.pages',          // GSP
            'org.codehaus.groovy.grails.web.sitemesh',       // layouts

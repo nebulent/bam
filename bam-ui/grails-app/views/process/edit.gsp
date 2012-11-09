@@ -51,7 +51,6 @@
 
 				<fieldset>
 					<g:form class="form-horizontal" action="edit" id="${processInstance?.id}" >
-						<g:hiddenField name="version" value="${processInstance?.version}" />
 						<fieldset>
 							<f:all bean="processInstance"/>
 							<div class="form-actions">
