@@ -117,6 +117,13 @@ public interface MetadataRepository {
 	BpmAttribute updateAttribute(BpmAttribute attribute) throws RepositoryException;
 	
 	/**
+	 * @param flow
+	 * @return
+	 * @throws RepositoryException
+	 */
+	BpmFlow createFlow(BpmFlow flow) throws RepositoryException;
+	
+	/**
 	 * @param process
 	 * @return
 	 * @throws RepositoryException

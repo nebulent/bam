@@ -115,6 +115,14 @@
 		<wsdl:part name="body" element="msg:updateAttributeResponse"/>
 	</wsdl:message>
 	
+	<wsdl:message name="createFlowRequest">
+		<wsdl:part name="body" element="msg:createFlow"/>
+	</wsdl:message>
+	
+	<wsdl:message name="createFlowResponse">
+		<wsdl:part name="body" element="msg:createFlowResponse"/>
+	</wsdl:message>
+	
 	<wsdl:message name="createProcessRequest">
 		<wsdl:part name="body" element="msg:createProcess"/>
 	</wsdl:message>
@@ -215,6 +223,11 @@
 		<wsdl:operation name="updateAttribute">
 			<wsdl:input message="tns:updateAttributeRequest"/>
 			<wsdl:output message="tns:updateAttributeResponse"/>
+		</wsdl:operation>
+		
+		<wsdl:operation name="createFlow">
+			<wsdl:input message="tns:createFlowRequest"/>
+			<wsdl:output message="tns:createFlowResponse"/>
 		</wsdl:operation>
 		
 		<wsdl:operation name="createProcess">
@@ -344,6 +357,16 @@
 		
 		<wsdl:operation name="updateAttribute">
 			<soap:operation soapAction="updateAttribute"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		
+		<wsdl:operation name="createFlow">
+			<soap:operation soapAction="createFlow"/>
 			<wsdl:input>
 				<soap:body use="literal"/>
 			</wsdl:input>

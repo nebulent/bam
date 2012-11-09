@@ -13,7 +13,8 @@
         <module>bam-biz</module>
         <module>bam-ws</module>
         <module>bam-monitor</module>
-    </modules>
+    <module>bam-mule-connector</module>
+  </modules>
     <properties>
         <!-- XML libraries. -->
         <jaxb-api-version>2.1</jaxb-api-version>
@@ -94,11 +95,4 @@
             <url>http://repository.codehaus.org/</url>
         </repository>
     </repositories>
-    <pluginRepositories>
-    	<pluginRepository>
-            <id>nebulent.repository</id>
-            <name>nebulent.repository</name>
-            <url>http://repo.nebulent.com/artifactory/repo</url>
-    	</pluginRepository>
-    </pluginRepositories>
 </project>

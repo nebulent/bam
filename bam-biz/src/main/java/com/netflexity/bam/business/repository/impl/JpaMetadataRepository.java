@@ -48,6 +48,16 @@ public class JpaMetadataRepository extends JpaAbstractRepository implements Meta
     public BpmMonitor createMonitor(BpmMonitor monitor) throws RepositoryException {
         return (BpmMonitor)save(monitor);
     }
+    
+    /* (non-Javadoc)
+     * @see com.netflexity.bam.business.repository.MetadataRepository#createFlow(com.netflexity.bam.business.domain.model.BpmFlow)
+     */
+    public BpmFlow createFlow(BpmFlow flow) throws RepositoryException {
+        if (flow.getId() != null) {
+            flow.setId(null);
+        }
+        return (BpmFlow)save(flow);
+    }
 
     /* (non-Javadoc)
      * @see com.netflexity.bam.business.repository.MetadataRepository#createProcess(com.netflexity.bam.business.domain.model.BpmProcess)

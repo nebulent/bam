@@ -13,6 +13,8 @@ import netflexity.schema.software.bam.messages._1.CreateAttribute;
 import netflexity.schema.software.bam.messages._1.CreateAttributeResponse;
 import netflexity.schema.software.bam.messages._1.CreateMonitor;
 import netflexity.schema.software.bam.messages._1.CreateMonitorResponse;
+import netflexity.schema.software.bam.messages._1.CreateFlow;
+import netflexity.schema.software.bam.messages._1.CreateFlowResponse;
 import netflexity.schema.software.bam.messages._1.CreateProcess;
 import netflexity.schema.software.bam.messages._1.CreateProcessResponse;
 import netflexity.schema.software.bam.messages._1.CreateStage;
@@ -111,6 +113,13 @@ public class BamInternalServiceImpl implements BAMInternal, BAM, BamServiceError
 		bamMonitorService.startMonitor(startMonitorRequest);
 		/*setting the response*/
 		response.setMonitor(DomainUtil.toXmlType(monitor));
+		return response;
+	}
+	
+	public CreateFlowResponse createFlow(CreateFlow body) {
+		CreateFlowResponse response = new CreateFlowResponse();
+		//body.getFlow().setPartyId(securityManagementService.getPartyId(body));
+		response.setFlow(DomainUtil.toXmlType(metadataRepository.createFlow(DomainUtil.toDomainType(body.getFlow()))));
 		return response;
 	}
 	

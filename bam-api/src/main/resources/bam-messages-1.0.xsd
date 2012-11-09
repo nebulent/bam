@@ -319,6 +319,26 @@
 		</xs:complexType>
 	</xs:element>
 	
+	<xs:element name="createFlow">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="userAwareMessage">
+					<xs:sequence>
+						<xs:element name="flow" type="types:FlowType" minOccurs="0"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="createFlowResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="flow" type="types:FlowType" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
 	<xs:element name="createProcess">
 		<xs:complexType>
 			<xs:complexContent>
