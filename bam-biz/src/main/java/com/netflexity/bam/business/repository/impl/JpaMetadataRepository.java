@@ -249,41 +249,10 @@ public class JpaMetadataRepository extends JpaAbstractRepository implements Meta
      */
     @SuppressWarnings("unchecked")
 	public BpmProcess updateProcess(BpmProcess processRequest) throws RepositoryException {
-    	/*remove old flows*/
-    	Query query = entityManager.createQuery("FROM com.netflexity.bam.business.domain.model.BpmFlow flow WHERE flow.bpmProcess.id = :ID");
-    	query.setParameter(ID, processRequest.getId());
-    	List<BpmFlow> flowList = query.getResultList();
-    	if(flowList != null) {
-    		for (BpmFlow flow : flowList) {
-    			entityManager.remove(flow);
-    		}
-    	}
     	/*get process*/
     	BpmProcess process = entityManager.find(BpmProcess.class, processRequest.getId());
-    	/*
-    	Set<BpmFlow> flows = process.getBpmFlows();
-    	if(flows != null) {
-    		Collection<BpmFlow> tmp = new ArrayList<BpmFlow>();
-    		for (BpmFlow flow : flows) {
-    			tmp.add(flow);
-    		}
-    		flows.removeAll(tmp);
-    	} else {
-    		process.setBpmFlows(new HashSet<BpmFlow>());
-    	}
-    	*/
-    	process.setBpmFlows(new HashSet<BpmFlow>());
-    	Set<BpmFlow>flows = processRequest.getBpmFlows();
-        if(flows != null) {
-        	for (BpmFlow flow : flows) {
-        		flow.setId(null);
-        		flow.setBpmProcess(process);
-        		if(StringUtils.isEmpty(flow.getUuid())) {
-        			flow.setUuid(createUUID());
-        		}
-        		process.getBpmFlows().add(flow);
-        	}
-        }
+    	process.setDescription(processRequest.getDescription());
+    	process.setName(processRequest.getName());
         return (BpmProcess)update(process);
     }
 

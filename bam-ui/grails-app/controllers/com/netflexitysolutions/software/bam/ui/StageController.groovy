@@ -1,10 +1,17 @@
 package com.netflexitysolutions.software.bam.ui
 
+import netflexity.schema.software.bam.messages._1.CreateStage;
+import netflexity.schema.software.bam.messages._1.GetStages;
+import netflexity.schema.software.bam.types._1.StageType;
+import netflexity.ws.software.bam.services._1_0.BAMInternal;
+
 import org.springframework.dao.DataIntegrityViolationException
 
 class StageController {
 
     static allowedMethods = [create: ['GET', 'POST'], edit: ['GET', 'POST'], delete: 'POST']
+
+	BAMInternal bamInternalService
 
     def index() {
         redirect action: 'list', params: params
@@ -12,7 +19,7 @@ class StageController {
 
     def list() {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
-        [stageInstanceList: Stage.list(params), stageInstanceTotal: Stage.count()]
+        [stageInstanceList: bamInternalService.getStages(new GetStages()).stages, stageInstanceTotal: 10]
     }
 
     def create() {
@@ -22,7 +29,9 @@ class StageController {
 			break
 		case 'POST':
 	        def stageInstance = new Stage(params)
-	        if (!stageInstance.save(flush: true)) {
+			def stageType = new StageType(name: stageInstance.name, description: stageInstance.description)
+			def result = bamInternalService.createStage(new CreateStage(stage: stageType)).stage
+	        if (!result) {
 	            render view: 'create', model: [stageInstance: stageInstance]
 	            return
 	        }
