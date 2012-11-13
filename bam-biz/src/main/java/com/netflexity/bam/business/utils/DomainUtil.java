@@ -440,6 +440,11 @@ public class DomainUtil {
             process.setId(Long.parseLong(flowType.getProcessId()));
             flow.setBpmProcess(process);
         }
+        if (StringUtils.isNotBlank(flowType.getStageId())) {
+            BpmStage stage = new BpmStage();
+            stage.setId(Long.parseLong(flowType.getStageId()));
+            flow.setBpmStage(stage);
+        }
         flow.setUuid(flowType.getUuid());
 //        if (StringUtils.isBlank(flowType.getUuid())) {
 //            flowType.setUuid(UUID.randomUUID().toString());
@@ -450,9 +455,9 @@ public class DomainUtil {
 //            flow.setBpmStageType(stageType);
 //        }
         flow.setStageTypeCode(flowType.getStageTypeId());
-        if (flowType.getStage() != null) {
-            flow.setBpmStage(toDomainType(flowType.getStage()));
-        }
+//        if (flowType.getStage() != null) {
+//            flow.setBpmStage(toDomainType(flowType.getStage()));
+//        }
         return flow;
     }
 

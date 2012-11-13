@@ -1,7 +1,10 @@
 package com.netflexitysolutions.software.bam.ui
 
+import netflexity.schema.software.bam.messages._1.CreateFlow;
 import netflexity.schema.software.bam.messages._1.GetProcesses;
 import netflexity.schema.software.bam.messages._1.GetStages;
+import netflexity.schema.software.bam.messages._1.GetFlows;
+import netflexity.schema.software.bam.types._1.FlowType;
 import netflexity.ws.software.bam.services._1_0.BAMInternal;
 
 import org.springframework.dao.DataIntegrityViolationException
@@ -18,7 +21,7 @@ class FlowController {
 
     def list() {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
-        [flowInstanceList: Flow.list(params), flowInstanceTotal: Flow.count()]
+        [flowInstanceList: bamInternalService.getFlows(new GetFlows()).flows, flowInstanceTotal: Flow.count()]
     }
 
     def create() {
@@ -30,7 +33,10 @@ class FlowController {
 			break
 		case 'POST':
 	        def flowInstance = new Flow(params)
-	        if (!flowInstance.save(flush: true)) {
+			def flowType = new FlowType(uuid: flowInstance.uuid, stageTypeId: flowInstance.stageTypeCode,
+										processId: flowInstance.process.id, stageId: flowInstance.stage.id)
+			def result = bamInternalService.createFlow(new CreateFlow(flow: flowType)).flow
+	        if (!result) {
 	            render view: 'create', model: [flowInstance: flowInstance]
 	            return
 	        }
