@@ -3,6 +3,19 @@
  */
 package com.netflexity.bam.connector;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import netflexity.schema.software.bam.messages._1.ProcessTransactionTracking;
+import netflexity.ws.software.bam.services._1_0.BAM;
+
+import org.apache.cxf.endpoint.Client;
+import org.apache.cxf.feature.AbstractFeature;
+import org.apache.cxf.feature.LoggingFeature;
+import org.apache.cxf.frontend.ClientProxyFactoryBean;
+import org.apache.cxf.jaxrs.client.JAXRSClientFactoryBean;
+import org.apache.cxf.jaxws.JaxWsClientFactoryBean;
+import org.codehaus.jackson.jaxrs.JacksonJsonProvider;
 import org.mule.api.annotations.Connector;
 import org.mule.api.annotations.Connect;
 import org.mule.api.annotations.ValidateConnection;
@@ -25,17 +38,9 @@ public class ProcessTransactionTrackingConnector
      * Configurable
      */
     @Configurable
-    private String myProperty;
-
-    /**
-     * Set property
-     *
-     * @param myProperty My property
-     */
-    public void setMyProperty(String myProperty)
-    {
-        this.myProperty = myProperty;
-    }
+    private String serviceUrl;
+    
+    private BAM bam;
 
     /**
      * Connect
@@ -45,11 +50,21 @@ public class ProcessTransactionTrackingConnector
      * @throws ConnectionException
      */
     @Connect
-    public void connect(@ConnectionKey String username, String password)
+    public void connect()
         throws ConnectionException {
         /*
          * CODE FOR ESTABLISHING A CONNECTION GOES IN HERE
          */
+    	ClientProxyFactoryBean bean = new ClientProxyFactoryBean();       
+        bean.setAddress(serviceUrl);
+        bean.setServiceClass(BAM.class);
+        
+        //Adding logging(not necessary)
+        List<AbstractFeature> features = new ArrayList<AbstractFeature>();
+        features.add(new LoggingFeature());
+        bean.setFeatures(features);
+        
+        bam = (BAM) bean.create();
     }
 
     /**
@@ -87,12 +102,31 @@ public class ProcessTransactionTrackingConnector
      * @return Some string
      */
     @Processor
-    public String myProcessor(String content)
+    public String myProcessor(String flowUuid, String transactionUuid)
     {
         /*
          * MESSAGE PROCESSOR CODE GOES HERE
          */
-
-        return content;
+    	ProcessTransactionTracking body = new ProcessTransactionTracking();
+    	body.setFlowUuid(flowUuid);
+    	body.setTransactionUuid(transactionUuid);
+    	
+        return bam.processTransactionTracking(body).toString();
     }
+
+	public String getServiceUrl() {
+		return serviceUrl;
+	}
+
+	public void setServiceUrl(String serviceUrl) {
+		this.serviceUrl = serviceUrl;
+	}
+
+	public BAM getBam() {
+		return bam;
+	}
+
+	public void setBam(BAM bam) {
+		this.bam = bam;
+	}
 }

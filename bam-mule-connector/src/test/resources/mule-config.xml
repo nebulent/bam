@@ -9,11 +9,16 @@
         http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
         http://www.mulesoft.org/schema/mule/processtransactiontracking http://www.mulesoft.org/schema/mule/processtransactiontracking/1.1/mule-processtransactiontracking.xsd">
 
-    <processtransactiontracking:config myProperty="Some string"
+    <!-- <processtransactiontracking:config myProperty="Some string"
             username="xxx" password="yyy"/>
 
     <flow name="testFlow">
         <processtransactiontracking:my-processor content="Another string"/>
-    </flow>
+    </flow> -->
+    
+    <processtransactiontracking:config serviceUrl="Some string"/>
 
+	<flow name="testFlow">
+        <processtransactiontracking:my-processor flowUuid="vasea" transactionUuid="petea"/>
+    </flow> 
 </mule>
