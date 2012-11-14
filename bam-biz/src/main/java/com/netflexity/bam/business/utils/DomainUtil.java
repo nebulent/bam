@@ -220,15 +220,15 @@ public class DomainUtil {
         processType.setChangeBy(process.getChangeBy());
         processType.setChangeDate(toCalendar(process.getChangeDate()));
         FlowArrayType flowsArrayType = bpmTypesFactory.createFlowArrayType();
-        Set<BpmFlow> flows = process.getBpmFlows();
-        if(flows != null) {
-            for (BpmFlow processFlow : flows) {
-                flowsArrayType.getFlows().add(toXmlType(processFlow));
-            }
-        }
-        if (!flowsArrayType.getFlows().isEmpty()) {
-            processType.setFlows(flowsArrayType);
-        }
+//        Set<BpmFlow> flows = process.getBpmFlows();
+//        if(flows != null) {
+//            for (BpmFlow processFlow : flows) {
+//                flowsArrayType.getFlows().add(toXmlType(processFlow));
+//            }
+//        }
+//        if (!flowsArrayType.getFlows().isEmpty()) {
+//            processType.setFlows(flowsArrayType);
+//        }
         return processType;
     }
 
@@ -412,6 +412,7 @@ public class DomainUtil {
         BpmProcess process = flow.getBpmProcess();
         if (process != null && process.getId() != null) {
             flowType.setProcessId(String.valueOf(process.getId()));
+            flowType.setProcess(toXmlType(process));
         }
         BpmQualifier qualifier = flow.getBpmQualifier();
         if (qualifier != null && qualifier.getId() != null) {
