@@ -22,6 +22,8 @@ import netflexity.schema.software.bam.messages._1.CreateStageResponse;
 import netflexity.schema.software.bam.messages._1.DeleteAttributes;
 import netflexity.schema.software.bam.messages._1.DeleteAttributesResponse;
 import netflexity.schema.software.bam.messages._1.DeleteProcesses;
+import netflexity.schema.software.bam.messages._1.DeleteFlowsResponse;
+import netflexity.schema.software.bam.messages._1.DeleteFlows;
 import netflexity.schema.software.bam.messages._1.DeleteProcessesResponse;
 import netflexity.schema.software.bam.messages._1.DeleteStages;
 import netflexity.schema.software.bam.messages._1.DeleteStagesResponse;
@@ -150,6 +152,15 @@ public class BamInternalServiceImpl implements BAMInternal, BAM, BamServiceError
 		DeleteAttributesResponse response = new DeleteAttributesResponse();
 		if(body != null && body.getIds() != null) {
 			metadataRepository.removeAttributes(toLongArray(body.getIds()));
+			response.setResponse(true);
+		}
+		return response;
+	}
+	
+	public DeleteFlowsResponse deleteFlows(DeleteFlows body) {
+		DeleteFlowsResponse response = new DeleteFlowsResponse();
+		if(body != null && body.getIds() != null) {
+			metadataRepository.removeFlows(toLongArray(body.getIds()));
 			response.setResponse(true);
 		}
 		return response;

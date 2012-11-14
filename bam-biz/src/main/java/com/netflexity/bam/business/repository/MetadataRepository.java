@@ -81,6 +81,12 @@ public interface MetadataRepository {
 	 * @param ids
 	 * @throws RepositoryException
 	 */
+	void removeFlows(Long[] ids) throws RepositoryException;
+	
+	/**
+	 * @param ids
+	 * @throws RepositoryException
+	 */
 	void removeProcesses(Long[] ids) throws RepositoryException;
 	
 	/**

@@ -213,6 +213,15 @@ public class JpaMetadataRepository extends JpaAbstractRepository implements Meta
         	}
         }
     }
+    
+    public void removeFlows(Long[] ids) throws RepositoryException {
+    	if(ids == null || ids.length == 0) {
+    		return;
+    	}
+    	Query query = entityManager.createQuery("DELETE FROM com.netflexity.bam.business.domain.model.BpmFlow flow WHERE flow.id IN (:IDS)");
+        query.setParameter(IDS, Arrays.asList(ids));
+        query.executeUpdate();
+    }
 
     /* (non-Javadoc)
      * @see com.netflexity.bam.business.repository.MetadataRepository#removeProcesses(long[])
