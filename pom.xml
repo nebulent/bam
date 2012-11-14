@@ -13,7 +13,7 @@
         <module>bam-biz</module>
         <module>bam-ws</module>
         <module>bam-monitor</module>
-    <module>bam-mule-connector</module>
+        <module>bam-mule-connector</module>
   </modules>
     <properties>
         <!-- XML libraries. -->

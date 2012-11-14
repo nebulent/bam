@@ -67,6 +67,14 @@
 		<wsdl:part name="body" element="msg:getAttributesResponse"/>
 	</wsdl:message>
 	
+	<wsdl:message name="deleteFlowsRequest">
+		<wsdl:part name="body" element="msg:deleteFlows"/>
+	</wsdl:message>
+	
+	<wsdl:message name="deleteFlowsResponse">
+		<wsdl:part name="body" element="msg:deleteFlowsResponse"/>
+	</wsdl:message>
+	
 	<wsdl:message name="deleteProcessesRequest">
 		<wsdl:part name="body" element="msg:deleteProcesses"/>
 	</wsdl:message>
@@ -195,6 +203,11 @@
 			<wsdl:output message="tns:getAttributesResponse"/>
 		</wsdl:operation>
 		
+		<wsdl:operation name="deleteFlows">
+			<wsdl:input message="tns:deleteFlowsRequest"/>
+			<wsdl:output message="tns:deleteFlowsResponse"/>
+		</wsdl:operation>
+		
 		<wsdl:operation name="deleteProcesses">
 			<wsdl:input message="tns:deleteProcessesRequest"/>
 			<wsdl:output message="tns:deleteProcessesResponse"/>
@@ -297,6 +310,16 @@
 		
 		<wsdl:operation name="getAttributes">
 			<soap:operation soapAction="getAttributes"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		
+		<wsdl:operation name="deleteFlows">
+			<soap:operation soapAction="deleteFlows"/>
 			<wsdl:input>
 				<soap:body use="literal"/>
 			</wsdl:input>

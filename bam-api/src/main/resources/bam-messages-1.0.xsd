@@ -205,6 +205,24 @@
 		</xs:complexType>
 	</xs:element>
 	
+	<xs:element name="deleteFlows">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="userAwareMessage">
+					<xs:sequence>
+						<xs:element name="ids" type="xs:long" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="deleteFlowsResponse">
+		<xs:complexType>
+			<xs:attribute name="response" type="xs:boolean" use="optional"/>
+		</xs:complexType>
+	</xs:element>
+	
 	<xs:element name="deleteProcesses">
 		<xs:complexType>
 			<xs:complexContent>

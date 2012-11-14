@@ -3,11 +3,11 @@
 <mule xmlns="http://www.mulesoft.org/schema/mule/core"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xmlns:spring="http://www.springframework.org/schema/beans"
-      xmlns:processtransactiontracking="http://www.mulesoft.org/schema/mule/processtransactiontracking"
+      xmlns:bamconnector="http://www.mulesoft.org/schema/mule/bamconnector"
       xsi:schemaLocation="
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
         http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
-        http://www.mulesoft.org/schema/mule/processtransactiontracking http://www.mulesoft.org/schema/mule/processtransactiontracking/1.1/mule-processtransactiontracking.xsd">
+        http://www.mulesoft.org/schema/mule/bamconnector http://www.mulesoft.org/schema/mule/bamconnector/1.1/mule-bamconnector.xsd">
 
     <!-- <processtransactiontracking:config myProperty="Some string"
             username="xxx" password="yyy"/>
@@ -16,9 +16,9 @@
         <processtransactiontracking:my-processor content="Another string"/>
     </flow> -->
     
-    <processtransactiontracking:config serviceUrl="Some string"/>
+    <bamconnector:config serviceUrl="Some string"/>
 
 	<flow name="testFlow">
-        <processtransactiontracking:my-processor flowUuid="vasea" transactionUuid="petea"/>
+        <bamconnector:process-transaction-tracking flowUuid="vasea" transactionUuid="petea"/>
     </flow> 
 </mule>

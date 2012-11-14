@@ -31,8 +31,8 @@ import org.mule.api.annotations.Processor;
  *
  * @author MuleSoft, Inc.
  */
-@Connector(name="processtransactiontracking", schemaVersion="1.1")
-public class ProcessTransactionTrackingConnector
+@Connector(name="bamconnector", schemaVersion="1.1")
+public class BamConnector
 {
     /**
      * Configurable
@@ -96,13 +96,14 @@ public class ProcessTransactionTrackingConnector
     /**
      * Custom processor
      *
-     * {@sample.xml ../../../doc/ProcessTransactionTracking-connector.xml.sample processtransactiontracking:my-processor}
+     * {@sample.xml ../../../doc/ProcessTransactionTracking-connector.xml.sample bamconnector:process-transaction-tracking}
      *
-     * @param content Content to be processed
+     * @param flowUuid String flowUuid
+     * @param transactionUuid String transactionUuid
      * @return Some string
      */
     @Processor
-    public String myProcessor(String flowUuid, String transactionUuid)
+    public String processTransactionTracking(String flowUuid, String transactionUuid)
     {
         /*
          * MESSAGE PROCESSOR CODE GOES HERE

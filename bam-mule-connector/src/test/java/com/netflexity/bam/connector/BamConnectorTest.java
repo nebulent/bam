@@ -10,7 +10,8 @@ import org.mule.tck.AbstractMuleTestCase;
 
 import org.junit.Test;
 
-public class ProcessTransactionTrackingConnectorTest extends FunctionalTestCase
+@SuppressWarnings("deprecation")
+public class BamConnectorTest extends FunctionalTestCase
 {
     @Override
     protected String getConfigResources()
