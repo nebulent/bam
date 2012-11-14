@@ -59,9 +59,9 @@
 					<g:each in="${flowInstanceList}" var="flowInstance">
 						<tr>
 						
-							<td>${fieldValue(bean: flowInstance, field: "process")}</td>
+							<td>${fieldValue(bean: flowInstance, field: "process.name")}</td>
 						
-							<td>${fieldValue(bean: flowInstance, field: "stage")}</td>
+							<td>${fieldValue(bean: flowInstance, field: "stage.name")}</td>
 						
 							<td><g:formatBoolean boolean="${flowInstance.storeMessagePayload}" /></td>
 						
