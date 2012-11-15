@@ -9,5 +9,7 @@ class Stage {
     String name;
     String description;
 	
-	
+	String toString() {
+		return name
+	}
 }

@@ -10,4 +10,7 @@ class Process {
 	String description;
 	List<Flow> flows;
 
+	String toString() {
+		return name
+	}
 }
