@@ -4,34 +4,32 @@
 package com.netflexity.bam.connector;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import netflexity.schema.software.bam.messages._1.ProcessTransactionTracking;
 import netflexity.ws.software.bam.services._1_0.BAM;
 
-import org.apache.cxf.endpoint.Client;
 import org.apache.cxf.feature.AbstractFeature;
 import org.apache.cxf.feature.LoggingFeature;
 import org.apache.cxf.frontend.ClientProxyFactoryBean;
-import org.apache.cxf.jaxrs.client.JAXRSClientFactoryBean;
-import org.apache.cxf.jaxws.JaxWsClientFactoryBean;
-import org.codehaus.jackson.jaxrs.JacksonJsonProvider;
-import org.mule.api.annotations.Connector;
-import org.mule.api.annotations.Connect;
-import org.mule.api.annotations.ValidateConnection;
-import org.mule.api.annotations.ConnectionIdentifier;
-import org.mule.api.annotations.Disconnect;
-import org.mule.api.annotations.param.ConnectionKey;
+import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
 import org.mule.api.ConnectionException;
 import org.mule.api.annotations.Configurable;
+import org.mule.api.annotations.Connect;
+import org.mule.api.annotations.ConnectionIdentifier;
+import org.mule.api.annotations.Connector;
+import org.mule.api.annotations.Disconnect;
 import org.mule.api.annotations.Processor;
+import org.mule.api.annotations.ValidateConnection;
 
 /**
  * Cloud Connector
  *
  * @author MuleSoft, Inc.
  */
-@Connector(name="bamconnector", schemaVersion="1.1")
+@Connector(name="bam", schemaVersion="1.1")
 public class BamConnector
 {
     /**
@@ -55,7 +53,7 @@ public class BamConnector
         /*
          * CODE FOR ESTABLISHING A CONNECTION GOES IN HERE
          */
-    	ClientProxyFactoryBean bean = new ClientProxyFactoryBean();       
+    	ClientProxyFactoryBean bean = new ClientProxyFactoryBean();
         bean.setAddress(serviceUrl);
         bean.setServiceClass(BAM.class);
         
@@ -108,10 +106,30 @@ public class BamConnector
         /*
          * MESSAGE PROCESSOR CODE GOES HERE
          */
+    	
+    	JaxWsProxyFactoryBean bean = new JaxWsProxyFactoryBean();
+        bean.setAddress(serviceUrl);
+        bean.setServiceClass(BAM.class);
+        
+        //Adding logging(not necessary)
+        List<AbstractFeature> features = new ArrayList<AbstractFeature>();
+        features.add(new LoggingFeature());
+        bean.setFeatures(features);
+        
+        Map<String, Object> params = new HashMap<String, Object>();
+        params.put("wrapped", false);
+        params.put("wrappedStyle", true);
+        bean.setProperties(params);
+        		
+        
+        bam = (BAM) bean.create();
+    	
     	ProcessTransactionTracking body = new ProcessTransactionTracking();
     	body.setFlowUuid(flowUuid);
     	body.setTransactionUuid(transactionUuid);
     	
+    	System.out.println("serviceUrl: " + serviceUrl);
+    	System.out.println("bam: " + bam);
         return bam.processTransactionTracking(body).toString();
     }
 
