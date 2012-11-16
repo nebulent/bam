@@ -16,9 +16,12 @@
         <processtransactiontracking:my-processor content="Another string"/>
     </flow> -->
     
-    <bam:config serviceUrl="http://localhost:9090/ws/BamQoSService?wsdl=BAM.wsdl"/>
+    <bam:config serviceUrl="http://tomcat.nebulent.com/bam-ws/ws/BamQoSService?wsdl=BAM.wsdl"/>
 
 	<flow name="testFlow">
-        <bam:process-transaction-tracking flowUuid="vasea" transactionUuid="petea"/>
+		<set-property value="#[groovy:new Date().format('yyyyMMddHHmmss')]" propertyName="tranId"/>
+        <bam:process-transaction-tracking flowUuid="F4_START" transactionUuid="#[header:tranId]" content="content"/>
+        <bam:process-transaction-tracking flowUuid="F4_FTIR200_RESPONSE" transactionUuid="#[header:tranId]" content="content"/>
+        <bam:process-transaction-tracking flowUuid="F4_END" transactionUuid="#[header:tranId]" content="content"/>
     </flow> 
 </mule>
