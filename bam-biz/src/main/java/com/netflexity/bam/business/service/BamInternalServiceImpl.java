@@ -416,16 +416,16 @@ public class BamInternalServiceImpl implements BAMInternal, BAM, BamServiceError
             processFlowTransaction.setBpmFlow(processFlow);
             processFlowTransaction.setBpmTransaction(processTransaction);
             processFlowTransaction.setTransactionDate(now);
+            
+            Set<BpmFlowTransactionPayload> bpmFlowTransactionPayloads = new HashSet<BpmFlowTransactionPayload>();
             if (content != null && content.length > 0) {
-    	        Set<BpmFlowTransactionPayload> bpmFlowTransactionPayloads = new HashSet<BpmFlowTransactionPayload>();
     	        BpmFlowTransactionPayload bpmFlowTransactionPayload = new BpmFlowTransactionPayload();
     	        bpmFlowTransactionPayload.setPayload(content);
+    	        bpmFlowTransactionPayload.setBpmFlowTransaction(processFlowTransaction);
     	        bpmFlowTransactionPayloads.add(bpmFlowTransactionPayload);
-    	        processFlowTransaction.setBpmFlowTransactionPayloads(bpmFlowTransactionPayloads);
             }
-            else {
-            	processFlowTransaction.setBpmFlowTransactionPayloads(null);
-            }
+            processFlowTransaction.setBpmFlowTransactionPayloads(bpmFlowTransactionPayloads);
+            
             processTransaction.getBpmFlowTransactions().add(processFlowTransaction);
             metadataRepository.createFlowTransaction(processFlowTransaction);
             if (BpmStage.END.equals(state) || BpmStage.ALLINONE.equals(state)) {

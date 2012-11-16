@@ -16,7 +16,9 @@
         <processtransactiontracking:my-processor content="Another string"/>
     </flow> -->
     
-    <bam:config serviceUrl="http://tomcat.nebulent.com/bam-ws/ws/BamQoSService?wsdl=BAM.wsdl"/>
+    <!-- <bam:config serviceUrl="http://tomcat.nebulent.com/bam-ws/ws/BamQoSService?wsdl=BAM.wsdl"/> -->
+    
+    <bam:config serviceUrl="http://localhost:9090/ws/BamQoSService?wsdl=BAM.wsdl"/>
 
 	<flow name="testFlow">
 		<set-property value="#[groovy:new Date().format('yyyyMMddHHmmss')]" propertyName="tranId"/>
