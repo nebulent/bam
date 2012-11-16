@@ -210,7 +210,7 @@
 		<xs:attribute name="id" type="xs:long" use="optional"/>
 		<xs:attribute name="resourceId" type="xs:long" use="optional"/>
 		<xs:attribute name="occurrenceInterval" type="xs:integer" use="optional"/>
-		<xs:attribute name="changeDate" type="xs:long" use="optional"/>
+		<xs:attribute name="changeDate" type="xs:dateTime" use="optional"/>
 		<xs:attribute name="status" type="xs:string" use="optional"/>
 	</xs:complexType>
 	
@@ -223,7 +223,7 @@
 	
 	<xs:complexType name="ScheduleType">
 		<xs:attribute name="id" type="xs:long" use="optional"/>
-		<xs:attribute name="changeDate" type="xs:long" use="optional"/>
+		<xs:attribute name="changeDate" type="xs:dateTime" use="optional"/>
 		<xs:attribute name="partyId" type="xs:string" use="optional"/>
 		<xs:attribute name="name" type="xs:string" use="optional"/>
 		<xs:attribute name="minutes" type="xs:string" use="optional"/>
@@ -242,7 +242,7 @@
 		<xs:attribute name="id" type="xs:long" use="optional"/>
 		<xs:attribute name="startTime" type="xs:long" use="optional"/>
 		<xs:attribute name="endTime" type="xs:long" use="optional"/>
-		<xs:attribute name="changeDate" type="xs:long" use="optional"/>
+		<xs:attribute name="changeDate" type="xs:dateTime" use="optional"/>
 		<xs:attribute name="eventStatusCode" type="xs:string" use="optional"/>
 		<xs:attribute name="changeBy" type="xs:string" use="optional"/>
 	</xs:complexType>
@@ -261,8 +261,8 @@
 		<xs:attribute name="processName" type="xs:string" use="optional"/>
 		<xs:attribute name="id" type="xs:long" use="optional"/>
 		<xs:attribute name="uuid" type="xs:string" use="optional"/>
-		<xs:attribute name="startDate" type="xs:long" use="optional"/>
-		<xs:attribute name="endDate" type="xs:long" use="optional"/>
+		<xs:attribute name="startDate" type="xs:dateTime" use="optional"/>
+		<xs:attribute name="endDate" type="xs:dateTime" use="optional"/>
 		<xs:attribute name="transactionStatusCode" type="xs:string" use="optional"/>
 	</xs:complexType>
 	
@@ -271,7 +271,7 @@
 			<xs:element name="bpmFlowTransactionPayloads" type="FlowTransactionPayloadDetailsType" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 		<xs:attribute name="id" type="xs:long" use="optional"/>
-		<xs:attribute name="transactionDate" type="xs:long" use="optional"/>
+		<xs:attribute name="transactionDate" type="xs:dateTime" use="optional"/>
 		<xs:attribute name="stageName" type="xs:string" use="optional"/>
 	</xs:complexType>
 	

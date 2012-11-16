@@ -4,6 +4,7 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -521,7 +522,9 @@ public class DomainUtil {
     	meta.setId(monitor.getId());
     	meta.setResourceId(monitor.getResourceId());
     	meta.setOccurrenceInterval(monitor.getOccurrenceInterval() != null ? new BigInteger(String.valueOf(monitor.getOccurrenceInterval())) : null);
-    	meta.setChangeDate(monitor.getChangeDate());
+    	GregorianCalendar calendar = new GregorianCalendar();
+    	calendar.setTimeInMillis(monitor.getChangeDate());
+    	meta.setChangeDate(calendar);
     	meta.setStatus(String.valueOf(monitor.getStatus()));
     	if(meta.getStatus() != null) {
     		meta.setStatus(meta.getStatus().trim());
@@ -536,9 +539,12 @@ public class DomainUtil {
     public static TransactionDetailsType toXmlType(BpmTransaction transaction) {
     	TransactionDetailsType trn = new TransactionDetailsType();
         trn.setId(transaction.getId());
-        trn.setStartDate(transaction.getStartDate());
+        GregorianCalendar calendar = new GregorianCalendar();
+    	calendar.setTimeInMillis(transaction.getStartDate());
+        trn.setStartDate(calendar);
         if(transaction.getEndDate() != null){
-            trn.setEndDate(transaction.getEndDate());
+        	calendar.setTimeInMillis(transaction.getEndDate());
+            trn.setEndDate(calendar);
         }
         trn.setUuid(transaction.getUuid());
         trn.setTransactionStatusCode(transaction.getTransactionStatusCode());
@@ -571,7 +577,9 @@ public class DomainUtil {
     public static FlowTransactionDetailsType toXmlType(BpmFlowTransaction transaction) {
     	FlowTransactionDetailsType rv = new FlowTransactionDetailsType();
         rv.setId(transaction.getId());
-        rv.setTransactionDate(transaction.getTransactionDate());
+        GregorianCalendar calendar = new GregorianCalendar();
+    	calendar.setTimeInMillis(transaction.getTransactionDate());
+        rv.setTransactionDate(calendar);
         if(transaction.getBpmFlowTransactionPayloads() != null){
             List<FlowTransactionPayloadDetailsType> list = new ArrayList<FlowTransactionPayloadDetailsType>(transaction.getBpmFlowTransactionPayloads().size());
             for(BpmFlowTransactionPayload payload : transaction.getBpmFlowTransactionPayloads()) {
@@ -654,7 +662,7 @@ public class DomainUtil {
     	entity.setId(monitor.getId());
     	entity.setResourceId(monitor.getResourceId() != null ? monitor.getResourceId() : 0);
     	entity.setOccurrenceInterval(monitor.getOccurrenceInterval() != null ? monitor.getOccurrenceInterval().intValue() : null);
-    	entity.setChangeDate(monitor.getChangeDate());
+    	entity.setChangeDate(monitor.getChangeDate().getTimeInMillis());
     	if(monitor.getStatus() != null && monitor.getStatus().length() > 0) {
     		entity.setStatus(monitor.getStatus().toCharArray()[0]);
     	}
