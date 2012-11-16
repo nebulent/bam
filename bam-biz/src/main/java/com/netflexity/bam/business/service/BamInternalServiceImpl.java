@@ -3,9 +3,12 @@
  */
 package com.netflexity.bam.business.service;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 import java.util.UUID;
 
 import netflexity.schema.software.bam.messages._1.AcknowledgeTransactionTracking;
@@ -65,6 +68,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.netflexity.bam.business.domain.model.BpmAttribute;
 import com.netflexity.bam.business.domain.model.BpmFlow;
 import com.netflexity.bam.business.domain.model.BpmFlowTransaction;
+import com.netflexity.bam.business.domain.model.BpmFlowTransactionPayload;
 import com.netflexity.bam.business.domain.model.BpmMonitor;
 import com.netflexity.bam.business.domain.model.BpmProcess;
 import com.netflexity.bam.business.domain.model.BpmStage;
@@ -362,8 +366,9 @@ public class BamInternalServiceImpl implements BAMInternal, BAM, BamServiceError
 			AcknowledgeTransactionTracking response = new AcknowledgeTransactionTracking();
 	        String transactionUuid = body.getTransactionUuid();
 	        String flowUuid = body.getFlowUuid();
+	        byte[] content = body.getTransactionContent();
 	        /*Create process flow transaction.*/
-	        FlowTransactionType flowTransactionType = createProcessFlowTransaction(transactionUuid, flowUuid, body.getTransactionDate() != null ? body.getTransactionDate().longValue() : null);
+	        FlowTransactionType flowTransactionType = createProcessFlowTransaction(transactionUuid, flowUuid, body.getTransactionDate() != null ? body.getTransactionDate().longValue() : null, content);
 	        response.setFlowUuid(flowUuid);
 	        response.setTransactionUuid(flowTransactionType.getTransactionId());
 	        return response;
@@ -378,7 +383,7 @@ public class BamInternalServiceImpl implements BAMInternal, BAM, BamServiceError
      * @return
      * @throws BamServiceException
      */
-    private FlowTransactionType createProcessFlowTransaction(final String transactionUuid, final String flowUuid, Long time) throws BamServiceException {
+    private FlowTransactionType createProcessFlowTransaction(final String transactionUuid, final String flowUuid, Long time, byte[] content) throws BamServiceException {
         if (StringUtils.isBlank(flowUuid)) {
             throw createServiceException(FLOW_UUID_REQUIRED_ERROR, new Object[]{});
         }
@@ -411,6 +416,16 @@ public class BamInternalServiceImpl implements BAMInternal, BAM, BamServiceError
             processFlowTransaction.setBpmFlow(processFlow);
             processFlowTransaction.setBpmTransaction(processTransaction);
             processFlowTransaction.setTransactionDate(now);
+            if (content != null && content.length > 0) {
+    	        Set<BpmFlowTransactionPayload> bpmFlowTransactionPayloads = new HashSet<BpmFlowTransactionPayload>();
+    	        BpmFlowTransactionPayload bpmFlowTransactionPayload = new BpmFlowTransactionPayload();
+    	        bpmFlowTransactionPayload.setPayload(content);
+    	        bpmFlowTransactionPayloads.add(bpmFlowTransactionPayload);
+    	        processFlowTransaction.setBpmFlowTransactionPayloads(bpmFlowTransactionPayloads);
+            }
+            else {
+            	processFlowTransaction.setBpmFlowTransactionPayloads(null);
+            }
             processTransaction.getBpmFlowTransactions().add(processFlowTransaction);
             metadataRepository.createFlowTransaction(processFlowTransaction);
             if (BpmStage.END.equals(state) || BpmStage.ALLINONE.equals(state)) {
@@ -419,6 +434,8 @@ public class BamInternalServiceImpl implements BAMInternal, BAM, BamServiceError
                 transactionProcessorRepository.createTransaction(processTransaction);
             }
         //}
+        
+        
         return DomainUtil.toFlowTransactionXmlType(processFlowTransaction);
     }
 	
