@@ -16,6 +16,12 @@ import com.netflexity.bam.business.domain.model.BpmTransactionSummary;
 public interface TransactionProcessorRepository {
 
 	/**
+	 * @return
+	 * @throws RepositoryException
+	 */
+	List<BpmTransaction> getTransactions() throws RepositoryException;
+	
+	/**
 	 * @param partyId
 	 * @return
 	 * @throws RepositoryException
@@ -28,6 +34,14 @@ public interface TransactionProcessorRepository {
 	 * @throws RepositoryException
 	 */
 	List<BpmTransaction> getTransactions(int limit) throws RepositoryException;
+	
+	/**
+	 * @param pageNumber
+	 * @param pageSize
+	 * @return
+	 * @throws RepositoryException
+	 */
+	List<BpmTransaction> getTransactions(int pageNumber, int pageSize) throws RepositoryException;
 
 	/**
 	 * @param uuid

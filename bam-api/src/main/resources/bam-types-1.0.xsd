@@ -162,12 +162,19 @@
 			<xs:enumeration value="ALLINONE"></xs:enumeration>
 			<xs:enumeration value="INTERMEDIATE"></xs:enumeration>
 			<xs:enumeration value="END"></xs:enumeration>
+			<xs:enumeration value="ERROR"></xs:enumeration>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="TransactionStatusEnum">
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="PROCESSING"></xs:enumeration>
 			<xs:enumeration value="COMPLETED"></xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TransactionHealthyEnum">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="HEALTHY"></xs:enumeration>
+			<xs:enumeration value="ERROR"></xs:enumeration>
 		</xs:restriction>
 	</xs:simpleType>
 	<!-- Collections of objects. -->
@@ -240,8 +247,8 @@
 			<xs:element name="message" type="xs:string" minOccurs="0"/>
 		</xs:sequence>
 		<xs:attribute name="id" type="xs:long" use="optional"/>
-		<xs:attribute name="startTime" type="xs:long" use="optional"/>
-		<xs:attribute name="endTime" type="xs:long" use="optional"/>
+		<xs:attribute name="startTime" type="xs:dateTime" use="optional"/>
+		<xs:attribute name="endTime" type="xs:dateTime" use="optional"/>
 		<xs:attribute name="changeDate" type="xs:dateTime" use="optional"/>
 		<xs:attribute name="eventStatusCode" type="xs:string" use="optional"/>
 		<xs:attribute name="changeBy" type="xs:string" use="optional"/>
@@ -264,6 +271,7 @@
 		<xs:attribute name="startDate" type="xs:dateTime" use="optional"/>
 		<xs:attribute name="endDate" type="xs:dateTime" use="optional"/>
 		<xs:attribute name="transactionStatusCode" type="xs:string" use="optional"/>
+		<xs:attribute name="healthCode" type="xs:string" use="optional"/>
 	</xs:complexType>
 	
 	<xs:complexType name="FlowTransactionDetailsType">

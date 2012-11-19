@@ -19,6 +19,12 @@ public class JpaTransactionProcessorRepository extends JpaAbstractRepository imp
     /*constants*/
     private static final String UUID = "UUID";
 	
+    @SuppressWarnings("unchecked")
+	public List<BpmTransaction> getTransactions() throws RepositoryException {
+    	String SQL = "FROM com.netflexity.bam.business.domain.model.BpmTransaction process ORDER BY startDate DESC";
+    	return entityManager.createQuery(SQL).getResultList();
+    }
+    
 	/* (non-Javadoc)
 	 * @see com.netflexity.bam.business.repository.TransactionProcessorRepository#getTransactions(int)
 	 */
@@ -29,6 +35,12 @@ public class JpaTransactionProcessorRepository extends JpaAbstractRepository imp
 			return entityManager.createQuery(SQL).setMaxResults(limit).getResultList();
 		}
 		return entityManager.createQuery(SQL).getResultList();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<BpmTransaction> getTransactions(int pageNumber, int pageSize) throws RepositoryException {
+		String SQL = "FROM com.netflexity.bam.business.domain.model.BpmTransaction process ORDER BY startDate DESC";
+		return entityManager.createQuery(SQL).setFirstResult(pageNumber * pageSize).setMaxResults(pageSize).getResultList();
 	}
 	
 	/* (non-Javadoc)
