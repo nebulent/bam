@@ -36,15 +36,15 @@
 								<thead>
 									<tr>
 										
-											<g:sortableColumn property="stageTypeCode" title="${message(code: 'flow.stageTypeCode.label', default: 'Stage Type Code')}" />
+											<g:sortableColumn property="uuid" title="${message(code: 'flow.uuid.label', default: 'Uuid')}" />
 										
 											<th class="header"><g:message code="flow.process.label" default="Process" /></th>
 										
 											<th class="header"><g:message code="flow.stage.label" default="Stage" /></th>
 										
-											<g:sortableColumn property="storeMessagePayload" title="${message(code: 'flow.storeMessagePayload.label', default: 'Store Message Payload')}" />
+											<g:sortableColumn property="stageTypeCode" title="${message(code: 'flow.stageTypeCode.label', default: 'Stage Type Code')}" />
 										
-											<g:sortableColumn property="uuid" title="${message(code: 'flow.uuid.label', default: 'Uuid')}" />
+											<g:sortableColumn property="storeMessagePayload" title="${message(code: 'flow.storeMessagePayload.label', default: 'Store Message Payload')}" />
 										
 										<th style="text-align:center; width: 89px">View</th>
 										<th style="text-align:center; width: 63px">Edit</th>
@@ -55,15 +55,15 @@
 								<g:each in="${flowInstanceList}" var="flowInstance">
 									<tr>
 									
-										<td>${fieldValue(bean: flowInstance, field: "stageTypeId")}</td>
+										<td>${fieldValue(bean: flowInstance, field: "uuid")}</td>
 									
 										<td>${fieldValue(bean: flowInstance, field: "process.name")}</td>
 									
 										<td>${fieldValue(bean: flowInstance, field: "stage.name")}</td>
 									
-										<td><g:formatBoolean boolean="${flowInstance.storeMessagePayload}" /></td>
+										<td>${fieldValue(bean: flowInstance, field: "stageTypeId")}</td>
 									
-										<td>${fieldValue(bean: flowInstance, field: "uuid")}</td>
+										<td><g:formatBoolean boolean="${flowInstance.storeMessagePayload}" /></td>
 									
 										<td>
 											<g:link action="show" id="${flowInstance.id}" class="btn btn-small">

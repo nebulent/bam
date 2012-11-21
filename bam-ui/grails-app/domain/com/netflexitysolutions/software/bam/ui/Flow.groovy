@@ -3,7 +3,11 @@ package com.netflexitysolutions.software.bam.ui
 class Flow {
 
     static constraints = {
+		uuid()
+		process()
+		stage()
 		stageTypeCode(nullable:false)
+		storeMessagePayload()
     }
 	
 	public enum StageTypeCode {

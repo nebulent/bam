@@ -37,17 +37,17 @@
 
 				<dl>
 				
-					<g:if test="${processInstance?.description}">
-						<dt><g:message code="process.description.label" default="Description" /></dt>
-						
-							<dd><g:fieldValue bean="${processInstance}" field="description"/></dd>
-						
-					</g:if>
-				
 					<g:if test="${processInstance?.name}">
 						<dt><g:message code="process.name.label" default="Name" /></dt>
 						
 							<dd><g:fieldValue bean="${processInstance}" field="name"/></dd>
+						
+					</g:if>
+				
+					<g:if test="${processInstance?.description}">
+						<dt><g:message code="process.description.label" default="Description" /></dt>
+						
+							<dd><g:fieldValue bean="${processInstance}" field="description"/></dd>
 						
 					</g:if>
 				

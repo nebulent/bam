@@ -2,12 +2,12 @@
 
 
 
-<div class="fieldcontain ${hasErrors(bean: transactionInstance, field: 'endDate', 'error')} required">
-	<label for="endDate">
-		<g:message code="transaction.endDate.label" default="End Date" />
-		<span class="required-indicator">*</span>
+<div class="fieldcontain ${hasErrors(bean: transactionInstance, field: 'uuid', 'error')} ">
+	<label for="uuid">
+		<g:message code="transaction.uuid.label" default="Uuid" />
+		
 	</label>
-	<g:field name="endDate" type="number" value="${transactionInstance.endDate}" required=""/>
+	<g:textField name="uuid" value="${transactionInstance?.uuid}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: transactionInstance, field: 'processName', 'error')} ">
@@ -23,7 +23,15 @@
 		<g:message code="transaction.startDate.label" default="Start Date" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:field name="startDate" type="number" value="${transactionInstance.startDate}" required=""/>
+	<g:datePicker name="startDate" precision="day"  value="${transactionInstance?.startDate}"  />
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: transactionInstance, field: 'endDate', 'error')} required">
+	<label for="endDate">
+		<g:message code="transaction.endDate.label" default="End Date" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:datePicker name="endDate" precision="day"  value="${transactionInstance?.endDate}"  />
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: transactionInstance, field: 'transactionStatusCode', 'error')} ">
@@ -34,11 +42,11 @@
 	<g:textField name="transactionStatusCode" value="${transactionInstance?.transactionStatusCode}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: transactionInstance, field: 'uuid', 'error')} ">
-	<label for="uuid">
-		<g:message code="transaction.uuid.label" default="Uuid" />
+<div class="fieldcontain ${hasErrors(bean: transactionInstance, field: 'healthCode', 'error')} ">
+	<label for="healthCode">
+		<g:message code="transaction.healthCode.label" default="Health Code" />
 		
 	</label>
-	<g:textField name="uuid" value="${transactionInstance?.uuid}"/>
+	<g:textField name="healthCode" value="${transactionInstance?.healthCode}"/>
 </div>
 

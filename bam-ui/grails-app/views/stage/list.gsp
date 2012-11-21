@@ -36,9 +36,9 @@
 								<thead>
 									<tr>
 										
-											<g:sortableColumn property="description" title="${message(code: 'stage.description.label', default: 'Description')}" />
-										
 											<g:sortableColumn property="name" title="${message(code: 'stage.name.label', default: 'Name')}" />
+										
+											<g:sortableColumn property="description" title="${message(code: 'stage.description.label', default: 'Description')}" />
 										
 										<th style="text-align:center; width: 89px">View</th>
 										<th style="text-align:center; width: 63px">Edit</th>
@@ -49,9 +49,9 @@
 								<g:each in="${stageInstanceList}" var="stageInstance">
 									<tr>
 									
-										<td>${fieldValue(bean: stageInstance, field: "description")}</td>
-									
 										<td>${fieldValue(bean: stageInstance, field: "name")}</td>
+									
+										<td>${fieldValue(bean: stageInstance, field: "description")}</td>
 									
 										<td>
 											<g:link action="show" id="${stageInstance.id}" class="btn btn-small">

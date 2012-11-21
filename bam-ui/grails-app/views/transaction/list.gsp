@@ -44,9 +44,11 @@
 										
 											<g:sortableColumn property="endDate" title="${message(code: 'transaction.endDate.label', default: 'End Date')}" />
 										
-											<th class="header"><g:message code="transaction.stages.label" default="Stages" /></th>
-										
+											<th class="header"><g:message code="transaction.trace.label" default="Trace" /></th>
+											
 											<g:sortableColumn property="transactionStatusCode" title="${message(code: 'transaction.transactionStatusCode.label', default: 'Transaction Status Code')}" />
+										
+											<g:sortableColumn property="healthCode" title="${message(code: 'transaction.healthCode.label', default: 'Health Code')}" />
 										
 										<th style="text-align:center; width: 89px">View</th>
 										<th style="text-align:center; width: 63px">Edit</th>
@@ -61,9 +63,9 @@
 									
 										<td>${fieldValue(bean: transactionInstance, field: "processName")}</td>
 									
-										<td>${fieldValue(bean: transactionInstance, field: "startDate")}</td>
+										<td><g:formatDate date="${transactionInstance.startDate}" /></td>
 									
-										<td>${fieldValue(bean: transactionInstance, field: "endDate")}</td>
+										<td><g:formatDate date="${transactionInstance.endDate}" /></td>
 										
 										<td>
 											<g:each in="${transactionInstance.bpmFlowTransactions.sort { a, b -> a.id - b.id }}" var="transactionStage">
@@ -72,6 +74,8 @@
 										</td>
 									
 										<td>${fieldValue(bean: transactionInstance, field: "transactionStatusCode")}</td>
+									
+										<td>${fieldValue(bean: transactionInstance, field: "healthCode")}</td>
 									
 										<td>
 											<g:link action="show" id="${transactionInstance.id}" class="btn btn-small">

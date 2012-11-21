@@ -37,17 +37,17 @@
 
 				<dl>
 				
-					<g:if test="${stageInstance?.description}">
-						<dt><g:message code="stage.description.label" default="Description" /></dt>
-						
-							<dd><g:fieldValue bean="${stageInstance}" field="description"/></dd>
-						
-					</g:if>
-				
 					<g:if test="${stageInstance?.name}">
 						<dt><g:message code="stage.name.label" default="Name" /></dt>
 						
 							<dd><g:fieldValue bean="${stageInstance}" field="name"/></dd>
+						
+					</g:if>
+				
+					<g:if test="${stageInstance?.description}">
+						<dt><g:message code="stage.description.label" default="Description" /></dt>
+						
+							<dd><g:fieldValue bean="${stageInstance}" field="description"/></dd>
 						
 					</g:if>
 				
