@@ -24,8 +24,8 @@ public class BpmTransaction implements Serializable {
     /**/
 	private static final long serialVersionUID = 1L;
 	
-	public static final String STARTED = "STARTED";
-    public static final String STOPED = "STOPED";
+	public static final String STARTED = "IN_PROGRESS";
+    public static final String STOPED = "COMPLETED";
     
     public static final String ERROR = "ERROR";
     public static final String HEALTHY = "HEALTHY";
