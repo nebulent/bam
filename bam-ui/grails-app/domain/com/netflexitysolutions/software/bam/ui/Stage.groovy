@@ -2,12 +2,13 @@ package com.netflexitysolutions.software.bam.ui
 
 class Stage {
 
+	static mapping = { id generator:'assigned', params:[type:'string'] }
+	
     static constraints = {
 		name()
 		description()
     }
 	
-    String id;
     String name;
     String description;
 	

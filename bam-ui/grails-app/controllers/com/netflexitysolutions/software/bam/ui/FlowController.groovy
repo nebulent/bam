@@ -48,27 +48,37 @@ class FlowController {
     }
 
     def show() {
-        def flowInstance = Flow.get(params.id)
-        if (!flowInstance) {
+		def flowType = bamInternalService.getFlows(new GetFlows(flowId: params.id)).flows[0]
+        if (!flowType) {
 			flash.message = message(code: 'default.not.found.message', args: [message(code: 'flow.label', default: 'Flow'), params.id])
             redirect action: 'list'
             return
         }
-
+		def flowInstance = new Flow(uuid: flowType.uuid, stageTypeCode: flowType.stageTypeId,
+										process: flowType.process, stage: flowType.stage)
+		flowInstance.id = flowType.id
+		
         [flowInstance: flowInstance]
     }
 
     def edit() {
 		switch (request.method) {
 		case 'GET':
-	        def flowInstance = Flow.get(params.id)
-	        if (!flowInstance) {
-	            flash.message = message(code: 'default.not.found.message', args: [message(code: 'flow.label', default: 'Flow'), params.id])
+			def flowType = bamInternalService.getFlows(new GetFlows(flowId: params.id)).flows[0]
+	        if (!flowType) {
+				flash.message = message(code: 'default.not.found.message', args: [message(code: 'flow.label', default: 'Flow'), params.id])
 	            redirect action: 'list'
 	            return
 	        }
-
-	        [flowInstance: flowInstance]
+			def stage = new Stage(id: flowType.stage.id, name: flowType.stage.name)
+			def flowInstance = new Flow(uuid: flowType.uuid, stageTypeCode: flowType.stageTypeId,
+											process: new Process(id: flowType.process.id, name: flowType.process.name), 
+											stage: new Stage(id: flowType.stage.id, name: flowType.stage.name))
+			flowInstance.id = flowType.id
+			
+	        [flowInstance: flowInstance, 
+				processes: bamInternalService.getProcesses(new GetProcesses()).processes,
+				stages: bamInternalService.getStages(new GetStages()).stages]
 			break
 		case 'POST':
 	        def flowInstance = Flow.get(params.id)

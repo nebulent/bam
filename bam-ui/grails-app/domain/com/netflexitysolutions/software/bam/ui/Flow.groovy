@@ -11,11 +11,10 @@ class Flow {
     }
 	
 	public enum StageTypeCode {
-		START, INTERMEDIATE,END, ALLINONE
+		START, INTERMEDIATE, END, ALLINONE, ERROR
 	
 	}
 	
-	String id;
 	String uuid;
 	StageTypeCode stageTypeCode;
 	boolean storeMessagePayload;
