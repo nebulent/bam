@@ -21,6 +21,7 @@
 		<property name="locations">
 			<util:list>
 				<value>classpath:bam-ws.properties</value>
+				<value>classpath:bam-ws-env-*.properties</value>
 			</util:list>
 		</property>
 	</bean>
