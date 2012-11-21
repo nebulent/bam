@@ -22,7 +22,7 @@
 					<xs:sequence>
 						<xs:element name="flowUuid" type="xs:string"/>
 						<xs:element name="transactionUuid" minOccurs="0" type="xs:string"/>
-						<xs:element name="transactionDate" type="xs:integer"/>
+						<xs:element name="transactionDate" type="xs:dateTime"/>
 						<xs:element name="transactionContent" minOccurs="0" type="xs:base64Binary"/>
 					</xs:sequence>
 				</xs:extension>
@@ -47,7 +47,7 @@
 					<xs:sequence>
 						<xs:element name="correlationId" type="xs:string"/>
 						<xs:element name="activityId" type="xs:string"/>
-						<xs:element name="activityTime" type="xs:integer"/>
+						<xs:element name="activityTime" type="xs:dateTime"/>
 						<xs:element name="activityStatus" type="xs:int"/>
 						<xs:element name="activityAttributes" minOccurs="0" type="TransactionActivityAttributeArrayType"/>
 						<xs:element name="activityPayload" minOccurs="0" type="TransactionPayloadType"/>

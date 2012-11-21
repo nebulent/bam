@@ -5,6 +5,7 @@ package com.netflexity.bam.business.service;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
@@ -377,7 +378,7 @@ public class BamInternalServiceImpl implements BAMInternal, BAM, BamServiceError
 	        String flowUuid = body.getFlowUuid();
 	        byte[] content = body.getTransactionContent();
 	        /*Create process flow transaction.*/
-	        FlowTransactionType flowTransactionType = createProcessFlowTransaction(transactionUuid, flowUuid, body.getTransactionDate() != null ? body.getTransactionDate().longValue() : null, content);
+	        FlowTransactionType flowTransactionType = createProcessFlowTransaction(transactionUuid, flowUuid, body.getTransactionDate() != null ? body.getTransactionDate() : null, content);
 	        response.setFlowUuid(flowUuid);
 	        response.setTransactionUuid(flowTransactionType.getTransactionId());
 	        return response;
@@ -392,12 +393,12 @@ public class BamInternalServiceImpl implements BAMInternal, BAM, BamServiceError
      * @return
      * @throws BamServiceException
      */
-    private FlowTransactionType createProcessFlowTransaction(final String transactionUuid, final String flowUuid, Long time, byte[] content) throws BamServiceException {
+    private FlowTransactionType createProcessFlowTransaction(final String transactionUuid, final String flowUuid, Calendar time, byte[] content) throws BamServiceException {
         if (StringUtils.isBlank(flowUuid)) {
             throw createServiceException(FLOW_UUID_REQUIRED_ERROR, new Object[]{});
         }
         BpmFlowTransaction processFlowTransaction = null;
-        long now = time != null ? time : System.currentTimeMillis(); //making best attempt to preserve times
+        long now = time != null ? time.getTimeInMillis() : System.currentTimeMillis(); //making best attempt to preserve times
         BpmFlow processFlow = null;
         if (StringUtils.isNotBlank(flowUuid)) {
             processFlow = metadataRepository.findProcessFlowByUuid(flowUuid);
