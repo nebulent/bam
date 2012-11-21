@@ -177,7 +177,7 @@
     	<dependency>
             <groupId>com.netflexitysolutions.software.bam</groupId>
             <artifactId>bam-api</artifactId>
-            <version>1.1</version>
+            <version>1.1-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.mule</groupId>

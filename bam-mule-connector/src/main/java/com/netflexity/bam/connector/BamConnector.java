@@ -2,6 +2,7 @@ package com.netflexity.bam.connector;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import netflexity.schema.software.bam.messages._1.AcknowledgeTransactionTracking;
@@ -98,7 +99,9 @@ public class BamConnector
     	body.setFlowUuid(flowUuid);
     	body.setTransactionUuid(transactionUuid);
     	body.setTransactionContent(content.getBytes());
-    	body.setTransactionDate(new BigInteger(new Long(System.currentTimeMillis()).toString()));
+    	Calendar calendar = Calendar.getInstance();
+    	calendar.setTimeInMillis(System.currentTimeMillis());
+    	body.setTransactionDate(calendar);
     	bam.processTransactionTracking(body);
         
     }

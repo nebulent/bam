@@ -4,7 +4,6 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -69,6 +68,7 @@ public class DomainUtil {
         if (dateTime != null) {
             Calendar cal = Calendar.getInstance();
             cal.setTime(new Date(dateTime));
+            return cal;
         }
         return null;
     }
@@ -246,9 +246,7 @@ public class DomainUtil {
         process.setDescription(processType.getDescription());
         process.setPartyId(processType.getPartyId());
         process.setChangeBy(processType.getChangeBy());
-        if (processType.getChangeDate() != null) {
-            process.setChangeDate(toLong(processType.getChangeDate()));
-        }
+        process.setChangeDate(toLong(processType.getChangeDate()));
         FlowArrayType flowsArrayType = processType.getFlows();
         if (flowsArrayType != null) {
             for (FlowType processFlowType : flowsArrayType.getFlows()) {
@@ -307,10 +305,7 @@ public class DomainUtil {
         stage.setDescription(stageType.getDescription());
         stage.setPartyId(stageType.getPartyId());
         stage.setChangeBy(stageType.getChangeBy());
-        if (stageType.getChangeDate() != null) {
-            stage.setChangeDate(toLong(stageType.getChangeDate()));
-        }
-
+        stage.setChangeDate(toLong(stageType.getChangeDate()));
         QualifierType qualifierType = stageType.getQualifier();
 
         if (qualifierType != null && qualifierType.getId() != null) {
@@ -392,9 +387,7 @@ public class DomainUtil {
             attribute.setRequired(NO);
         }
         attribute.setChangeBy(attrType.getChangeBy());
-        if (attrType.getChangeDate() != null) {
-            attribute.setChangeDate(toLong(attrType.getChangeDate()));
-        }
+        attribute.setChangeDate(toLong(attrType.getChangeDate()));
         return attribute;
     }
 
@@ -522,9 +515,7 @@ public class DomainUtil {
     	meta.setId(monitor.getId());
     	meta.setResourceId(monitor.getResourceId());
     	meta.setOccurrenceInterval(monitor.getOccurrenceInterval() != null ? new BigInteger(String.valueOf(monitor.getOccurrenceInterval())) : null);
-    	GregorianCalendar calendar = new GregorianCalendar();
-    	calendar.setTimeInMillis(monitor.getChangeDate());
-    	meta.setChangeDate(calendar);
+    	meta.setChangeDate(toCalendar(monitor.getChangeDate()));
     	meta.setStatus(String.valueOf(monitor.getStatus()));
     	if(meta.getStatus() != null) {
     		meta.setStatus(meta.getStatus().trim());
@@ -539,13 +530,8 @@ public class DomainUtil {
     public static TransactionDetailsType toXmlType(BpmTransaction transaction) {
     	TransactionDetailsType trn = new TransactionDetailsType();
         trn.setId(transaction.getId());
-        GregorianCalendar calendar = new GregorianCalendar();
-    	calendar.setTimeInMillis(transaction.getStartDate());
-        trn.setStartDate(calendar);
-        if(transaction.getEndDate() != null){
-        	calendar.setTimeInMillis(transaction.getEndDate());
-            trn.setEndDate(calendar);
-        }
+        trn.setStartDate(toCalendar(transaction.getStartDate()));
+        trn.setEndDate(toCalendar(transaction.getEndDate()));
         trn.setUuid(transaction.getUuid());
         trn.setTransactionStatusCode(transaction.getTransactionStatusCode());
         if(transaction.getBpmFlowTransactions() != null){
@@ -577,9 +563,7 @@ public class DomainUtil {
     public static FlowTransactionDetailsType toXmlType(BpmFlowTransaction transaction) {
     	FlowTransactionDetailsType rv = new FlowTransactionDetailsType();
         rv.setId(transaction.getId());
-        GregorianCalendar calendar = new GregorianCalendar();
-    	calendar.setTimeInMillis(transaction.getTransactionDate());
-        rv.setTransactionDate(calendar);
+        rv.setTransactionDate(toCalendar(transaction.getTransactionDate()));
         if(transaction.getBpmFlowTransactionPayloads() != null){
             List<FlowTransactionPayloadDetailsType> list = new ArrayList<FlowTransactionPayloadDetailsType>(transaction.getBpmFlowTransactionPayloads().size());
             for(BpmFlowTransactionPayload payload : transaction.getBpmFlowTransactionPayloads()) {
