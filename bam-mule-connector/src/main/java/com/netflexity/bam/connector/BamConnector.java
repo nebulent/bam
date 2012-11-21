@@ -92,14 +92,14 @@ public class BamConnector
      * @return acknoledgment
      */
     @Processor
-    public AcknowledgeTransactionTracking processTransactionTracking(String flowUuid, String transactionUuid, @Optional String content)
+    public void processTransactionTracking(String flowUuid, String transactionUuid, @Optional String content)
     {
     	ProcessTransactionTracking body = new ProcessTransactionTracking();
     	body.setFlowUuid(flowUuid);
     	body.setTransactionUuid(transactionUuid);
     	body.setTransactionContent(content.getBytes());
     	body.setTransactionDate(new BigInteger(new Long(System.currentTimeMillis()).toString()));
-        return bam.processTransactionTracking(body);
+    	bam.processTransactionTracking(body);
         
     }
 

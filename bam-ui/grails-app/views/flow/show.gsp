@@ -3,44 +3,46 @@
 <!doctype html>
 <html>
 	<head>
-		<meta name="layout" content="bootstrap">
+		<meta name="layout" content="bam">
 		<g:set var="entityName" value="${message(code: 'flow.label', default: 'Flow')}" />
 		<title><g:message code="default.show.label" args="[entityName]" /></title>
 	</head>
 	<body>
-		<div class="row-fluid">
-			
-			<div class="span3">
-				<div class="well">
-					<ul class="nav nav-list">
-						<li class="nav-header">${entityName}</li>
-						<li>
-							<g:link class="list" action="list">
-								<i class="icon-list"></i>
-								<g:message code="default.list.label" args="[entityName]" />
-							</g:link>
-						</li>
-						<li>
-							<g:link class="create" action="create">
-								<i class="icon-plus"></i>
-								<g:message code="default.create.label" args="[entityName]" />
-							</g:link>
-						</li>
-					</ul>
-				</div>
-			</div>
-			
-			<div class="span9">
+					<div class="row-fluid">
+						<div class="span12">
+							<div class="hero-unit non-index">
+								<h2><g:message code="default.show.label" args="[entityName]" /></h2>
+								<br />
+								<p class="hidden-phone">
+									<g:link class="btn btn-info btn-large pull-right" action="list">
+										<g:message code="default.list.label" args="[entityName]" />
+									</g:link>
+									<g:link class="btn btn-info btn-large pull-right" action="create">
+										<g:message code="default.create.label" args="[entityName]" />
+									</g:link>
+								</p>
+							</div>
+						</div>
+					</div>
 
-				<div class="page-header">
-					<h1><g:message code="default.show.label" args="[entityName]" /></h1>
-				</div>
-
-				<g:if test="${flash.message}">
-				<bootstrap:alert class="alert-info">${flash.message}</bootstrap:alert>
-				</g:if>
+					<div class="row-fluid">
+						<g:if test="${flash.message}">
+						<bootstrap:alert class="alert-info">${flash.message}</bootstrap:alert>
+						</g:if>
+					</div>
+					<div class="row-fluid">
+						<div class="span12">
+							<h4 class="title"><g:message code="default.show.label" args="[entityName]" /></h4>
+							<div class="squiggly-border"></div>
 
 				<dl>
+				
+					<g:if test="${flowInstance?.stageTypeCode}">
+						<dt><g:message code="flow.stageTypeCode.label" default="Stage Type Code" /></dt>
+						
+							<dd><g:fieldValue bean="${flowInstance}" field="stageTypeCode"/></dd>
+						
+					</g:if>
 				
 					<g:if test="${flowInstance?.process}">
 						<dt><g:message code="flow.process.label" default="Process" /></dt>
@@ -86,8 +88,8 @@
 					</div>
 				</g:form>
 
-			</div>
+				</div>
 
-		</div>
+			</div>
 	</body>
 </html>

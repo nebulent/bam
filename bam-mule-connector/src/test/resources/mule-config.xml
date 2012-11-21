@@ -4,9 +4,13 @@
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xmlns:spring="http://www.springframework.org/schema/beans"
       xmlns:bam="http://www.mulesoft.org/schema/mule/bam"
+      xmlns:jms="http://www.mulesoft.org/schema/mule/jms"
+	  xmlns:vm="http://www.mulesoft.org/schema/mule/vm"
       xsi:schemaLocation="
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
         http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+        http://www.mulesoft.org/schema/mule/jms http://www.mulesoft.org/schema/mule/jms/current/mule-jms.xsd
+        http://www.mulesoft.org/schema/mule/vm http://www.mulesoft.org/schema/mule/vm/current/mule-vm.xsd
         http://www.mulesoft.org/schema/mule/bam http://www.mulesoft.org/schema/mule/bam/1.1/mule-bam.xsd">
 
     <!-- <processtransactiontracking:config myProperty="Some string"
@@ -16,14 +20,34 @@
         <processtransactiontracking:my-processor content="Another string"/>
     </flow> -->
     
-    <!-- <bam:config serviceUrl="http://tomcat.nebulent.com/bam-ws/ws/BamQoSService?wsdl=BAM.wsdl"/> -->
+    <bam:config serviceUrl="http://tomcat.nebulent.com/bam-ws/ws/BamQoSService?wsdl=BAM.wsdl"/> 
     
-    <bam:config serviceUrl="http://localhost:9090/ws/BamQoSService?wsdl=BAM.wsdl"/>
+    <!-- <bam:config serviceUrl="http://localhost:9090/ws/BamQoSService?wsdl=BAM.wsdl"/>-->
 
 	<flow name="testFlow">
-		<set-property value="#[groovy:new Date().format('yyyyMMddHHmmss')]" propertyName="tranId"/>
-        <bam:process-transaction-tracking flowUuid="F4_START" transactionUuid="#[header:tranId]" content="content"/>
-        <bam:process-transaction-tracking flowUuid="F4_FTIR200_RESPONSE" transactionUuid="#[header:tranId]" content="content"/>
-        <bam:process-transaction-tracking flowUuid="F4_END" transactionUuid="#[header:tranId]" content="content"/>
+		<message-properties-transformer scope="session">
+			<add-message-property key="tranId" value="#[groovy:new Date().format('yyyyMMddHHmmss')]"/>
+		</message-properties-transformer>
+		
+        <bam:process-transaction-tracking flowUuid="F4_START" transactionUuid="#[header:session:tranId]" content="content"/>
+        <logger level="INFO" message="#[header:session:tranId]"/>
+		<vm:outbound-endpoint path="path1" />
+	</flow>
+	<flow name="testFlow1">
+		<vm:inbound-endpoint path="path1"/>
+        <bam:process-transaction-tracking flowUuid="F4_START" transactionUuid="#[header:session:tranId]" content="content"/>
+		<vm:outbound-endpoint path="path2"/>
+	</flow>
+	<flow name="testFlow2">
+		<vm:inbound-endpoint path="path2"/>
+        <bam:process-transaction-tracking flowUuid="F4_FTIR200_RESPONSE" transactionUuid="#[header:session:tranId]" content="content"/>
+ 		<vm:outbound-endpoint path="path3"/>
+	</flow>
+	<flow name="testFlow3">
+		<vm:inbound-endpoint path="path3"/>
+        <bam:process-transaction-tracking flowUuid="F4_END" transactionUuid="#[header:session:tranIdasdasdasd]" content="content"/>
+        <catch-exception-strategy>
+	        <bam:process-transaction-tracking flowUuid="F4_START" transactionUuid="#[header:session:tranId]" content="content"/>
+        </catch-exception-strategy>
     </flow> 
 </mule>

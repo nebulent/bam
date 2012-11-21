@@ -9,8 +9,6 @@ class Transaction {
 
 	Long id;
 	String uuid;
-
-	Long processId;
 	String processName;
 	Long startDate;
 	Long endDate;

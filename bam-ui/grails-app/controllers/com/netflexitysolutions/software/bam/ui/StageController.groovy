@@ -43,13 +43,15 @@ class StageController {
     }
 
     def show() {
-        def stageInstance = Stage.get(params.id)
-        if (!stageInstance) {
+		def stageType = bamInternalService.getStages(new GetStages(stageId: params.id)).stages[0]
+        if (!stageType) {
 			flash.message = message(code: 'default.not.found.message', args: [message(code: 'stage.label', default: 'Stage'), params.id])
             redirect action: 'list'
             return
         }
-
+		def stageInstance = new Stage(name: stageType.name, description: stageType.description)
+		stageInstance.id = stageType.id
+		
         [stageInstance: stageInstance]
     }
 

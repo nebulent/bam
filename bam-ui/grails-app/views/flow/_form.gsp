@@ -2,6 +2,14 @@
 
 
 
+<div class="fieldcontain ${hasErrors(bean: flowInstance, field: 'stageTypeCode', 'error')} required">
+	<label for="stageTypeCode">
+		<g:message code="flow.stageTypeCode.label" default="Stage Type Code" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:select name="stageTypeCode" from="${com.netflexitysolutions.software.bam.ui.Flow$StageTypeCode?.values()}" keys="${com.netflexitysolutions.software.bam.ui.Flow$StageTypeCode.values()*.name()}" required="" value="${flowInstance?.stageTypeCode?.name()}"/>
+</div>
+
 <div class="fieldcontain ${hasErrors(bean: flowInstance, field: 'process', 'error')} required">
 	<label for="process">
 		<g:message code="flow.process.label" default="Process" />

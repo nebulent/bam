@@ -10,14 +10,6 @@
 	<g:field name="endDate" type="number" value="${transactionInstance.endDate}" required=""/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: transactionInstance, field: 'processId', 'error')} required">
-	<label for="processId">
-		<g:message code="transaction.processId.label" default="Process Id" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:field name="processId" type="number" value="${transactionInstance.processId}" required=""/>
-</div>
-
 <div class="fieldcontain ${hasErrors(bean: transactionInstance, field: 'processName', 'error')} ">
 	<label for="processName">
 		<g:message code="transaction.processName.label" default="Process Name" />
