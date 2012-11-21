@@ -293,7 +293,16 @@ public class BamInternalServiceImpl implements BAMInternal, BAM, BamServiceError
 	 * @see netflexity.ws.software.bam.services._1_0.BAMInternal#getTransactions(netflexity.schema.software.bam.messages._1.GetTransactions)
 	 */
 	public GetTransactionsResponse getTransactions(GetTransactions body) {
-		List<BpmTransaction> transactions = transactionProcessorRepository.getTransactions(body.getLimit().intValue());
+		List<BpmTransaction> transactions;
+		if (body.getLimit() != null) {
+			transactions = transactionProcessorRepository.getTransactions(body.getLimit().intValue());
+		}
+		else if (body.getPageNumber() != null && body.getPageSize() != null) {
+			transactions = transactionProcessorRepository.getTransactions(body.getPageNumber(), body.getPageSize());
+		}
+		else {
+			transactions = transactionProcessorRepository.getTransactions();
+		}
 		List<TransactionDetailsType> transactionsResponse = null;
 		if(transactions != null && !transactions.isEmpty()) {
 			transactionsResponse = new ArrayList<TransactionDetailsType>();

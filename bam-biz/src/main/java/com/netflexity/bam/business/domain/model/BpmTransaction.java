@@ -27,6 +27,9 @@ public class BpmTransaction implements Serializable {
 	public static final String STARTED = "STARTED";
     public static final String STOPED = "STOPED";
     
+    public static final String ERROR = "ERROR";
+    public static final String HEALTHY = "HEALTHY";
+    
     @Id
     @Column(name = "id", unique = true, nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -43,6 +46,9 @@ public class BpmTransaction implements Serializable {
     
     @Column(name = "transaction_status_code", length = 32)
     private String transactionStatusCode;
+    
+    @Column(name = "health_code", length = 32)
+    private String healthCode = "HEALTHY";
     
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "bpmTransaction")
     private Set<BpmFlowTransaction> bpmFlowTransactions = new HashSet<BpmFlowTransaction>(0);
@@ -145,6 +151,20 @@ public class BpmTransaction implements Serializable {
 	 */
 	public void setTransactionStatusCode(String transactionStatusCode) {
 		this.transactionStatusCode = transactionStatusCode;
+	}
+
+	/**
+	 * @return
+	 */
+	public String getHealthCode() {
+		return healthCode;
+	}
+
+	/**
+	 * @param healthCode
+	 */
+	public void setHealthCode(String healthCode) {
+		this.healthCode = healthCode;
 	}
 
 	/**

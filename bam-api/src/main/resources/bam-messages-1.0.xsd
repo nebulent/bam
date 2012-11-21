@@ -118,6 +118,8 @@
 			<xs:complexContent>
 				<xs:extension base="userAwareMessage">
 					<xs:attribute name="limit" type="xs:integer" use="optional"/>
+					<xs:attribute name="pageNumber" type="xs:int" use="optional" />
+					<xs:attribute name="pageSize" type="xs:int" use="optional" />
 				</xs:extension>
 			</xs:complexContent>
 		</xs:complexType>

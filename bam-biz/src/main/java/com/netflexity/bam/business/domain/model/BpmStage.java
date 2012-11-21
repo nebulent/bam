@@ -31,6 +31,7 @@ public class BpmStage implements Serializable {
     public static final String INTERMEDIATE = "INTERMEDIATE";
     public static final String END = "END";
     public static final String ALLINONE = "ALLINONE";
+    public static final String ERROR = "ERROR";
     
     @Id
     @Column(name = "id")
