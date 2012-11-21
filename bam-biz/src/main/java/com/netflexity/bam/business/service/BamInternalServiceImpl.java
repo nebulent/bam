@@ -419,32 +419,34 @@ public class BamInternalServiceImpl implements BAMInternal, BAM, BamServiceError
             processTransaction.setUuid(StringUtils.isNotBlank(transactionUuid) ? transactionUuid : UUID.randomUUID().toString());
             processTransaction.setStartDate(now);
             processTransaction.setTransactionStatusCode(BpmTransaction.STARTED);
+            processTransaction.setHealthCode(BpmTransaction.HEALTHY);
             processTransaction = transactionProcessorRepository.createTransaction(processTransaction);
         }
-        //if (processTransaction != null && processFlow != null) { //TODO: I dont think we need this check here
-            processFlowTransaction = new BpmFlowTransaction();
-            processFlowTransaction.setBpmFlow(processFlow);
-            processFlowTransaction.setBpmTransaction(processTransaction);
-            processFlowTransaction.setTransactionDate(now);
-            
-            Set<BpmFlowTransactionPayload> bpmFlowTransactionPayloads = new HashSet<BpmFlowTransactionPayload>();
-            if (content != null && content.length > 0) {
-    	        BpmFlowTransactionPayload bpmFlowTransactionPayload = new BpmFlowTransactionPayload();
-    	        bpmFlowTransactionPayload.setPayload(content);
-    	        bpmFlowTransactionPayload.setBpmFlowTransaction(processFlowTransaction);
-    	        bpmFlowTransactionPayloads.add(bpmFlowTransactionPayload);
-            }
-            processFlowTransaction.setBpmFlowTransactionPayloads(bpmFlowTransactionPayloads);
-            
-            processTransaction.getBpmFlowTransactions().add(processFlowTransaction);
-            metadataRepository.createFlowTransaction(processFlowTransaction);
-            if (BpmStage.END.equals(state) || BpmStage.ALLINONE.equals(state)) {
-                processTransaction.setEndDate(now);
-                processTransaction.setTransactionStatusCode(BpmTransaction.STOPED);
-                transactionProcessorRepository.createTransaction(processTransaction);
-            }
-        //}
-        
+
+        processFlowTransaction = new BpmFlowTransaction();
+        processFlowTransaction.setBpmFlow(processFlow);
+        processFlowTransaction.setBpmTransaction(processTransaction);
+        processFlowTransaction.setTransactionDate(now);
+
+        Set<BpmFlowTransactionPayload> bpmFlowTransactionPayloads = new HashSet<BpmFlowTransactionPayload>();
+        if (content != null && content.length > 0) {
+        	BpmFlowTransactionPayload bpmFlowTransactionPayload = new BpmFlowTransactionPayload();
+        	bpmFlowTransactionPayload.setPayload(content);
+        	bpmFlowTransactionPayload.setBpmFlowTransaction(processFlowTransaction);
+        	bpmFlowTransactionPayloads.add(bpmFlowTransactionPayload);
+        }
+        processFlowTransaction.setBpmFlowTransactionPayloads(bpmFlowTransactionPayloads);
+
+        processTransaction.getBpmFlowTransactions().add(processFlowTransaction);
+        metadataRepository.createFlowTransaction(processFlowTransaction);
+        if (BpmStage.END.equals(state) || BpmStage.ALLINONE.equals(state) || BpmStage.ERROR.equals(state) ) {
+        	processTransaction.setEndDate(now);
+        	processTransaction.setTransactionStatusCode(BpmTransaction.STOPED);
+        	if (BpmStage.ERROR.equals(state)) {
+        		processTransaction.setHealthCode(BpmTransaction.ERROR);
+        	}
+        	transactionProcessorRepository.createTransaction(processTransaction);
+        }
         
         return DomainUtil.toFlowTransactionXmlType(processFlowTransaction);
     }
