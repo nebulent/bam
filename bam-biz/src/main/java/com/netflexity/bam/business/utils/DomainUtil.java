@@ -534,6 +534,7 @@ public class DomainUtil {
         trn.setEndDate(toCalendar(transaction.getEndDate()));
         trn.setUuid(transaction.getUuid());
         trn.setTransactionStatusCode(transaction.getTransactionStatusCode());
+        trn.setHealthCode(transaction.getHealthCode());
         if(transaction.getBpmFlowTransactions() != null){
             String processName = null;
             long processId = -1L;

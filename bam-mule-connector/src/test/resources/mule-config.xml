@@ -20,9 +20,9 @@
         <processtransactiontracking:my-processor content="Another string"/>
     </flow> -->
     
-    <bam:config serviceUrl="http://tomcat.nebulent.com/bam-ws/ws/BamQoSService?wsdl=BAM.wsdl"/> 
+    <!-- <bam:config serviceUrl="http://tomcat.nebulent.com/bam-ws/ws/BamQoSService?wsdl=BAM.wsdl"/> -->
     
-    <!-- <bam:config serviceUrl="http://localhost:9090/ws/BamQoSService?wsdl=BAM.wsdl"/>-->
+    <bam:config serviceUrl="http://localhost:9090/ws/BamQoSService?wsdl=BAM.wsdl" enabled="true"/>
 
 	<flow name="testFlow">
 		<message-properties-transformer scope="session">

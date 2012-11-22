@@ -5,14 +5,20 @@ import java.util.List;
 class Transaction {
 
 	static constraints = {
+		uuid()
+		processName()
+		startDate()
+		endDate()
+		transactionStatusCode()
+		healthCode()
 	}
 
-	Long id;
 	String uuid;
 	String processName;
-	Long startDate;
-	Long endDate;
+	Calendar startDate;
+	Calendar endDate;
 	String transactionStatusCode;
+	String healthCode
 
 	List<FlowTransaction> bpmFlowTransactions;
 }

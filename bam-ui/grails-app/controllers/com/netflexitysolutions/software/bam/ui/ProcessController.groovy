@@ -75,11 +75,8 @@ class ProcessController {
 	        [processInstance: processInstance]
 			break
 		case 'POST':
-			log.info(params)
 	        def processInstance = new Process(params)
 			def processType = new ProcessType(id: params.id, name: processInstance.name, description: processInstance.description)
-			log.info("1 " + processInstance.id)
-			log.info("2 " + processType.id)
 			def result = bamInternalService.updateProcess(new UpdateProcess(process: processType)).process
 	        if (!result) {
 	            render view: 'create', model: [processInstance: processInstance]

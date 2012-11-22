@@ -37,10 +37,10 @@
 
 				<dl>
 				
-					<g:if test="${transactionInstance?.endDate}">
-						<dt><g:message code="transaction.endDate.label" default="End Date" /></dt>
+					<g:if test="${transactionInstance?.uuid}">
+						<dt><g:message code="transaction.uuid.label" default="Uuid" /></dt>
 						
-							<dd><g:fieldValue bean="${transactionInstance}" field="endDate"/></dd>
+							<dd><g:fieldValue bean="${transactionInstance}" field="uuid"/></dd>
 						
 					</g:if>
 				
@@ -54,7 +54,14 @@
 					<g:if test="${transactionInstance?.startDate}">
 						<dt><g:message code="transaction.startDate.label" default="Start Date" /></dt>
 						
-							<dd><g:fieldValue bean="${transactionInstance}" field="startDate"/></dd>
+							<dd><g:formatDate date="${transactionInstance?.startDate}" /></dd>
+						
+					</g:if>
+				
+					<g:if test="${transactionInstance?.endDate}">
+						<dt><g:message code="transaction.endDate.label" default="End Date" /></dt>
+						
+							<dd><g:formatDate date="${transactionInstance?.endDate}" /></dd>
 						
 					</g:if>
 				
@@ -65,10 +72,10 @@
 						
 					</g:if>
 				
-					<g:if test="${transactionInstance?.uuid}">
-						<dt><g:message code="transaction.uuid.label" default="Uuid" /></dt>
+					<g:if test="${transactionInstance?.healthCode}">
+						<dt><g:message code="transaction.healthCode.label" default="Health Code" /></dt>
 						
-							<dd><g:fieldValue bean="${transactionInstance}" field="uuid"/></dd>
+							<dd><g:fieldValue bean="${transactionInstance}" field="healthCode"/></dd>
 						
 					</g:if>
 				

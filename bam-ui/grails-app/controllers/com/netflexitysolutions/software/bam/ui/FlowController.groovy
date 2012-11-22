@@ -1,6 +1,7 @@
 package com.netflexitysolutions.software.bam.ui
 
 import netflexity.schema.software.bam.messages._1.CreateFlow;
+//import netflexity.schema.software.bam.messages._1.UpdateFlow;
 import netflexity.schema.software.bam.messages._1.GetProcesses;
 import netflexity.schema.software.bam.messages._1.GetStages;
 import netflexity.schema.software.bam.messages._1.GetFlows;
@@ -48,56 +49,47 @@ class FlowController {
     }
 
     def show() {
-        def flowInstance = Flow.get(params.id)
-        if (!flowInstance) {
+		def flowType = bamInternalService.getFlows(new GetFlows(flowId: params.id)).flows[0]
+        if (!flowType) {
 			flash.message = message(code: 'default.not.found.message', args: [message(code: 'flow.label', default: 'Flow'), params.id])
             redirect action: 'list'
             return
         }
-
+		def flowInstance = new Flow(id: flowType.id, uuid: flowType.uuid, stageTypeCode: flowType.stageTypeId,
+											process: new Process(id: flowType.process.id, name: flowType.process.name), 
+											stage: new Stage(id: flowType.stage.id, name: flowType.stage.name))
+		
         [flowInstance: flowInstance]
     }
 
     def edit() {
 		switch (request.method) {
 		case 'GET':
-	        def flowInstance = Flow.get(params.id)
-	        if (!flowInstance) {
-	            flash.message = message(code: 'default.not.found.message', args: [message(code: 'flow.label', default: 'Flow'), params.id])
+			def flowType = bamInternalService.getFlows(new GetFlows(flowId: params.id)).flows[0]
+	        if (!flowType) {
+				flash.message = message(code: 'default.not.found.message', args: [message(code: 'flow.label', default: 'Flow'), params.id])
 	            redirect action: 'list'
 	            return
 	        }
-
-	        [flowInstance: flowInstance]
+			def flowInstance = new Flow(id: flowType.id, uuid: flowType.uuid, stageTypeCode: flowType.stageTypeId,
+											process: new Process(id: flowType.process.id, name: flowType.process.name), 
+											stage: new Stage(id: flowType.stage.id, name: flowType.stage.name))
+			
+	        [flowInstance: flowInstance, 
+				processes: bamInternalService.getProcesses(new GetProcesses()).processes,
+				stages: bamInternalService.getStages(new GetStages()).stages]
 			break
 		case 'POST':
-	        def flowInstance = Flow.get(params.id)
-	        if (!flowInstance) {
-	            flash.message = message(code: 'default.not.found.message', args: [message(code: 'flow.label', default: 'Flow'), params.id])
-	            redirect action: 'list'
-	            return
-	        }
-
-	        if (params.version) {
-	            def version = params.version.toLong()
-	            if (flowInstance.version > version) {
-	                flowInstance.errors.rejectValue('version', 'default.optimistic.locking.failure',
-	                          [message(code: 'flow.label', default: 'Flow')] as Object[],
-	                          "Another user has updated this Flow while you were editing")
-	                render view: 'edit', model: [flowInstance: flowInstance]
-	                return
-	            }
-	        }
-
-	        flowInstance.properties = params
-
-	        if (!flowInstance.save(flush: true)) {
-	            render view: 'edit', model: [flowInstance: flowInstance]
-	            return
-	        }
-
-			flash.message = message(code: 'default.updated.message', args: [message(code: 'flow.label', default: 'Flow'), flowInstance.id])
-	        redirect action: 'show', id: flowInstance.id
+//	        def flowInstance = new Flow(params)
+//			def flowType = new FlowType(id: params.id, name: flowInstance.name, description: flowInstance.description)
+//			def result = bamInternalService.updateFlow(new UpdateFlow(flow: flowType)).flow
+//	        if (!result) {
+//	            render view: 'create', model: [flowInstance: flowInstance]
+//	            return
+//	        }
+//
+//			flash.message = message(code: 'default.updated.message', args: [message(code: 'flow.label', default: 'Flow'), result.id])
+//	        redirect action: 'show', id: result.id
 			break
 		}
     }

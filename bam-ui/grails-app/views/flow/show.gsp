@@ -37,10 +37,10 @@
 
 				<dl>
 				
-					<g:if test="${flowInstance?.stageTypeCode}">
-						<dt><g:message code="flow.stageTypeCode.label" default="Stage Type Code" /></dt>
+					<g:if test="${flowInstance?.uuid}">
+						<dt><g:message code="flow.uuid.label" default="Uuid" /></dt>
 						
-							<dd><g:fieldValue bean="${flowInstance}" field="stageTypeCode"/></dd>
+							<dd><g:fieldValue bean="${flowInstance}" field="uuid"/></dd>
 						
 					</g:if>
 				
@@ -58,17 +58,17 @@
 						
 					</g:if>
 				
+					<g:if test="${flowInstance?.stageTypeCode}">
+						<dt><g:message code="flow.stageTypeCode.label" default="Stage Type Code" /></dt>
+						
+							<dd><g:fieldValue bean="${flowInstance}" field="stageTypeCode"/></dd>
+						
+					</g:if>
+				
 					<g:if test="${flowInstance?.storeMessagePayload}">
 						<dt><g:message code="flow.storeMessagePayload.label" default="Store Message Payload" /></dt>
 						
 							<dd><g:formatBoolean boolean="${flowInstance?.storeMessagePayload}" /></dd>
-						
-					</g:if>
-				
-					<g:if test="${flowInstance?.uuid}">
-						<dt><g:message code="flow.uuid.label" default="Uuid" /></dt>
-						
-							<dd><g:fieldValue bean="${flowInstance}" field="uuid"/></dd>
 						
 					</g:if>
 				
