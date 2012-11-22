@@ -47,6 +47,8 @@ import netflexity.schema.software.bam.messages._1.ProcessTransactionTracking;
 import netflexity.schema.software.bam.messages._1.StartMonitor;
 import netflexity.schema.software.bam.messages._1.UpdateAttribute;
 import netflexity.schema.software.bam.messages._1.UpdateAttributeResponse;
+import netflexity.schema.software.bam.messages._1.UpdateFlow;
+import netflexity.schema.software.bam.messages._1.UpdateFlowResponse;
 import netflexity.schema.software.bam.messages._1.UpdateProcess;
 import netflexity.schema.software.bam.messages._1.UpdateProcessResponse;
 import netflexity.schema.software.bam.messages._1.UpdateStage;
@@ -220,11 +222,14 @@ public class BamInternalServiceImpl implements BAMInternal, BAM, BamServiceError
 	 */
 	public GetFlowsResponse getFlows(GetFlows body) {
 		List<BpmFlow> flows = new ArrayList<BpmFlow>();
-		if (StringUtils.isBlank(body.getFlowId())) {
-			flows = metadataRepository.getFlows();
+		if (StringUtils.isNotBlank(body.getProcessId())) {
+			flows = metadataRepository.getFlows(Long.parseLong(body.getProcessId()));
+		}
+		else if (StringUtils.isNotBlank(body.getFlowId())) {
+			flows.add(metadataRepository.getFlow(Long.parseLong(body.getFlowId())));
 		}
 		else {
-			flows.add(metadataRepository.getFlow(Long.parseLong(body.getFlowId())));
+			flows = metadataRepository.getFlows();
 		}
 		List<FlowType> flowsResponse = null;
 		if (flows != null && !flows.isEmpty()) {
@@ -295,7 +300,7 @@ public class BamInternalServiceImpl implements BAMInternal, BAM, BamServiceError
 	 */
 	public GetTransactionsResponse getTransactions(GetTransactions body) {
 		List<BpmTransaction> transactions;
-		if (body.getLimit() != null) {
+		/*if (body.getLimit() != null) {
 			transactions = transactionProcessorRepository.getTransactions(body.getLimit().intValue());
 		}
 		else if (body.getPageNumber() != null && body.getPageSize() != null) {
@@ -303,7 +308,9 @@ public class BamInternalServiceImpl implements BAMInternal, BAM, BamServiceError
 		}
 		else {
 			transactions = transactionProcessorRepository.getTransactions();
-		}
+		}*/
+		transactions = transactionProcessorRepository.getTransactions(body);
+		
 		List<TransactionDetailsType> transactionsResponse = null;
 		if(transactions != null && !transactions.isEmpty()) {
 			transactionsResponse = new ArrayList<TransactionDetailsType>();
@@ -345,6 +352,12 @@ public class BamInternalServiceImpl implements BAMInternal, BAM, BamServiceError
 		UpdateAttributeResponse response = new UpdateAttributeResponse();
 		body.getAttr().setPartyId(securityManagementService.getPartyId(body));
 		response.setAttr(DomainUtil.toXmlType(metadataRepository.updateAttribute(DomainUtil.toDomainType(body.getAttr()))));
+		return response;
+	}
+	
+	public UpdateFlowResponse updateFlow(UpdateFlow body) {
+		UpdateFlowResponse response = new UpdateFlowResponse();
+		response.setFlow(DomainUtil.toXmlType(metadataRepository.updateFlow(DomainUtil.toDomainType(body.getFlow()))));
 		return response;
 	}
 	

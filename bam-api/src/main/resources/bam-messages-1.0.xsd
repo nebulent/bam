@@ -120,6 +120,7 @@
 					<xs:attribute name="limit" type="xs:integer" use="optional"/>
 					<xs:attribute name="pageNumber" type="xs:int" use="optional" />
 					<xs:attribute name="pageSize" type="xs:int" use="optional" />
+					<xs:attribute name="query" type="xs:string" use="optional" />
 				</xs:extension>
 			</xs:complexContent>
 		</xs:complexType>
@@ -138,6 +139,7 @@
 			<xs:complexContent>
 				<xs:extension base="userAwareMessage">
 					<xs:attribute name="flowId" type="xs:string" use="optional"></xs:attribute>
+					<xs:attribute name="processId" type="xs:string" use="optional"></xs:attribute>
 				</xs:extension>
 			</xs:complexContent>
 		</xs:complexType>
@@ -276,6 +278,26 @@
 	<xs:element name="deleteAttributesResponse">
 		<xs:complexType>
 			<xs:attribute name="response" type="xs:boolean" use="optional"/>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="updateFlow">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="userAwareMessage">
+					<xs:sequence>
+						<xs:element name="flow" type="types:FlowType" minOccurs="0"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="updateFlowResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="flow" type="types:FlowType" minOccurs="0"/>
+			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
 	

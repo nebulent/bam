@@ -1,12 +1,19 @@
 package com.netflexity.bam.business.service;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+
+import junit.framework.Assert;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -15,25 +22,59 @@ import com.netflexity.bam.business.domain.model.BpmFlow;
 import com.netflexity.bam.business.utils.DomainUtil;
 
 import netflexity.schema.software.bam.messages._1.GetFlows;
+import netflexity.schema.software.bam.messages._1.GetTransactions;
+import netflexity.schema.software.bam.messages._1.UpdateFlow;
 import netflexity.schema.software.bam.types._1.FlowType;
+import netflexity.schema.software.bam.types._1.TransactionDetailsType;
 import netflexity.ws.software.bam.services._1_0.BAMInternal;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:META-INF/spring/test-bam-biz-services.xml","classpath:META-INF/spring/test-bam.xml"})
+@ContextConfiguration(locations = {"classpath:/META-INF/spring/test-bam.xml"})
 public class ServiceTest {
+	
+	private final static Logger LOGGER = LoggerFactory.getLogger(ServiceTest.class);
 	
 	@Autowired
 	private BAMInternal bamInternal;
 	
 	@Test
-	public void testGetFlows() {
+	public void testGetFlowsByProcessId() {
 		GetFlows body = new GetFlows();
-		List<BpmFlow> flows = new ArrayList<BpmFlow>();
-		System.out.println("bamInternal: " + bamInternal);
-		for (FlowType flow : bamInternal.getFlows(body).getFlows()) {
-			flows.add(DomainUtil.toDomainType(flow));
+		String processId = "2";
+		body.setProcessId(processId);
+		List<FlowType> flows = bamInternal.getFlows(body).getFlows();
+		int i = 1;
+		for (FlowType flow : flows) {
+			LOGGER.debug("\tflow " + i++ + ":\n" + ToStringBuilder.reflectionToString(flow, ToStringStyle.MULTI_LINE_STYLE));
+			Assert.assertEquals(processId, flow.getProcessId());
 		}
-		System.out.println(ToStringBuilder.reflectionToString(flows, ToStringStyle.MULTI_LINE_STYLE));
+	}
+	
+	@Test
+	public void testUpdateFlow() {
+		GetFlows getFlows = new GetFlows();
+		getFlows.setFlowId("1");
+		FlowType flow = bamInternal.getFlows(getFlows).getFlows().get(0);
+		/*Calendar calendar = Calendar.getInstance();
+		calendar.setTimeInMillis(System.currentTimeMillis());
+		flow.setChangeDate(calendar);*/
+		flow.setUuid("vasea3");
+		UpdateFlow updateFlow = new UpdateFlow();
+		updateFlow.setFlow(flow);
+		flow = bamInternal.updateFlow(updateFlow).getFlow();
+		LOGGER.debug(ToStringBuilder.reflectionToString(flow, ToStringStyle.MULTI_LINE_STYLE));
+	}
+	
+	@Test
+	public void testGetTransactionsByQuery() {
+		GetTransactions getTransactions = new GetTransactions();
+		getTransactions.setLimit(new BigInteger("100"));
+		getTransactions.setQuery("131");
+		List<TransactionDetailsType> transactions = bamInternal.getTransactions(getTransactions).getTransactions();
+		int i = 1;
+		for (TransactionDetailsType tr : transactions) {
+			LOGGER.debug("\ttransaction " + i++ + ":\n" + ToStringBuilder.reflectionToString(tr, ToStringStyle.MULTI_LINE_STYLE));
+		}
 	}
 
 	public BAMInternal getBamInternal() {

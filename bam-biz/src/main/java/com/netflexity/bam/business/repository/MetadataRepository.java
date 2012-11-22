@@ -35,6 +35,13 @@ public interface MetadataRepository {
 	List<BpmFlow> getFlows() throws RepositoryException;
 	
 	/**
+	 * @param processId
+	 * @return
+	 * @throws RepositoryException
+	 */
+	List<BpmFlow> getFlows(long processId) throws RepositoryException;
+	
+	/**
 	 * @param companyId
 	 * @return
 	 * @throws RepositoryException
@@ -100,6 +107,13 @@ public interface MetadataRepository {
 	 * @throws RepositoryException
 	 */
 	void removeAttributes(Long[] ids) throws RepositoryException;
+	
+	/**
+	 * @param flow
+	 * @return
+	 * @throws RepositoryException
+	 */
+	BpmFlow updateFlow(BpmFlow flow) throws RepositoryException;
 	
 	/**
 	 * @param process

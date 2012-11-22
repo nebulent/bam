@@ -14,7 +14,8 @@
             http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
 	<!-- ========================= Resources ========================= -->
-	<import resource="classpath:/META-INF/spring/test-bam-persistance.xml"/>
+	<import resource="classpath*:/META-INF/spring/test-bam-biz-services.xml"/>
+	<import resource="classpath*:/META-INF/spring/test-bam-persistance.xml"/>
 	
 	<!-- ========================= Expose The Properties ========================= -->
 	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">

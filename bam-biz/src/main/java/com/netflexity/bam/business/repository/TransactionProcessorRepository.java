@@ -5,6 +5,8 @@ package com.netflexity.bam.business.repository;
 
 import java.util.List;
 
+import netflexity.schema.software.bam.messages._1.GetTransactions;
+
 import com.netflexity.bam.business.domain.model.BpmTransaction;
 import com.netflexity.bam.business.domain.model.BpmTransactionSummary;
 
@@ -42,6 +44,13 @@ public interface TransactionProcessorRepository {
 	 * @throws RepositoryException
 	 */
 	List<BpmTransaction> getTransactions(int pageNumber, int pageSize) throws RepositoryException;
+	
+	/**
+	 * @param body
+	 * @return
+	 * @throws RepositoryException
+	 */
+	List<BpmTransaction> getTransactions(GetTransactions body) throws RepositoryException;
 
 	/**
 	 * @param uuid

@@ -9,6 +9,11 @@
 	</layout>
   </appender>
   
+  <category name="com.netflexity.bam" additivity="false">
+  	<priority value="debug"/>
+  	<appender-ref ref="console"/>
+  </category>
+  
   <root> 
     <priority value="debug"/> 
     <appender-ref ref="console"/>

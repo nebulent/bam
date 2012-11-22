@@ -34,6 +34,7 @@ public class JpaMetadataRepository extends JpaAbstractRepository implements Meta
     private static final String IDS = "IDS";
     private static final String UUID = "UUID";
     private static final String ID = "ID";
+    private static final String PROCESS_ID = "PROCESS_ID";
 
     /* (non-Javadoc)
      * @see com.netflexity.bam.business.repository.MetadataRepository#createAttribute(com.netflexity.bam.business.domain.model.BpmAttribute)
@@ -125,6 +126,15 @@ public class JpaMetadataRepository extends JpaAbstractRepository implements Meta
     		throws RepositoryException {
     	Query query;
     	query = entityManager.createQuery("select flow from com.netflexity.bam.business.domain.model.BpmFlow flow");
+    	return query.getResultList();
+    }
+    
+    @SuppressWarnings("unchecked")
+	public List<BpmFlow> getFlows(long processId) throws RepositoryException {
+    	Query query;
+    	query = entityManager.createQuery("select flow from com.netflexity.bam.business.domain.model.BpmFlow flow " +
+    			"where flow.bpmProcess.id = :PROCESS_ID");
+    	query.setParameter(PROCESS_ID, processId);
     	return query.getResultList();
     }
 
@@ -261,6 +271,13 @@ public class JpaMetadataRepository extends JpaAbstractRepository implements Meta
      */
     public BpmAttribute updateAttribute(BpmAttribute attribute) throws RepositoryException {
         return (BpmAttribute) merge(attribute);
+    }
+    
+    /* (non-Javadoc)
+     * @see com.netflexity.bam.business.repository.MetadataRepository#updateFlow(com.netflexity.bam.business.domain.model.BpmFlow)
+     */
+    public BpmFlow updateFlow(BpmFlow flow) throws RepositoryException {
+    	return (BpmFlow)merge(flow);
     }
 
     /* (non-Javadoc)
