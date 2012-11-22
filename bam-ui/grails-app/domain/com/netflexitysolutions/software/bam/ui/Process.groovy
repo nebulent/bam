@@ -7,7 +7,6 @@ class Process {
 		description()
     }
 	
-	String id;
 	String name;
 	String description;
 	List<Flow> flows;

@@ -13,7 +13,6 @@ class Transaction {
 		healthCode()
 	}
 
-	Long id;
 	String uuid;
 	String processName;
 	Calendar startDate;
