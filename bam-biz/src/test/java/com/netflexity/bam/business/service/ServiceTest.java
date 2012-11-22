@@ -66,10 +66,12 @@ public class ServiceTest {
 	}
 	
 	@Test
-	public void testGetTransactionsByQuery() {
+	public void testGetTransactionsByCriteria() {
 		GetTransactions getTransactions = new GetTransactions();
-		getTransactions.setLimit(new BigInteger("100"));
+		getTransactions.setLimit(new BigInteger("8"));
 		getTransactions.setQuery("131");
+		getTransactions.setTransactionStatusCode("STOPED");
+		getTransactions.setHealthCode("HEALTHY");
 		List<TransactionDetailsType> transactions = bamInternal.getTransactions(getTransactions).getTransactions();
 		int i = 1;
 		for (TransactionDetailsType tr : transactions) {
