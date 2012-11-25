@@ -35,7 +35,9 @@ grails.project.dependency.resolution = {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
 
         // runtime 'mysql:mysql-connector-java:5.1.20'
-		compile "com.netflexitysolutions.software.bam:bam-api:1.1-SNAPSHOT"
+		compile ("com.netflexitysolutions.software.bam:bam-api:1.1-SNAPSHOT") {
+			changing = true
+		}
     }
 
     plugins {

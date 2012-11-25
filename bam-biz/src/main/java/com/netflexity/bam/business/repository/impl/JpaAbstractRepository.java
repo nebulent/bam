@@ -3,13 +3,19 @@
  */
 package com.netflexity.bam.business.repository.impl;
 
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.UUID;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.sun.tools.javac.comp.Enter;
 
 /**
  * @author Alexei SCLIFOS
@@ -75,6 +81,39 @@ public class JpaAbstractRepository {
      */
     protected String createUUID() {
     	return UUID.randomUUID().toString();
+    }
+    
+    protected String appendCondition(String query, String condition, Map<String, Object> params, String paramName, Object paramValue) {
+    	params.put(paramName, paramValue);
+    	return appendCondition(query, condition);
+    }
+    
+    protected String appendCondition(String query, String condition) {
+    	if (StringUtils.isNotBlank(query)) {
+    		query += " AND "; 
+    	} else {
+    		query = "";
+    	}
+    	return query + condition;
+    }
+    
+    protected Query composeQuery(String select, String query, String postfix, Map<String, Object> params) {
+    	if (StringUtils.isNotBlank(query)) {
+    		select += " WHERE " + query;
+    	}
+    	if (StringUtils.isNotBlank(postfix)) {
+    		select += " " + postfix;
+    	}
+    	Query jpaQuery = entityManager.createQuery(select);
+    	setParameters(jpaQuery, params);
+    	return jpaQuery;
+    	
+    }
+    
+    protected void setParameters(Query query, Map<String, Object> params) {
+    	for (Entry<String, Object> entry : params.entrySet()) {
+			query.setParameter(entry.getKey(), entry.getValue());
+		}
     }
 
 }
