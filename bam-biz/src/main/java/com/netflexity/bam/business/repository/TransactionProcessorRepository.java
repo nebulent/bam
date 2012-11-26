@@ -17,6 +17,32 @@ import com.netflexity.bam.business.domain.model.BpmTransactionSummary;
  */
 public interface TransactionProcessorRepository {
 
+	public class GetTransactionsResponse {
+		
+		private List<BpmTransaction> transactions;
+		private int totalTransactions;
+		
+		public GetTransactionsResponse(List<BpmTransaction> transactions, int totalTransactions) {
+			this.transactions = transactions;
+			this.totalTransactions = totalTransactions;
+		}
+		
+		public List<BpmTransaction> getTransactions() {
+			return transactions;
+		}
+		
+		public void setTransactions(List<BpmTransaction> transactions) {
+			this.transactions = transactions;
+		}
+		
+		public int getTotalTransactions() {
+			return totalTransactions;
+		}
+		
+		public void setTotalTransactions(int totalTransactions) {
+			this.totalTransactions = totalTransactions;
+		}
+	}
 	/**
 	 * @return
 	 * @throws RepositoryException
@@ -50,7 +76,7 @@ public interface TransactionProcessorRepository {
 	 * @return
 	 * @throws RepositoryException
 	 */
-	List<BpmTransaction> getTransactions(GetTransactions body) throws RepositoryException;
+	GetTransactionsResponse getTransactions(GetTransactions body) throws RepositoryException;
 
 	/**
 	 * @param uuid

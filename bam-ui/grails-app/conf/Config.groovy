@@ -67,7 +67,7 @@ bam.service.internal.url  = ""
 environments {
     development {
         grails.logging.jul.usebridge = true
-        bam.service.internal.url = "http://tomcat.nebulent.com/bam-ws/ws/BAMInternal" //"http://localhost:9090/ws/BAMInternal" //"http://192.168.0.123:8080/bam-ws/ws/BAMInternal"// 
+        bam.service.internal.url = "http://localhost:9090/ws/BAMInternal" //"http://tomcat.nebulent.com/bam-ws/ws/BAMInternal" //"http://192.168.0.123:8080/bam-ws/ws/BAMInternal"// 
     }
     production {
         grails.logging.jul.usebridge = true

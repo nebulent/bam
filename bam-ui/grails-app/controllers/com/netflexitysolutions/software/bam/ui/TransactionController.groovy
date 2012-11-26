@@ -18,7 +18,7 @@ class TransactionController {
     def list() {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
         [transactionInstanceList: Transaction.list(params), transactionInstanceTotal: Transaction.count()]
-        [transactionInstanceList: bamInternalService.getTransactions(new GetTransactions(limit: 1000)).transactions, transactionInstanceTotal: 10]
+        [transactionInstanceList: bamInternalService.getTransactions(new GetTransactions(limit: 10)).transactions, transactionInstanceTotal: 10]
     }
 
     def create() {

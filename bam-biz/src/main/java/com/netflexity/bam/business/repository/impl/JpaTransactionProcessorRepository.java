@@ -56,7 +56,7 @@ public class JpaTransactionProcessorRepository extends JpaAbstractRepository imp
 	 * @see com.netflexity.bam.business.repository.TransactionProcessorRepository#getTransactions(netflexity.schema.software.bam.messages._1.GetTransactions)
 	 */
 	@SuppressWarnings("unchecked")
-	public List<BpmTransaction> getTransactions(GetTransactions body) throws RepositoryException {
+	public GetTransactionsResponse getTransactions(GetTransactions body) throws RepositoryException {
 		boolean flag = false;
 		List<BpmTransaction> transactions = new ArrayList<BpmTransaction>();
 		Query query;
@@ -95,12 +95,13 @@ public class JpaTransactionProcessorRepository extends JpaAbstractRepository imp
 		if (body.getLimit() != null) {
 			query.setMaxResults(body.getLimit().intValue());
 		}
-		else if (body.getPageNumber() != null && body.getPageSize() != null) {
+		Integer totalTransactions = (Integer)entityManager.createQuery("SELECT count(transaction) " + SQL).getSingleResult();
+		if (body.getPageNumber() != null && body.getPageSize() != null) {
 			query.setFirstResult(body.getPageNumber() * body.getPageSize());
 			query.setMaxResults(body.getPageSize());
 		}
 		transactions = query.getResultList();
-		return transactions;
+		return new GetTransactionsResponse(transactions, totalTransactions);
 	}
 	
 	/* (non-Javadoc)

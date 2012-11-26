@@ -299,29 +299,21 @@ public class BamInternalServiceImpl implements BAMInternal, BAM, BamServiceError
 	 * @see netflexity.ws.software.bam.services._1_0.BAMInternal#getTransactions(netflexity.schema.software.bam.messages._1.GetTransactions)
 	 */
 	public GetTransactionsResponse getTransactions(GetTransactions body) {
-		List<BpmTransaction> transactions;
-		/*if (body.getLimit() != null) {
-			transactions = transactionProcessorRepository.getTransactions(body.getLimit().intValue());
-		}
-		else if (body.getPageNumber() != null && body.getPageSize() != null) {
-			transactions = transactionProcessorRepository.getTransactions(body.getPageNumber(), body.getPageSize());
-		}
-		else {
-			transactions = transactionProcessorRepository.getTransactions();
-		}*/
-		transactions = transactionProcessorRepository.getTransactions(body);
+		com.netflexity.bam.business.repository.TransactionProcessorRepository.GetTransactionsResponse transactionResponse;
+		transactionResponse = transactionProcessorRepository.getTransactions(body);
 		
-		List<TransactionDetailsType> transactionsResponse = null;
-		if(transactions != null && !transactions.isEmpty()) {
-			transactionsResponse = new ArrayList<TransactionDetailsType>();
-			for (BpmTransaction transaction : transactions) {
-				transactionsResponse.add(DomainUtil.toXmlType(transaction));
+		List<TransactionDetailsType> transactions = null;
+		if(transactionResponse != null && transactionResponse.getTransactions() != null && !transactionResponse.getTransactions().isEmpty()) {
+			transactions = new ArrayList<TransactionDetailsType>();
+			for (BpmTransaction transaction : transactionResponse.getTransactions()) {
+				transactions.add(DomainUtil.toXmlType(transaction));
 			}
 		}
 		GetTransactionsResponse response = new GetTransactionsResponse();
-		if(transactionsResponse != null && !transactionsResponse.isEmpty()) {
-			response.getTransactions().addAll(transactionsResponse);
+		if(transactions != null && !transactions.isEmpty()) {
+			response.getTransactions().addAll(transactions);
 		}
+		response.setTotalTransactions(transactionResponse.getTotalTransactions());
 		return response;
 	}
 	

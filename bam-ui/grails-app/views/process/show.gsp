@@ -1,5 +1,6 @@
 
 <%@ page import="com.netflexitysolutions.software.bam.ui.Process" %>
+<%@ page import="com.netflexitysolutions.software.bam.ui.Flow" %>
 <!doctype html>
 <html>
 	<head>
@@ -49,6 +50,67 @@
 						
 							<dd><g:fieldValue bean="${processInstance}" field="description"/></dd>
 						
+					</g:if>
+					
+					<g:if test="${flowInstanceList}">
+						<dt><g:message code="process.flows.label" default="Flows" /></dt>
+						<dd>
+							<table class="table table-striped table-bordered table-radmin">
+								<thead>
+									<tr>
+										
+											<g:sortableColumn property="uuid" title="${message(code: 'flow.uuid.label', default: 'Uuid')}" />
+										
+											<th class="header"><g:message code="flow.process.label" default="Process" /></th>
+										
+											<th class="header"><g:message code="flow.stage.label" default="Stage" /></th>
+										
+											<g:sortableColumn property="stageTypeCode" title="${message(code: 'flow.stageTypeCode.label', default: 'Stage Type Code')}" />
+										
+											<g:sortableColumn property="storeMessagePayload" title="${message(code: 'flow.storeMessagePayload.label', default: 'Store Message Payload')}" />
+										
+										<th style="text-align:center; width: 89px">View</th>
+										<th style="text-align:center; width: 63px">Edit</th>
+										<th style="text-align:center; width: 77px">Delete</th>
+									</tr>
+								</thead>
+								<tbody>
+								<g:each in="${flowInstanceList}" var="flowInstance">
+									<tr>
+									
+										<td>${fieldValue(bean: flowInstance, field: "uuid")}</td>
+									
+										<td>${fieldValue(bean: flowInstance, field: "process.name")}</td>
+									
+										<td>${fieldValue(bean: flowInstance, field: "stage.name")}</td>
+									
+										<td>${fieldValue(bean: flowInstance, field: "stageTypeId")}</td>
+									
+										<td><g:formatBoolean boolean="${flowInstance.storeMessagePayload}" /></td>
+									
+										<td>
+											<g:link action="show" id="${flowInstance.id}" class="btn btn-small">
+												<i class="icon-edit"></i>
+												Show
+											</g:link>
+										</td>
+										<td>
+											<g:link action="edit" id="${flowInstance.id}" class="btn btn-small">
+												<i class="icon-edit"></i>
+												Edit
+											</g:link>
+										</td>
+										<td>
+											<a class="btn btn-small btn-danger" href="#">
+												<i class="icon-trash icon-white"></i>
+												Delete
+											</a>
+										</td>
+									</tr>
+								</g:each>
+								</tbody>
+							</table>
+						</dd>
 					</g:if>
 				
 				</dl>

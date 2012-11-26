@@ -132,6 +132,7 @@
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element name="transactions" type="types:TransactionDetailsType" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element name="totalTransactions" type="xs:int" />
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>

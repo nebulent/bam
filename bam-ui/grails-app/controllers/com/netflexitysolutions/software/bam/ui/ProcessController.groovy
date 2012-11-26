@@ -8,8 +8,10 @@ import com.sun.media.sound.AbstractMidiDeviceProvider.Info;
 
 import netflexity.schema.software.bam.messages._1.CreateProcess;
 import netflexity.schema.software.bam.messages._1.GetProcesses;
+import netflexity.schema.software.bam.messages._1.GetFlows;
 import netflexity.schema.software.bam.messages._1.UpdateProcess;
 import netflexity.schema.software.bam.types._1.ProcessType;
+import netflexity.schema.software.bam.types._1.FlowType;
 import netflexity.ws.software.bam.services._1_0.BAMInternal
 
 class ProcessController {
@@ -57,7 +59,9 @@ class ProcessController {
 		def processInstance = new Process(name: processType.name, description: processType.description)
 		processInstance.id = processType.id
 		
-        [processInstance: processInstance]
+		params.max = Math.min(params.max ? params.int('max') : 10, 100)
+		
+        [processInstance: processInstance, flowInstanceList: bamInternalService.getFlows(new GetFlows(processId : processType.id)).flows]
     }
 
     def edit() {
