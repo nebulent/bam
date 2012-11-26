@@ -57,7 +57,7 @@ class TransactionController {
 													transactionDate: it.transactionDate,
 													payload: it.bpmFlowTransactionPayloads.isEmpty() 
 														? null 
-														: new String(Base64.decodeBase64(it.bpmFlowTransactionPayloads.get(0).payloads.get(0))))} ).sort { a, b -> a.id - b.id });
+														: new String(it.bpmFlowTransactionPayloads.get(0).payloads.get(0)))} ).sort { a, b -> a.id - b.id });
 		transactionInstance.id = transactionType.id
 		
         [transactionInstance: transactionInstance]
