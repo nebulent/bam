@@ -31,6 +31,7 @@ import netflexity.schema.software.bam.types._1.StageType;
 import netflexity.schema.software.bam.types._1.TransactionDetailsType;
 import netflexity.schema.software.bam.types._1.TransactionSummaryType;
 
+import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -589,7 +590,7 @@ public class DomainUtil {
     public static FlowTransactionPayloadDetailsType toXmlType(BpmFlowTransactionPayload payload) {
     	FlowTransactionPayloadDetailsType rv = new FlowTransactionPayloadDetailsType();
         rv.setId(payload.getId());
-        rv.getPayloads().addAll(toList(payload.getPayload()));
+        rv.getPayloads().add(payload.getPayload());
         return rv;
     }
     

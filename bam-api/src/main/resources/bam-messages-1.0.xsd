@@ -117,6 +117,7 @@
 		<xs:complexType>
 			<xs:complexContent>
 				<xs:extension base="userAwareMessage">
+					<xs:attribute name="transactionId" type="xs:string" use="optional"></xs:attribute>
 					<xs:attribute name="limit" type="xs:integer" use="optional"/>
 					<xs:attribute name="pageNumber" type="xs:int" use="optional" />
 					<xs:attribute name="pageSize" type="xs:int" use="optional" />

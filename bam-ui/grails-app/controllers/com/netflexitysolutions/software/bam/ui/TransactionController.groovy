@@ -1,8 +1,11 @@
 package com.netflexitysolutions.software.bam.ui
 
 import netflexity.schema.software.bam.messages._1.GetTransactions;
+import netflexity.schema.software.bam.types._1.TransactionDetailsType;
+import netflexity.schema.software.bam.types._1.TransactionType;
 import netflexity.ws.software.bam.services._1_0.BAMInternal;
 
+import org.apache.commons.codec.binary.Base64;
 import org.springframework.dao.DataIntegrityViolationException
 
 class TransactionController {
@@ -40,14 +43,25 @@ class TransactionController {
     }
 
     def show() {
-        def transactionInstance = Transaction.get(params.id)
-        if (!transactionInstance) {
+		def TransactionDetailsType transactionType = bamInternalService.getTransactions(new GetTransactions(transactionId: params.id)).transactions[0]
+        if (!transactionType) {
 			flash.message = message(code: 'default.not.found.message', args: [message(code: 'transaction.label', default: 'Transaction'), params.id])
             redirect action: 'list'
             return
         }
-
+		def transactionInstance = new Transaction(uuid: transactionType.uuid, processName: transactionType.processName, 
+								startDate: transactionType.startDate, endDate: transactionType.endDate,
+								transactionStatusCode: transactionType.transactionStatusCode, healthCode: transactionType.healthCode,
+								flowTransactions: transactionType.bpmFlowTransactions
+									.collect( {new FlowTransaction(id: it.id, stageName: it.stageName, 
+													transactionDate: it.transactionDate,
+													payload: it.bpmFlowTransactionPayloads.isEmpty() 
+														? null 
+														: new String(Base64.decodeBase64(it.bpmFlowTransactionPayloads.get(0).payloads.get(0))))} ).sort { a, b -> a.id - b.id });
+		transactionInstance.id = transactionType.id
+		
         [transactionInstance: transactionInstance]
+		
     }
 
     def edit() {

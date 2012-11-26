@@ -4,7 +4,9 @@
 package com.netflexity.bam.business.repository.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.Query;
 
@@ -57,41 +59,28 @@ public class JpaTransactionProcessorRepository extends JpaAbstractRepository imp
 	 */
 	@SuppressWarnings("unchecked")
 	public GetTransactionsResponse getTransactions(GetTransactions body) throws RepositoryException {
-		boolean flag = false;
 		List<BpmTransaction> transactions = new ArrayList<BpmTransaction>();
-		Query query;
-		String SQL = "FROM com.netflexity.bam.business.domain.model.BpmTransaction transaction ";
-		if (StringUtils.isNotBlank(body.getQuery())) {
-			SQL += "WHERE transaction.uuid LIKE :UUID ";
-			flag = true;
-		}
-		if (StringUtils.isNotBlank(body.getTransactionStatusCode())) {
-			if (flag == false) {
-				SQL += "WHERE transaction.transactionStatusCode = :TRANSACTION_STATUS_CODE ";
+		String select = "SELECT distinct(transaction) FROM com.netflexity.bam.business.domain.model.BpmTransaction transaction " +
+				"LEFT JOIN FETCH transaction.bpmFlowTransactions fltr " +
+				"LEFT JOIN FETCH fltr.bpmFlowTransactionPayloads";
+		String queryString = "";
+		Map<String, Object> params = new HashMap<String, Object>();
+		if (StringUtils.isNotBlank(body.getTransactionId())) {
+			queryString = appendCondition(queryString, "transaction.id = :ID", params, "ID", Long.parseLong(body.getTransactionId()));
+		} else {
+			if (StringUtils.isNotBlank(body.getQuery())) {
+				queryString = appendCondition(queryString, "transaction.uuid LIKE :UUID", params, "UUID", "%" + body.getQuery() + "%");
 			}
-			else {
-				SQL += "AND transaction.transactionStatusCode = :TRANSACTION_STATUS_CODE ";
+			if (StringUtils.isNotBlank(body.getTransactionStatusCode())) {
+				queryString = appendCondition(queryString, "transaction.transactionStatusCode = :TRANSACTION_STATUS_CODE", 
+						params, "TRANSACTION_STATUS_CODE", body.getTransactionStatusCode());
 			}
-		}
-		if (StringUtils.isNotBlank(body.getHealthCode())) {
-			if (flag == false) {
-				SQL += "WHERE transaction.healthCode = :HEALTH_CODE ";
-			}
-			else {
-				SQL += "AND transaction.healthCode = :HEALTH_CODE ";
+			if (StringUtils.isNotBlank(body.getHealthCode())) {
+				queryString = appendCondition(queryString, "transaction.healthCode = :HEALTH_CODE", 
+						params, "HEALTH_CODE", body.getHealthCode());
 			}
 		}
-		SQL += "ORDER BY startDate DESC";
-		query = entityManager.createQuery(SQL);
-		if (StringUtils.isNotBlank(body.getQuery())) {
-			query.setParameter(UUID, "%" + body.getQuery() + "%");
-		}
-		if (StringUtils.isNotBlank(body.getTransactionStatusCode())) {
-			query.setParameter(TRANSACTION_STATUS_CODE, body.getTransactionStatusCode());
-		}
-		if (StringUtils.isNotBlank(body.getHealthCode())) {
-			query.setParameter(HEALTH_CODE, body.getHealthCode());
-		}
+		Query query = composeQuery(select, queryString, "ORDER BY transaction.startDate DESC", params);
 		if (body.getLimit() != null) {
 			query.setMaxResults(body.getLimit().intValue());
 		}

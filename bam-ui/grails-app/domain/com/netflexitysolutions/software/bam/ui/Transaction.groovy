@@ -20,5 +20,5 @@ class Transaction {
 	String transactionStatusCode;
 	String healthCode
 
-	List<FlowTransaction> bpmFlowTransactions;
+	List<FlowTransaction> flowTransactions;
 }

@@ -285,7 +285,7 @@
 	
 	<xs:complexType name="FlowTransactionPayloadDetailsType">
 		<xs:sequence>
-			<xs:element name="payload" type="xs:byte" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="payload" type="xs:base64Binary" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 		<xs:attribute name="id" type="xs:long" use="optional"/>
 	</xs:complexType>
