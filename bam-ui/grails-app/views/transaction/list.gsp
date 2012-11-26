@@ -102,7 +102,7 @@
 
 							<div class="pagination pagination-right">
 								<bootstrap:paginate total="${transactionInstanceTotal}" />
-								<!-- ul>
+								<ul>
 									<li class="disabled">
 										<a href="#">Prev</a>
 									</li>
@@ -124,7 +124,7 @@
 									<li>
 										<a href="#">Next</a>
 									</li>
-								</ul -->
+								</ul>
 							</div>
 
 						</div>

@@ -58,7 +58,7 @@ public class JpaTransactionProcessorRepository extends JpaAbstractRepository imp
 	 * @see com.netflexity.bam.business.repository.TransactionProcessorRepository#getTransactions(netflexity.schema.software.bam.messages._1.GetTransactions)
 	 */
 	@SuppressWarnings("unchecked")
-	public List<BpmTransaction> getTransactions(GetTransactions body) throws RepositoryException {
+	public GetTransactionsResponse getTransactions(GetTransactions body) throws RepositoryException {
 		List<BpmTransaction> transactions = new ArrayList<BpmTransaction>();
 		String select = "SELECT distinct(transaction) FROM com.netflexity.bam.business.domain.model.BpmTransaction transaction " +
 				"LEFT JOIN FETCH transaction.bpmFlowTransactions fltr " +
@@ -84,12 +84,13 @@ public class JpaTransactionProcessorRepository extends JpaAbstractRepository imp
 		if (body.getLimit() != null) {
 			query.setMaxResults(body.getLimit().intValue());
 		}
-		else if (body.getPageNumber() != null && body.getPageSize() != null) {
+		Long totalTransactions = (Long)composeQuery("SELECT DISTINCT count(transaction) FROM com.netflexity.bam.business.domain.model.BpmTransaction transaction", queryString, "", params).getSingleResult();
+		if (body.getPageNumber() != null && body.getPageSize() != null) {
 			query.setFirstResult(body.getPageNumber() * body.getPageSize());
 			query.setMaxResults(body.getPageSize());
 		}
 		transactions = query.getResultList();
-		return transactions;
+		return new GetTransactionsResponse(transactions, totalTransactions.intValue());
 	}
 	
 	/* (non-Javadoc)
