@@ -84,13 +84,13 @@ public class JpaTransactionProcessorRepository extends JpaAbstractRepository imp
 		if (body.getLimit() != null) {
 			query.setMaxResults(body.getLimit().intValue());
 		}
-		Integer totalTransactions = (Integer)entityManager.createQuery("SELECT count(transaction) " + SQL).getSingleResult();
+		Long totalTransactions = (Long)composeQuery("SELECT DISTINCT count(transaction) FROM com.netflexity.bam.business.domain.model.BpmTransaction transaction", queryString, "", params).getSingleResult();
 		if (body.getPageNumber() != null && body.getPageSize() != null) {
 			query.setFirstResult(body.getPageNumber() * body.getPageSize());
 			query.setMaxResults(body.getPageSize());
 		}
 		transactions = query.getResultList();
-		return new GetTransactionsResponse(transactions, totalTransactions);
+		return new GetTransactionsResponse(transactions, totalTransactions.intValue());
 	}
 	
 	/* (non-Javadoc)
