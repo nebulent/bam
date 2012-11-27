@@ -31,7 +31,20 @@
 						<div class="span12">
 							<h4 class="title"><g:message code="default.list.label" args="[entityName]" /></h4>
 							<div class="squiggly-border"></div>
-
+							<form action="list" method="get">
+								Uuid: <input type="text" name="query"/>
+								<select id="status" name="status">
+									<option value="">Select status code...</option>
+									<option value="PROCESSING">PROCESSING</option>
+									<option value="COMPLETED">COMPLETED</option>
+								</select>
+								<select id="health" name="health">
+									<option value="">Select health code...</option>
+									<option value="HEALTHY">HEALTHY</option>
+									<option value="ERROR">ERROR</option>
+								</select>
+								<input type="submit" value="Search">
+							</form>
 							<table class="table table-striped table-bordered table-radmin">
 								<thead>
 									<tr>
@@ -101,30 +114,7 @@
 							</table>
 
 							<div class="pagination pagination-right">
-								<bootstrap:paginate total="${transactionInstanceTotal}" />
-								<ul>
-									<li class="disabled">
-										<a href="#">Prev</a>
-									</li>
-									<li class="active">
-										<a href="#">1</a>
-									</li>
-									<li>
-										<a href="#">2</a>
-									</li>
-									<li>
-										<a href="#">3</a>
-									</li>
-									<li>
-										<a href="#">4</a>
-									</li>
-									<li>
-										<a href="#">5</a>
-									</li>
-									<li>
-										<a href="#">Next</a>
-									</li>
-								</ul>
+								<bootstrap:paginate total="${transactionInstanceTotal}"  params="${[query: '', transactionStatusCode: '', healthCode: '']}"/>
 							</div>
 
 						</div>
