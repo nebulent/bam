@@ -89,13 +89,13 @@
 										<td><g:formatBoolean boolean="${flowInstance.storeMessagePayload}" /></td>
 									
 										<td>
-											<g:link action="show" id="${flowInstance.id}" class="btn btn-small">
+											<g:link controller="flow" action="show" id="${flowInstance.id}" class="btn btn-small">
 												<i class="icon-edit"></i>
 												Show
 											</g:link>
 										</td>
 										<td>
-											<g:link action="edit" id="${flowInstance.id}" class="btn btn-small">
+											<g:link controller="flow" action="edit" id="${flowInstance.id}" class="btn btn-small">
 												<i class="icon-edit"></i>
 												Edit
 											</g:link>
