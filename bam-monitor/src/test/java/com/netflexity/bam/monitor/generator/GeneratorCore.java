@@ -2,6 +2,7 @@ package com.netflexity.bam.monitor.generator;
 
 import java.io.StringWriter;
 import java.math.BigInteger;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
@@ -74,8 +75,7 @@ public class GeneratorCore {
     public AcknowledgeTransactionTracking sendMessage(BpmFlow flow, UUID uuid) {
         ProcessTransactionTracking ptt = new ProcessTransactionTracking();
         ptt.setFlowUuid(flow.getUuid());
-        Date date = new Date();
-        ptt.setTransactionDate(BigInteger.valueOf(date.getTime()));
+        ptt.setTransactionDate(Calendar.getInstance());
         if(uuid != null){
             ptt.setTransactionUuid(uuid.toString());
         }
