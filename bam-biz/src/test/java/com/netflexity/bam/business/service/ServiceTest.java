@@ -24,9 +24,12 @@ import com.netflexity.bam.business.utils.DomainUtil;
 import netflexity.schema.software.bam.messages._1.GetFlows;
 import netflexity.schema.software.bam.messages._1.GetTransactions;
 import netflexity.schema.software.bam.messages._1.GetTransactionsResponse;
+import netflexity.schema.software.bam.messages._1.GetUsers;
+import netflexity.schema.software.bam.messages._1.GetUsersResponse;
 import netflexity.schema.software.bam.messages._1.UpdateFlow;
 import netflexity.schema.software.bam.types._1.FlowType;
 import netflexity.schema.software.bam.types._1.TransactionDetailsType;
+import netflexity.schema.software.bam.types._1.UserType;
 import netflexity.ws.software.bam.services._1_0.BAMInternal;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -80,6 +83,16 @@ public class ServiceTest {
 			LOGGER.debug("\ttransaction " + i++ + ":\n" + ToStringBuilder.reflectionToString(tr, ToStringStyle.MULTI_LINE_STYLE));
 		}
 		LOGGER.debug("totalTransactions: " + getTransactionsResponse.getTotalTransactions());
+	}
+	
+	@Test
+	public void testGetUsers() {
+		GetUsers getUsers = new GetUsers();
+		GetUsersResponse getUsersResponse = bamInternal.getUsers(getUsers);
+		int i = 1;
+		for (UserType userType : getUsersResponse.getUsers()) {
+			LOGGER.debug("user " + i++ + ": " + ToStringBuilder.reflectionToString(userType, ToStringStyle.MULTI_LINE_STYLE));
+		}
 	}
 
 	public BAMInternal getBamInternal() {

@@ -213,6 +213,65 @@
 		</xs:complexType>
 	</xs:element>
 	
+	<xs:element name="getUsers">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="userAwareMessage">
+					<xs:attribute name="userId" type="xs:string" use="optional"/>
+					<xs:attribute name="alias" type="xs:string" use="optional"/>
+					<xs:attribute name="email" type="xs:string" use="optional"/>
+					<xs:attribute name="password" type="xs:string" use="optional"/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="getUsersResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="users" type="types:UserType" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="authentication">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="userAwareMessage">
+					<xs:attribute name="alias" type="xs:string" use="optional"/>
+					<xs:attribute name="email" type="xs:string" use="optional"/>
+					<xs:attribute name="password" type="xs:string" use="optional"/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="authenticationResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="user" type="types:UserType" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="getOrganizations">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="userAwareMessage">
+					<xs:attribute name="organizationId" type="xs:string" use="optional"/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="getOrganizationsResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="organizations" type="types:OrganizationType" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
 	<xs:element name="deleteFlows">
 		<xs:complexType>
 			<xs:complexContent>
@@ -280,6 +339,42 @@
 	</xs:element>
 	
 	<xs:element name="deleteAttributesResponse">
+		<xs:complexType>
+			<xs:attribute name="response" type="xs:boolean" use="optional"/>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="deleteUsers">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="userAwareMessage">
+					<xs:sequence>
+						<xs:element name="ids" type="xs:long" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="deleteUsersResponse">
+		<xs:complexType>
+			<xs:attribute name="response" type="xs:boolean" use="optional"/>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="deleteOrganizations">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="userAwareMessage">
+					<xs:sequence>
+						<xs:element name="ids" type="xs:long" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="deleteOrganizationsResponse">
 		<xs:complexType>
 			<xs:attribute name="response" type="xs:boolean" use="optional"/>
 		</xs:complexType>
@@ -365,6 +460,46 @@
 		</xs:complexType>
 	</xs:element>
 	
+	<xs:element name="updateUser">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="userAwareMessage">
+					<xs:sequence>
+						<xs:element name="user" type="types:UserType" minOccurs="0"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="updateUserResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="user" type="types:UserType" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="updateOrganization">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="userAwareMessage">
+					<xs:sequence>
+						<xs:element name="organization" type="types:OrganizationType" minOccurs="0"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="updateOrganizationResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="organization" type="types:OrganizationType" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
 	<xs:element name="createFlow">
 		<xs:complexType>
 			<xs:complexContent>
@@ -441,6 +576,46 @@
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element name="attr" type="types:AttributeType" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="createUser">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="userAwareMessage">
+					<xs:sequence>
+						<xs:element name="user" type="types:UserType" minOccurs="0"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="createUserResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="user" type="types:UserType" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="createOrganization">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="userAwareMessage">
+					<xs:sequence>
+						<xs:element name="organization" type="types:OrganizationType" minOccurs="0"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="createOrganizationResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="organization" type="types:OrganizationType" minOccurs="0"/>
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>

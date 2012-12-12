@@ -13,28 +13,40 @@ import java.util.Set;
 import java.util.UUID;
 
 import netflexity.schema.software.bam.messages._1.AcknowledgeTransactionTracking;
+import netflexity.schema.software.bam.messages._1.Authentication;
+import netflexity.schema.software.bam.messages._1.AuthenticationResponse;
 import netflexity.schema.software.bam.messages._1.CreateAttribute;
 import netflexity.schema.software.bam.messages._1.CreateAttributeResponse;
 import netflexity.schema.software.bam.messages._1.CreateMonitor;
 import netflexity.schema.software.bam.messages._1.CreateMonitorResponse;
 import netflexity.schema.software.bam.messages._1.CreateFlow;
 import netflexity.schema.software.bam.messages._1.CreateFlowResponse;
+import netflexity.schema.software.bam.messages._1.CreateOrganization;
+import netflexity.schema.software.bam.messages._1.CreateOrganizationResponse;
 import netflexity.schema.software.bam.messages._1.CreateProcess;
 import netflexity.schema.software.bam.messages._1.CreateProcessResponse;
 import netflexity.schema.software.bam.messages._1.CreateStage;
 import netflexity.schema.software.bam.messages._1.CreateStageResponse;
+import netflexity.schema.software.bam.messages._1.CreateUser;
+import netflexity.schema.software.bam.messages._1.CreateUserResponse;
 import netflexity.schema.software.bam.messages._1.DeleteAttributes;
 import netflexity.schema.software.bam.messages._1.DeleteAttributesResponse;
+import netflexity.schema.software.bam.messages._1.DeleteOrganizations;
+import netflexity.schema.software.bam.messages._1.DeleteOrganizationsResponse;
 import netflexity.schema.software.bam.messages._1.DeleteProcesses;
 import netflexity.schema.software.bam.messages._1.DeleteFlowsResponse;
 import netflexity.schema.software.bam.messages._1.DeleteFlows;
 import netflexity.schema.software.bam.messages._1.DeleteProcessesResponse;
 import netflexity.schema.software.bam.messages._1.DeleteStages;
 import netflexity.schema.software.bam.messages._1.DeleteStagesResponse;
+import netflexity.schema.software.bam.messages._1.DeleteUsers;
+import netflexity.schema.software.bam.messages._1.DeleteUsersResponse;
 import netflexity.schema.software.bam.messages._1.GetAttributes;
 import netflexity.schema.software.bam.messages._1.GetAttributesResponse;
 import netflexity.schema.software.bam.messages._1.GetFlows;
 import netflexity.schema.software.bam.messages._1.GetFlowsResponse;
+import netflexity.schema.software.bam.messages._1.GetOrganizations;
+import netflexity.schema.software.bam.messages._1.GetOrganizationsResponse;
 import netflexity.schema.software.bam.messages._1.GetProcesses;
 import netflexity.schema.software.bam.messages._1.GetProcessesResponse;
 import netflexity.schema.software.bam.messages._1.GetStages;
@@ -43,23 +55,31 @@ import netflexity.schema.software.bam.messages._1.GetTransactionSummary;
 import netflexity.schema.software.bam.messages._1.GetTransactionSummaryResponse;
 import netflexity.schema.software.bam.messages._1.GetTransactions;
 import netflexity.schema.software.bam.messages._1.GetTransactionsResponse;
+import netflexity.schema.software.bam.messages._1.GetUsers;
+import netflexity.schema.software.bam.messages._1.GetUsersResponse;
 import netflexity.schema.software.bam.messages._1.ProcessTransactionTracking;
 import netflexity.schema.software.bam.messages._1.StartMonitor;
 import netflexity.schema.software.bam.messages._1.UpdateAttribute;
 import netflexity.schema.software.bam.messages._1.UpdateAttributeResponse;
 import netflexity.schema.software.bam.messages._1.UpdateFlow;
 import netflexity.schema.software.bam.messages._1.UpdateFlowResponse;
+import netflexity.schema.software.bam.messages._1.UpdateOrganization;
+import netflexity.schema.software.bam.messages._1.UpdateOrganizationResponse;
 import netflexity.schema.software.bam.messages._1.UpdateProcess;
 import netflexity.schema.software.bam.messages._1.UpdateProcessResponse;
 import netflexity.schema.software.bam.messages._1.UpdateStage;
 import netflexity.schema.software.bam.messages._1.UpdateStageResponse;
+import netflexity.schema.software.bam.messages._1.UpdateUser;
+import netflexity.schema.software.bam.messages._1.UpdateUserResponse;
 import netflexity.schema.software.bam.types._1.AttributeType;
 import netflexity.schema.software.bam.types._1.FlowTransactionType;
 import netflexity.schema.software.bam.types._1.FlowType;
+import netflexity.schema.software.bam.types._1.OrganizationType;
 import netflexity.schema.software.bam.types._1.ProcessType;
 import netflexity.schema.software.bam.types._1.StageType;
 import netflexity.schema.software.bam.types._1.TransactionDetailsType;
 import netflexity.schema.software.bam.types._1.TransactionSummaryType;
+import netflexity.schema.software.bam.types._1.UserType;
 import netflexity.ws.software.bam.services._1_0.BAM;
 import netflexity.ws.software.bam.services._1_0.BAMInternal;
 import netflexity.ws.software.bam.services._1_0.BamMonitorService;
@@ -73,12 +93,15 @@ import com.netflexity.bam.business.domain.model.BpmFlow;
 import com.netflexity.bam.business.domain.model.BpmFlowTransaction;
 import com.netflexity.bam.business.domain.model.BpmFlowTransactionPayload;
 import com.netflexity.bam.business.domain.model.BpmMonitor;
+import com.netflexity.bam.business.domain.model.BpmOrganization;
 import com.netflexity.bam.business.domain.model.BpmProcess;
 import com.netflexity.bam.business.domain.model.BpmStage;
 import com.netflexity.bam.business.domain.model.BpmTransaction;
 import com.netflexity.bam.business.domain.model.BpmTransactionSummary;
+import com.netflexity.bam.business.domain.model.BpmUser;
 import com.netflexity.bam.business.repository.MetadataRepository;
 import com.netflexity.bam.business.repository.TransactionProcessorRepository;
+import com.netflexity.bam.business.repository.UserManagementRepository;
 import com.netflexity.bam.business.utils.DomainUtil;
 
 /**
@@ -94,6 +117,7 @@ public class BamInternalServiceImpl implements BAMInternal, BAM, BamServiceError
 	/*repositories*/
 	private MetadataRepository metadataRepository;
 	private TransactionProcessorRepository transactionProcessorRepository;
+	private UserManagementRepository userManagementRepository;
 	
 	/*services*/
 	private SecurityManagementService securityManagementService;
@@ -153,6 +177,24 @@ public class BamInternalServiceImpl implements BAMInternal, BAM, BamServiceError
 	}
 	
 	/* (non-Javadoc)
+	 * @see netflexity.ws.software.bam.services._1_0.BAMInternal#createUser(netflexity.schema.software.bam.messages._1.CreateUser)
+	 */
+	public CreateUserResponse createUser(CreateUser body) {
+		CreateUserResponse response = new CreateUserResponse();
+		response.setUser(DomainUtil.toXmlType(userManagementRepository.createUser(DomainUtil.toDomainType(body.getUser()))));
+		return response;
+	}
+
+	/* (non-Javadoc)
+	 * @see netflexity.ws.software.bam.services._1_0.BAMInternal#createOrganization(netflexity.schema.software.bam.messages._1.CreateOrganization)
+	 */
+	public CreateOrganizationResponse createOrganization(CreateOrganization body) {
+		CreateOrganizationResponse response = new CreateOrganizationResponse();
+		response.setOrganization(DomainUtil.toXmlType(userManagementRepository.createOrganization(DomainUtil.toDomainType(body.getOrganization()))));
+		return response;
+	}
+	
+	/* (non-Javadoc)
 	 * @see netflexity.ws.software.bam.services._1_0.BAMInternal#deleteAttributes(netflexity.schema.software.bam.messages._1.DeleteAttributes)
 	 */
 	public DeleteAttributesResponse deleteAttributes(DeleteAttributes body) {
@@ -192,6 +234,30 @@ public class BamInternalServiceImpl implements BAMInternal, BAM, BamServiceError
 		DeleteStagesResponse response = new DeleteStagesResponse();
 		if(body != null && body.getIds() != null) {
 			metadataRepository.removeStages(toLongArray(body.getIds()));
+			response.setResponse(true);
+		}
+		return response;
+	}
+	
+	/* (non-Javadoc)
+	 * @see netflexity.ws.software.bam.services._1_0.BAMInternal#deleteUsers(netflexity.schema.software.bam.messages._1.DeleteUsers)
+	 */
+	public DeleteUsersResponse deleteUsers(DeleteUsers body) {
+		DeleteUsersResponse response = new DeleteUsersResponse();
+		if (body != null && body.getIds() != null) {
+			userManagementRepository.removeUsers(toLongArray(body.getIds()));
+			response.setResponse(true);
+		}
+		return response;
+	}
+
+	/* (non-Javadoc)
+	 * @see netflexity.ws.software.bam.services._1_0.BAMInternal#deleteOrganizations(netflexity.schema.software.bam.messages._1.DeleteOrganizations)
+	 */
+	public DeleteOrganizationsResponse deleteOrganizations(DeleteOrganizations body) {
+		DeleteOrganizationsResponse response = new DeleteOrganizationsResponse();
+		if (body != null && body.getIds() != null) {
+			userManagementRepository.removeOrganizations(toLongArray(body.getIds()));
 			response.setResponse(true);
 		}
 		return response;
@@ -338,6 +404,63 @@ public class BamInternalServiceImpl implements BAMInternal, BAM, BamServiceError
 	}
 	
 	/* (non-Javadoc)
+	 * @see netflexity.ws.software.bam.services._1_0.BAMInternal#getUsers(netflexity.schema.software.bam.messages._1.GetUsers)
+	 */
+	public GetUsersResponse getUsers(GetUsers body) {
+		List<BpmUser> users = userManagementRepository.getUsers(body);
+		List<UserType> usersResponse = null;
+		if (users != null && !users.isEmpty()) {
+			usersResponse = new ArrayList<UserType>();
+			for (BpmUser user : users) {
+				usersResponse.add(DomainUtil.toXmlType(user));
+			}
+		}
+		GetUsersResponse response = new GetUsersResponse();
+		if (usersResponse != null && !usersResponse.isEmpty()) {
+			response.getUsers().addAll(usersResponse);
+		}
+		return response;
+	}
+	
+	public AuthenticationResponse authenticate(Authentication body) {
+		BpmUser user = userManagementRepository.authenticate(body);
+		UserType userResponse = null;
+		if (user != null) {
+			userResponse = DomainUtil.toXmlType(user);
+		}
+		AuthenticationResponse response = new AuthenticationResponse();
+		if (userResponse != null) {
+			response.setUser(userResponse);
+		}
+		return response;
+	}
+	
+	/* (non-Javadoc)
+	 * @see netflexity.ws.software.bam.services._1_0.BAMInternal#getOrganizations(netflexity.schema.software.bam.messages._1.GetOrganizations)
+	 */
+	public GetOrganizationsResponse getOrganizations(GetOrganizations body) {
+		List<BpmOrganization> organizations = new ArrayList<BpmOrganization>();
+		if (StringUtils.isNotBlank(body.getOrganizationId())) {
+			organizations.add(userManagementRepository.getOrganization(Long.parseLong(body.getOrganizationId())));
+		}
+		else {
+			organizations = userManagementRepository.getOrganizations();
+		}
+		List<OrganizationType> organizationsResponse = null;
+		if (organizations != null && !organizations.isEmpty()) {
+			organizationsResponse = new ArrayList<OrganizationType>();
+			for (BpmOrganization organization : organizations) {
+				organizationsResponse.add(DomainUtil.toXmlType(organization));
+			}
+		}
+		GetOrganizationsResponse response = new GetOrganizationsResponse();
+		if (organizationsResponse != null && !organizationsResponse.isEmpty()) {
+			response.getOrganizations().addAll(organizationsResponse);
+		}
+		return response;
+	}
+	
+	/* (non-Javadoc)
 	 * @see netflexity.ws.software.bam.services._1_0.BAMInternal#updateAttribute(netflexity.schema.software.bam.messages._1.UpdateAttribute)
 	 */
 	public UpdateAttributeResponse updateAttribute(UpdateAttribute body) {
@@ -370,6 +493,24 @@ public class BamInternalServiceImpl implements BAMInternal, BAM, BamServiceError
 		UpdateStageResponse response = new UpdateStageResponse();
 		body.getStage().setPartyId(securityManagementService.getPartyId(body));
 		response.setStage(DomainUtil.toXmlType(metadataRepository.updateStage(DomainUtil.toDomainType(body.getStage())), true));
+		return response;
+	}
+	
+	/* (non-Javadoc)
+	 * @see netflexity.ws.software.bam.services._1_0.BAMInternal#updateUser(netflexity.schema.software.bam.messages._1.UpdateUser)
+	 */
+	public UpdateUserResponse updateUser(UpdateUser body) {
+		UpdateUserResponse response = new UpdateUserResponse();
+		response.setUser(DomainUtil.toXmlType(userManagementRepository.updateUser(DomainUtil.toDomainType(body.getUser()))));
+		return response;
+	}
+	
+	/* (non-Javadoc)
+	 * @see netflexity.ws.software.bam.services._1_0.BAMInternal#updateOrganization(netflexity.schema.software.bam.messages._1.UpdateOrganization)
+	 */
+	public UpdateOrganizationResponse updateOrganization(UpdateOrganization body) {
+		UpdateOrganizationResponse response = new UpdateOrganizationResponse();
+		response.setOrganization(DomainUtil.toXmlType(userManagementRepository.updateOrganization(DomainUtil.toDomainType(body.getOrganization()))));
 		return response;
 	}
 
@@ -494,6 +635,13 @@ public class BamInternalServiceImpl implements BAMInternal, BAM, BamServiceError
 	 */
 	public void setTransactionProcessorRepository(TransactionProcessorRepository transactionProcessorRepository) {
 		this.transactionProcessorRepository = transactionProcessorRepository;
+	}
+
+	/**
+	 * @param userManagementRepository
+	 */
+	public void setUserManagementRepository(UserManagementRepository userManagementRepository) {
+		this.userManagementRepository = userManagementRepository;
 	}
 
 	/**

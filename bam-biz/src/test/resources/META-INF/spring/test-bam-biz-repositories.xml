@@ -17,6 +17,7 @@
 	
 	<bean id="metadataRepository" class="com.netflexity.bam.business.repository.impl.JpaMetadataRepository" autowire="byName"/>
 	<bean id="transactionProcessorRepository" class="com.netflexity.bam.business.repository.impl.JpaTransactionProcessorRepository" autowire="byName"/>
+	<bean id="userManagementRepository" class="com.netflexity.bam.business.repository.impl.JpaUserManagementRepository" autowire="byName"/>
 		
 </beans>
 

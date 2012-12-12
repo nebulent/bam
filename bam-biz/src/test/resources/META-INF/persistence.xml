@@ -21,6 +21,9 @@
     	<class>com.netflexity.bam.business.domain.model.BpmTransaction</class>
     	<class>com.netflexity.bam.business.domain.model.BpmTransactionSummary</class>
     	<class>com.netflexity.bam.business.domain.model.BpmBinding</class>
+    	<class>com.netflexity.bam.business.domain.model.BpmUser</class>
+    	<class>com.netflexity.bam.business.domain.model.BpmOrganization</class>
+    	<class>com.netflexity.bam.business.domain.model.BpmUserOrganization</class>
         <!-- MySQL -->
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>

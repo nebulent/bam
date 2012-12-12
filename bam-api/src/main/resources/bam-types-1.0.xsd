@@ -290,6 +290,52 @@
 		<xs:attribute name="id" type="xs:long" use="optional"/>
 	</xs:complexType>
 	
+	<xs:complexType name="UserType">
+		<xs:annotation>
+			<xs:documentation>Defines a user</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="id" type="xs:string"/>
+			<xs:element name="alias" type="xs:string"/>
+			<xs:element name="email" type="xs:string"/>
+			<xs:element name="fullName" type="xs:string"/>
+			<xs:element name="password" type="xs:string"/>
+			<xs:element name="userOrganizations" type="UserOrganizationType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="UserOrganizationType">
+		<xs:annotation>
+			<xs:documentation>Defines a role</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="id" type="xs:string"/>
+			<xs:element name="userId" type="xs:string"/>
+			<xs:element name="organizationId" type="xs:string"/>
+			<xs:element name="role" type="RoleEnum"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:simpleType name="RoleEnum">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="OWNER"></xs:enumeration>
+			<xs:enumeration value="USER"></xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:complexType name="OrganizationType">
+		<xs:annotation>
+			<xs:documentation>Defines an organization</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="id" type="xs:string"/>
+			<xs:element name="name" type="xs:string"/>
+			<xs:element name="alias" type="xs:string"/>
+			<xs:element name="description" type="xs:string"/>
+			<xs:element name="userOrganizations" type="UserOrganizationType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	
 </xs:schema>
 
 

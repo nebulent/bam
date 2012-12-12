@@ -67,7 +67,7 @@ bam.service.internal.url  = ""
 environments {
     development {
         grails.logging.jul.usebridge = true
-        bam.service.internal.url = "http://tomcat.nebulent.com/bam-ws/ws/BAMInternal" // "http://192.168.0.123:8080/bam-ws/ws/BAMInternal" // "http://localhost:9090/ws/BAMInternal" // 
+        bam.service.internal.url = "http://localhost:9090/ws/BAMInternal" //"http://tomcat.nebulent.com/bam-ws/ws/BAMInternal" // "http://192.168.0.123:8080/bam-ws/ws/BAMInternal" // "http://localhost:9090/ws/BAMInternal" // 
     }
     production {
         grails.logging.jul.usebridge = true
@@ -105,3 +105,14 @@ log4j = {
            'org.hibernate',
            'net.sf.ehcache.hibernate'
 }
+
+// Added by the Spring Security Core plugin:
+//grails.plugins.springsecurity.userLookup.userDomainClassName = 'com.netflexitysolutions.software.bam.ui.User'
+//grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'com.netflexitysolutions.software.bam.ui.UserRole'
+//grails.plugins.springsecurity.authority.className = 'com.netflexitysolutions.software.bam.ui.Role'
+
+grails.plugins.springsecurity.providerNames = [
+	'bamAuthenticationProvider']
+
+//grails.plugins.springsecurity.interceptUrlMap = [
+//]

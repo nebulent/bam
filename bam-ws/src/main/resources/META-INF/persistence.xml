@@ -21,10 +21,13 @@
     	<class>com.netflexity.bam.business.domain.model.BpmTransaction</class>
     	<class>com.netflexity.bam.business.domain.model.BpmTransactionSummary</class>
     	<class>com.netflexity.bam.business.domain.model.BpmBinding</class>
+    	<class>com.netflexity.bam.business.domain.model.BpmUser</class>
+    	<class>com.netflexity.bam.business.domain.model.BpmOrganization</class>
+    	<class>com.netflexity.bam.business.domain.model.BpmUserOrganization</class>
         <!-- MySQL -->
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
-            <!-- property name="hibernate.hbm2ddl.auto" value="update"/ -->
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.format_sql" value="true"/>
         </properties>
