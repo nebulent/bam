@@ -1,9 +1,8 @@
 package com.netflexity.bam.monitor.service;
 
-import com.netflexity.bam.monitor.esper.EsperBean;
-import com.netflexity.bam.monitor.esper.event.BamEvent;
-import com.netflexity.bam.monitor.generator.GeneratorCore;
 import java.util.Date;
+import java.util.List;
+
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
@@ -14,15 +13,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.netflexity.bam.monitor.esper.EsperBean;
+import com.netflexity.bam.monitor.esper.event.BamEvent;
+import com.netflexity.bam.monitor.esper.statement.StatementBean;
+import com.netflexity.bam.monitor.esper.statement.StatementLoader;
+import com.netflexity.bam.monitor.executor.EsperMonitorExecutor;
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:test-bam-monitor-context.xml"})
 public class GeneratorTest {
 
 //    @Autowired
 //    private GeneratorCore generatorCore;
-    @Autowired
-    private EsperBean esperBean;
+    
+	@Autowired
+    EsperBean esperBean;
 
+	@Autowired
+	StatementLoader statementLoader;
+	
     public GeneratorTest() {
     }
 
@@ -36,6 +45,13 @@ public class GeneratorTest {
 
     @Before
     public void setUp() {
+    	Assert.assertNotNull(statementLoader);
+    	Assert.assertNotNull(esperBean);
+    	
+    	List<StatementBean> statements = statementLoader.loadStatements();
+    	for (StatementBean statementBean : statements) {
+    		esperBean.addStatement(statementBean);
+		}
     }
 //    @Test
 //    public void simulatorTest() {

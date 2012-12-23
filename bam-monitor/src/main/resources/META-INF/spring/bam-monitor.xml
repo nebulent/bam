@@ -24,8 +24,6 @@
 	
 	<bean id="esperMonitorExecutor" class="com.netflexity.bam.monitor.executor.EsperMonitorExecutor" autowire="byName"/>
 	
-	<bean id="manualMonitorExecutor" class="com.netflexity.bam.monitor.executor.ManualMonitorExecutor" autowire="byName"/>
-	
 	<bean id="bamStatementAwareUpdateListener" class="com.netflexity.bam.monitor.esper.listener.BamStatementAwareUpdateListener" autowire="byName"/>
     
     <!--bean id="statementLoader" class="com.netflexity.bam.monitor.esper.statement.DatabaseStatementLoader" autowire="byName">
