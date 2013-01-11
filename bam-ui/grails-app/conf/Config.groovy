@@ -114,5 +114,10 @@ log4j = {
 grails.plugins.springsecurity.providerNames = [
 	'bamAuthenticationProvider']
 
+//grails.plugins.springsecurity.securityConfigType = SecurityConfigType.InterceptUrlMap
 //grails.plugins.springsecurity.interceptUrlMap = [
+//	'/flow/*':			['ROLE_USER'],
+//	'/**':				['IS_AUTHENTICATED_ANONYMOUSLY']
+
 //]
+//grails.plugins.springsecurity.rejectIfNoRule = true
