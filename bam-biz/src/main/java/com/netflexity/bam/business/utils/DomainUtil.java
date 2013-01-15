@@ -23,13 +23,17 @@ import netflexity.schema.software.bam.types._1.FlowTransactionType;
 import netflexity.schema.software.bam.types._1.FlowType;
 import netflexity.schema.software.bam.types._1.MonitorType;
 import netflexity.schema.software.bam.types._1.ObjectFactory;
+import netflexity.schema.software.bam.types._1.OrganizationType;
 import netflexity.schema.software.bam.types._1.ProcessArrayType;
 import netflexity.schema.software.bam.types._1.ProcessType;
 import netflexity.schema.software.bam.types._1.QualifierType;
+import netflexity.schema.software.bam.types._1.RoleEnum;
 import netflexity.schema.software.bam.types._1.StageArrayType;
 import netflexity.schema.software.bam.types._1.StageType;
 import netflexity.schema.software.bam.types._1.TransactionDetailsType;
 import netflexity.schema.software.bam.types._1.TransactionSummaryType;
+import netflexity.schema.software.bam.types._1.UserOrganizationType;
+import netflexity.schema.software.bam.types._1.UserType;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang.StringUtils;
@@ -42,11 +46,14 @@ import com.netflexity.bam.business.domain.model.BpmFlow;
 import com.netflexity.bam.business.domain.model.BpmFlowTransaction;
 import com.netflexity.bam.business.domain.model.BpmFlowTransactionPayload;
 import com.netflexity.bam.business.domain.model.BpmMonitor;
+import com.netflexity.bam.business.domain.model.BpmOrganization;
 import com.netflexity.bam.business.domain.model.BpmProcess;
 import com.netflexity.bam.business.domain.model.BpmQualifier;
 import com.netflexity.bam.business.domain.model.BpmStage;
 import com.netflexity.bam.business.domain.model.BpmTransaction;
 import com.netflexity.bam.business.domain.model.BpmTransactionSummary;
+import com.netflexity.bam.business.domain.model.BpmUser;
+import com.netflexity.bam.business.domain.model.BpmUserOrganization;
 
 /**
  * @author
@@ -674,6 +681,122 @@ public class DomainUtil {
     	entity.setName(condition.getName());
     	entity.setExpression(condition.getExpression());
     	return entity;
+    }
+    
+    public static BpmUser toDomainType(UserType userType) {
+    	if (userType == null) {
+    		return null;
+    	}
+    	BpmUser user = new BpmUser();
+    	if (StringUtils.isNotBlank(userType.getId())) {
+    		user.setId(Long.parseLong(userType.getId()));
+    	}
+    	user.setAlias(userType.getAlias());
+    	user.setEmail(userType.getEmail());
+    	user.setFullName(userType.getFullName());
+    	user.setPassword(userType.getPassword());
+    	Set<BpmUserOrganization> userOrganizations = new HashSet<BpmUserOrganization>();
+    	if (userType.getUserOrganizations() != null) {
+    		for (UserOrganizationType userOrganizationType : userType.getUserOrganizations()) {
+    			userOrganizations.add(toDomainType(userOrganizationType));
+    		}
+    	}
+    	user.setBpmUserOrganizations(userOrganizations);
+    	return user;
+    }
+    
+    public static UserType toXmlType(BpmUser user) {
+    	if (user == null) {
+    		return null;
+    	}
+    	UserType userType = new UserType();
+    	userType.setId(user.getId().toString());
+    	userType.setAlias(user.getAlias());
+    	userType.setEmail(user.getEmail());
+    	userType.setFullName(user.getFullName());
+    	userType.setPassword(user.getPassword());
+    	List<UserOrganizationType> userOrganizationTypes = new ArrayList<UserOrganizationType>();
+    	if (user.getBpmUserOrganizations() != null) {
+    		for (BpmUserOrganization bpmUserOrganization : user.getBpmUserOrganizations()) {
+    			userOrganizationTypes.add(toXmlType(bpmUserOrganization));
+    		}
+    	}
+    	userType.setUserOrganizations(userOrganizationTypes);
+    	return userType;
+    }
+    
+    public static BpmOrganization toDomainType(OrganizationType organizationType) {
+    	if (organizationType == null) {
+    		return null;
+    	}
+    	BpmOrganization organization = new BpmOrganization();
+    	if (StringUtils.isNotBlank(organizationType.getId())) {
+    		organization.setId(Long.parseLong(organizationType.getId()));
+    	}
+    	organization.setAlias(organizationType.getAlias());
+    	organization.setName(organizationType.getName());
+    	organization.setDescription(organization.getDescription());
+    	Set<BpmUserOrganization> userOrganizations = new HashSet<BpmUserOrganization>();
+    	if (organizationType.getUserOrganizations() != null) {
+    		for (UserOrganizationType userOrganizationType : organizationType.getUserOrganizations()) {
+    			userOrganizations.add(toDomainType(userOrganizationType));
+    		}
+    	}
+    	organization.setBpmUserOrganizations(userOrganizations);
+    	return organization;
+    }
+    
+    public static OrganizationType toXmlType(BpmOrganization organization) {
+    	if (organization == null) {
+    		return null;
+    	}
+    	OrganizationType organizationType = new OrganizationType();
+    	organizationType.setId(organization.getId().toString());
+    	organizationType.setAlias(organization.getAlias());
+    	organizationType.setName(organization.getName());
+    	organizationType.setDescription(organization.getName());
+    	List<UserOrganizationType> userOrganizationTypes = new ArrayList<UserOrganizationType>();
+    	if (organization.getBpmUserOrganizations() != null) {
+    		for (BpmUserOrganization userOrganization : organization.getBpmUserOrganizations()) {
+    			userOrganizationTypes.add(toXmlType(userOrganization));
+    		}
+    	}
+    	organizationType.setUserOrganizations(userOrganizationTypes);
+    	return organizationType;
+    }
+    
+    public static BpmUserOrganization toDomainType(UserOrganizationType userOrganizationType) {
+    	if (userOrganizationType == null) {
+    		return null;
+    	}
+    	BpmUserOrganization userOrganization = new BpmUserOrganization();
+    	if (StringUtils.isNotBlank(userOrganizationType.getId())) {
+    		userOrganization.setId(Long.parseLong(userOrganizationType.getId()));
+    	}
+    	userOrganization.setRole(userOrganizationType.getRole().value());
+    	if (StringUtils.isNotBlank(userOrganizationType.getOrganizationId())) {
+    		BpmOrganization organization = new BpmOrganization();
+    		organization.setId(Long.parseLong(userOrganizationType.getOrganizationId()));
+    		userOrganization.setBpmOrganization(organization);
+    	}
+    	if (StringUtils.isNotBlank(userOrganizationType.getUserId())) {
+    		BpmUser user = new BpmUser();
+    		user.setId(Long.parseLong(userOrganizationType.getUserId()));
+    		userOrganization.setBpmUser(user);
+    	}
+    	return userOrganization;
+    }
+    
+    public static UserOrganizationType toXmlType(BpmUserOrganization userOrganization) {
+    	if (userOrganization == null) {
+    		return null;
+    	}
+    	UserOrganizationType userOrganizationType = new UserOrganizationType();
+    	userOrganizationType.setId(userOrganization.getId().toString());
+    	userOrganizationType.setRole(RoleEnum.valueOf(userOrganization.getRole()));
+    	userOrganizationType.setOrganizationId(userOrganization.getBpmOrganization().getId().toString());
+    	userOrganizationType.setUserId(userOrganization.getBpmUser().getId().toString());
+    	return userOrganizationType;
     }
 }
 

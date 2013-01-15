@@ -67,6 +67,30 @@
 		<wsdl:part name="body" element="msg:getAttributesResponse"/>
 	</wsdl:message>
 	
+	<wsdl:message name="getUsersRequest">
+		<wsdl:part name="body" element="msg:getUsers"/>
+	</wsdl:message>
+	
+	<wsdl:message name="getUsersResponse">
+		<wsdl:part name="body" element="msg:getUsersResponse"/>
+	</wsdl:message>
+	
+	<wsdl:message name="authenticationRequest">
+		<wsdl:part name="body" element="msg:authentication"/>
+	</wsdl:message>
+	
+	<wsdl:message name="authenticationResponse">
+		<wsdl:part name="body" element="msg:authenticationResponse"/>
+	</wsdl:message>
+	
+	<wsdl:message name="getOrganizationsRequest">
+		<wsdl:part name="body" element="msg:getOrganizations"/>
+	</wsdl:message>
+	
+	<wsdl:message name="getOrganizationsResponse">
+		<wsdl:part name="body" element="msg:getOrganizationsResponse"/>
+	</wsdl:message>
+	
 	<wsdl:message name="deleteFlowsRequest">
 		<wsdl:part name="body" element="msg:deleteFlows"/>
 	</wsdl:message>
@@ -97,6 +121,22 @@
 	
 	<wsdl:message name="deleteAttributesResponse">
 		<wsdl:part name="body" element="msg:deleteAttributesResponse"/>
+	</wsdl:message>
+	
+	<wsdl:message name="deleteUsersRequest">
+		<wsdl:part name="body" element="msg:deleteUsers"/>
+	</wsdl:message>
+	
+	<wsdl:message name="deleteUsersResponse">
+		<wsdl:part name="body" element="msg:deleteUsersResponse"/>
+	</wsdl:message>
+	
+	<wsdl:message name="deleteOrganizationsRequest">
+		<wsdl:part name="body" element="msg:deleteOrganizations"/>
+	</wsdl:message>
+	
+	<wsdl:message name="deleteOrganizationsResponse">
+		<wsdl:part name="body" element="msg:deleteOrganizationsResponse"/>
 	</wsdl:message>
 	
 	<wsdl:message name="updateFlowRequest">
@@ -131,6 +171,22 @@
 		<wsdl:part name="body" element="msg:updateAttributeResponse"/>
 	</wsdl:message>
 	
+	<wsdl:message name="updateUserRequest">
+		<wsdl:part name="body" element="msg:updateUser"/>
+	</wsdl:message>
+	
+	<wsdl:message name="updateUserResponse">
+		<wsdl:part name="body" element="msg:updateUserResponse"/>
+	</wsdl:message>
+	
+	<wsdl:message name="updateOrganizationRequest">
+		<wsdl:part name="body" element="msg:updateOrganization"/>
+	</wsdl:message>
+	
+	<wsdl:message name="updateOrganizationResponse">
+		<wsdl:part name="body" element="msg:updateOrganizationResponse"/>
+	</wsdl:message>
+	
 	<wsdl:message name="createFlowRequest">
 		<wsdl:part name="body" element="msg:createFlow"/>
 	</wsdl:message>
@@ -161,6 +217,22 @@
 	
 	<wsdl:message name="createAttributeResponse">
 		<wsdl:part name="body" element="msg:createAttributeResponse"/>
+	</wsdl:message>
+	
+	<wsdl:message name="createUserRequest">
+		<wsdl:part name="body" element="msg:createUser"/>
+	</wsdl:message>
+	
+	<wsdl:message name="createUserResponse">
+		<wsdl:part name="body" element="msg:createUserResponse"/>
+	</wsdl:message>
+	
+	<wsdl:message name="createOrganizationRequest">
+		<wsdl:part name="body" element="msg:createOrganization"/>
+	</wsdl:message>
+	
+	<wsdl:message name="createOrganizationResponse">
+		<wsdl:part name="body" element="msg:createOrganizationResponse"/>
 	</wsdl:message>
 	
 	<wsdl:message name="createMonitorRequest">
@@ -211,6 +283,21 @@
 			<wsdl:output message="tns:getAttributesResponse"/>
 		</wsdl:operation>
 		
+		<wsdl:operation name="getUsers">
+			<wsdl:input message="tns:getUsersRequest"/>
+			<wsdl:output message="tns:getUsersResponse"/>
+		</wsdl:operation>
+		
+		<wsdl:operation name="authenticate">
+			<wsdl:input message="tns:authenticationRequest"/>
+			<wsdl:output message="tns:authenticationResponse"/>
+		</wsdl:operation>
+		
+		<wsdl:operation name="getOrganizations">
+			<wsdl:input message="tns:getOrganizationsRequest"/>
+			<wsdl:output message="tns:getOrganizationsResponse"/>
+		</wsdl:operation>
+		
 		<wsdl:operation name="deleteFlows">
 			<wsdl:input message="tns:deleteFlowsRequest"/>
 			<wsdl:output message="tns:deleteFlowsResponse"/>
@@ -229,6 +316,16 @@
 		<wsdl:operation name="deleteAttributes">
 			<wsdl:input message="tns:deleteAttributesRequest"/>
 			<wsdl:output message="tns:deleteAttributesResponse"/>
+		</wsdl:operation>
+		
+		<wsdl:operation name="deleteUsers">
+			<wsdl:input message="tns:deleteUsersRequest"/>
+			<wsdl:output message="tns:deleteUsersResponse"/>
+		</wsdl:operation>
+		
+		<wsdl:operation name="deleteOrganizations">
+			<wsdl:input message="tns:deleteOrganizationsRequest"/>
+			<wsdl:output message="tns:deleteOrganizationsResponse"/>
 		</wsdl:operation>
 		
 		<wsdl:operation name="updateFlow">
@@ -251,6 +348,16 @@
 			<wsdl:output message="tns:updateAttributeResponse"/>
 		</wsdl:operation>
 		
+		<wsdl:operation name="updateUser">
+			<wsdl:input message="tns:updateUserRequest"/>
+			<wsdl:output message="tns:updateUserResponse"/>
+		</wsdl:operation>
+		
+		<wsdl:operation name="updateOrganization">
+			<wsdl:input message="tns:updateOrganizationRequest"/>
+			<wsdl:output message="tns:updateOrganizationResponse"/>
+		</wsdl:operation>
+		
 		<wsdl:operation name="createFlow">
 			<wsdl:input message="tns:createFlowRequest"/>
 			<wsdl:output message="tns:createFlowResponse"/>
@@ -269,6 +376,16 @@
 		<wsdl:operation name="createAttribute">
 			<wsdl:input message="tns:createAttributeRequest"/>
 			<wsdl:output message="tns:createAttributeResponse"/>
+		</wsdl:operation>
+		
+		<wsdl:operation name="createUser">
+			<wsdl:input message="tns:createUserRequest"/>
+			<wsdl:output message="tns:createUserResponse"/>
+		</wsdl:operation>
+		
+		<wsdl:operation name="createOrganization">
+			<wsdl:input message="tns:createOrganizationRequest"/>
+			<wsdl:output message="tns:createOrganizationResponse"/>
 		</wsdl:operation>
 		
 		<wsdl:operation name="createMonitor">
@@ -341,6 +458,36 @@
 			</wsdl:output>
 		</wsdl:operation>
 		
+		<wsdl:operation name="getUsers">
+			<soap:operation soapAction="authenticate"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		
+		<wsdl:operation name="authenticate">
+			<soap:operation soapAction="authenticate"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		
+		<wsdl:operation name="getOrganizations">
+			<soap:operation soapAction="getOrganizations"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		
 		<wsdl:operation name="deleteFlows">
 			<soap:operation soapAction="deleteFlows"/>
 			<wsdl:input>
@@ -373,6 +520,26 @@
 		
 		<wsdl:operation name="deleteAttributes">
 			<soap:operation soapAction="deleteAttributes"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		
+		<wsdl:operation name="deleteUsers">
+			<soap:operation soapAction="deleteUsers"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		
+		<wsdl:operation name="deleteOrganizations">
+			<soap:operation soapAction="deleteOrganizations"/>
 			<wsdl:input>
 				<soap:body use="literal"/>
 			</wsdl:input>
@@ -421,6 +588,26 @@
 			</wsdl:output>
 		</wsdl:operation>
 		
+		<wsdl:operation name="updateUser">
+			<soap:operation soapAction="updateUser"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		
+		<wsdl:operation name="updateOrganization">
+			<soap:operation soapAction="updateOrganization"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		
 		<wsdl:operation name="createFlow">
 			<soap:operation soapAction="createFlow"/>
 			<wsdl:input>
@@ -453,6 +640,26 @@
 		
 		<wsdl:operation name="createAttribute">
 			<soap:operation soapAction="createAttribute"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		
+		<wsdl:operation name="createUser">
+			<soap:operation soapAction="createUser"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		
+		<wsdl:operation name="createOrganization">
+			<soap:operation soapAction="createOrganization"/>
 			<wsdl:input>
 				<soap:body use="literal"/>
 			</wsdl:input>

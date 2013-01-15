@@ -1,5 +1,6 @@
 package com.netflexitysolutions.software.bam.ui
 
+import grails.plugins.springsecurity.Secured;
 import netflexity.schema.software.bam.messages._1.CreateFlow;
 import netflexity.schema.software.bam.messages._1.UpdateFlow;
 import netflexity.schema.software.bam.messages._1.GetProcesses;
@@ -20,6 +21,7 @@ class FlowController {
         redirect action: 'list', params: params
     }
 
+	@Secured("ROLE_USER")
     def list() {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
         [flowInstanceList: bamInternalService.getFlows(new GetFlows()).flows, flowInstanceTotal: Flow.count()]
