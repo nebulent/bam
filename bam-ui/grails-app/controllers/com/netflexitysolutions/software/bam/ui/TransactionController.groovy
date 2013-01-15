@@ -22,11 +22,11 @@ class TransactionController {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
 		def pageNumber = params.offset ? params.int('offset') / params.max : 0
 		def pageSize = params.max
-		def query = params.query ?: ''
-		def transactionStatusCode = params.transactionStatusCode ?: ''
-		def healthCode = params.healthCode ?: ''
+		def query = params.query ? params.query : ''
+		def transactionStatusCode = params.status ? params.status : ''
+		def healthCode = params.health ? params.health : ''
 		def transactions = bamInternalService.getTransactions(new GetTransactions(pageNumber: pageNumber, pageSize: pageSize, query: query, transactionStatusCode: transactionStatusCode, healthCode: healthCode))
-        [transactionInstanceList: transactions.transactions, transactionInstanceTotal: transactions.totalTransactions]
+        [transactionInstanceList: transactions.transactions, transactionInstanceTotal: transactions.totalTransactions, query : query, transactionStatusCode: transactionStatusCode, healthCode: healthCode]
     }
 
     def create() {

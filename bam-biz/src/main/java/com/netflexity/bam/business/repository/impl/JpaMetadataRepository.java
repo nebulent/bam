@@ -4,13 +4,10 @@
 package com.netflexity.bam.business.repository.impl;
 
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Query;
-
-import org.apache.commons.lang.StringUtils;
 
 import com.netflexity.bam.business.domain.model.BpmAttribute;
 import com.netflexity.bam.business.domain.model.BpmFlow;
@@ -129,6 +126,9 @@ public class JpaMetadataRepository extends JpaAbstractRepository implements Meta
     	return query.getResultList();
     }
     
+    /* (non-Javadoc)
+     * @see com.netflexity.bam.business.repository.MetadataRepository#getFlows(long)
+     */
     @SuppressWarnings("unchecked")
 	public List<BpmFlow> getFlows(long processId) throws RepositoryException {
     	Query query;
@@ -141,9 +141,7 @@ public class JpaMetadataRepository extends JpaAbstractRepository implements Meta
 	/* (non-Javadoc)
 	 * @see com.netflexity.bam.business.repository.MetadataRepository#getProcess(java.lang.String, long)
 	 */
-	@Override
-	public BpmProcess getProcess(String companyId, long processId)
-			throws RepositoryException {
+	public BpmProcess getProcess(String companyId, long processId) throws RepositoryException {
         Query query;
         query = entityManager.createQuery("select process from com.netflexity.bam.business.domain.model.BpmProcess process " +
         		"where process.partyId = :PARTY_ID and process.id = :ID");
@@ -283,7 +281,6 @@ public class JpaMetadataRepository extends JpaAbstractRepository implements Meta
     /* (non-Javadoc)
      * @see com.netflexity.bam.business.repository.MetadataRepository#updateProcess(com.netflexity.bam.business.domain.model.BpmProcess)
      */
-    @SuppressWarnings("unchecked")
 	public BpmProcess updateProcess(BpmProcess processRequest) throws RepositoryException {
     	/*get process*/
     	BpmProcess process = entityManager.find(BpmProcess.class, processRequest.getId());

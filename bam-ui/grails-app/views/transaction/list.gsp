@@ -31,20 +31,12 @@
 						<div class="span12">
 							<h4 class="title"><g:message code="default.list.label" args="[entityName]" /></h4>
 							<div class="squiggly-border"></div>
-							<form action="list" method="get">
-								Uuid: <input type="text" name="query"/>
-								<select id="status" name="status">
-									<option value="">Select status code...</option>
-									<option value="PROCESSING">PROCESSING</option>
-									<option value="COMPLETED">COMPLETED</option>
-								</select>
-								<select id="health" name="health">
-									<option value="">Select health code...</option>
-									<option value="HEALTHY">HEALTHY</option>
-									<option value="ERROR">ERROR</option>
-								</select>
-								<input type="submit" value="Search">
-							</form>
+							<g:form action="list" method="get">
+								Uuid: <g:textField name="query" value="${query}"/>
+								<g:select id="status" name="status" from="${['PROCESSING', 'COMPLETED']}" noSelection="['' : 'Select status code...']" value="${transactionStatusCode}"/>
+								<g:select id="health" name="health" from="${['HEALTHY', 'ERROR']}" noSelection="['' : 'Select health code...']" value="${healthCode}"/>
+								<g:submitButton name="Search"/>
+							</g:form>
 							<table class="table table-striped table-bordered table-radmin">
 								<thead>
 									<tr>
@@ -114,7 +106,7 @@
 							</table>
 
 							<div class="pagination pagination-right">
-								<bootstrap:paginate total="${transactionInstanceTotal}"  params="${[query: '', transactionStatusCode: '', healthCode: '']}"/>
+								<bootstrap:paginate total="${transactionInstanceTotal}" params="${['query' : query, 'status' : transactionStatusCode, 'health' : healthCode]}"/>
 							</div>
 
 						</div>
