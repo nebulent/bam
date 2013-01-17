@@ -76,7 +76,7 @@
 
 	<!-- ========================= Monitor Services ========================= -->
 	
-	<bean id="monitorEngine" class="com.netflexity.bam.monitor.engine.BamMonitorEngine" init-method="init" autowire="byName"/>
+	<!--bean id="monitorEngine" class="com.netflexity.bam.monitor.engine.BamMonitorEngine" init-method="init" autowire="byName"/>
 	
 	<bean id="monitorDispatcher" class="com.netflexity.bam.monitor.dispatcher.BamMonitorDispatcher" autowire="byName">
 		<property name="unmarshaller" ref="marshaller"/>
@@ -103,7 +103,7 @@
 		<oxm:class-to-be-bound name="netflexity.schema.software.bam.monitors._1.FlowToFlowDurationMonitorType"/>
 		<oxm:class-to-be-bound name="netflexity.schema.software.bam.monitors._1.OverallTransactionDurationMonitorType"/>
 		<oxm:class-to-be-bound name="netflexity.schema.software.bam.monitors._1.SQSMonitor"/>
-		<!-- oxm:class-to-be-bound name="com.netflexity.software.logger._1.LogEvent"/ -->
+		<oxm:class-to-be-bound name="com.netflexity.software.logger._1.LogEvent"/>
 	</oxm:jaxb2-marshaller>
 	
 	<bean id="xStreamMarshaller" class="org.springframework.oxm.xstream.XStreamMarshaller"/>
@@ -113,7 +113,7 @@
 		<property name="destination" value="direct:bam-queue"/>
 	</bean>
 	
-	<bean id="messageBuilder" class="com.netflexity.bam.monitor.service.impl.FreemarkerMessageBuilder" autowire="byName"/>
+	<bean id="messageBuilder" class="com.netflexity.bam.monitor.service.impl.FreemarkerMessageBuilder" autowire="byName"/ -->
 	
 	<!-- ========================= Camel Context ========================= -->
 	

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta name="layout" content="bam">
+	<meta name="layout" content="login">
 	<title>Authentication</title>
 </head>
 <body id="body-login">
@@ -28,13 +28,13 @@
 								<div class="input-prepend">
 									<span class="add-on"> <i class="radmin-icon radmin-user"></i>
 									</span>
-									<input class="input-large" id="input-username" size="16" type="text" placeholder="Username"></div>
+									<input class="input-large" id="input-username" size="16" type="text" placeholder="Username" name="j_username"></div>
 								<br />
 								<br />
 								<div class="input-prepend">
 									<span class="add-on"> <i class="radmin-icon radmin-locked"></i>
 									</span>
-									<input class="input-large" id="input-password" size="16" type="password" placeholder="Password"></div>
+									<input class="input-large" id="input-password" size="16" type="password" placeholder="Password" name="j_password"></div>
 
 								<div class="form-actions">
 									<a class="btn-link pull-left" href="#" id="lost-password">Lost your password?</a>
