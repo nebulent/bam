@@ -15,8 +15,6 @@ import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.sun.tools.javac.comp.Enter;
-
 /**
  * @author Alexei SCLIFOS
  *

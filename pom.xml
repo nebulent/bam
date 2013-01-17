@@ -84,11 +84,11 @@
             <name>nebulent.repository</name>
             <url>http://repo.nebulent.com/artifactory/repo</url>
         </repository-->
-        <repository>
+        <!-- repository>
             <id>ibiblio.org</id>
             <name>ibiblio.org</name>
             <url>http://mirrors.ibiblio.org/pub/mirrors/maven2/</url>
-        </repository>
+        </repository -->
         <repository>
             <id>codehouse</id>
             <name>codehouse</name>
